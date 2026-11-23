@@ -57,7 +57,7 @@
     const u = C.ui; const href = `project.html?p=${p.slug}`;
     const award = p.award ? `<span class="award">${ic("medal")}${esc(t(p.award))}</span>` : p.status ? `<span class="status">${esc(t(p.status))}</span>` : "";
     return `<article class="pcard ${big ? "big" : ""} rv">
-      <a class="p-art" href="${href}" tabindex="-1" aria-hidden="true">${p.image ? `<img class="pimg" src="${esc(p.image)}" alt="" loading="lazy">` : window.RWArt.paint(p.art, big ? 1 : 0.9)}</a>
+      <a class="p-art" href="${href}" tabindex="-1" aria-hidden="true">${A.visual(p, big ? 1 : 0.9)}</a>
       <div class="p-body">
         <p class="p-meta">${esc(t(C.categories[p.cat]))}${p.year ? ` · ${p.year}` : ""}</p>
         <h3><a href="${href}">${esc(t(p.title))}</a></h3>

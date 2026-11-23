@@ -22,8 +22,6 @@
     } else if (id === "library") {
       const L = C.library;
       body = `<ul class="d-list">${L.education.map((e) => `<li><div><span><b>${esc(t(e.t))}</b><small>${esc(t(e.o))}</small></span><small>${e.y}</small></div></li>`).join("")}${L.certifications.map((e) => `<li><div><span><b dir="ltr">${esc(t(e.t))}</b><small>${esc(t(e.o))}</small></span>${ic("medal")}</div></li>`).join("")}</ul>`;
-    } else if (id === "workshop") {
-      body = `<ul class="d-list">${C.workshop.map((s) => bySlug(s)).map((p) => row(`project.html?p=${p.slug}`, t(p.title), p.status ? t(u.nowBuilding) + " · " + t(p.kicker) : t(p.kicker))).join("")}</ul>`;
     } else if (id === "contact") {
       const p = C.person;
       body = `<p>${esc(t(u.contactSub))}</p><ul class="d-list">
@@ -58,6 +56,22 @@
   function render() {
     const u = C.ui;
     const stage = document.getElementById("stage");
+    // green leaves drifting from the left (past the title) to the right
+    if (!stage.querySelector(".petals")) {
+      const pet = document.createElement("div"); pet.className = "petals"; pet.setAttribute("aria-hidden", "true");
+      for (let i = 0; i < 16; i++) {
+        const p = document.createElement("span");
+        p.style.setProperty("--y", (48 + Math.random() * 44).toFixed(1) + "%");
+        p.style.setProperty("--s", (0.6 + Math.random() * 0.8).toFixed(2));
+        p.style.setProperty("--t", (11 + Math.random() * 9).toFixed(1) + "s");
+        p.style.setProperty("--delay", (-Math.random() * 20).toFixed(1) + "s");
+        p.style.setProperty("--rise", (-60 - Math.random() * 160).toFixed(0) + "px");
+        const greens = [["#B5CF8E", "#5E8A4E"], ["#9DBF7E", "#46703F"], ["#C9D99F", "#6F9358"], ["#8FB57A", "#3E6A3B"]][i % 4];
+        p.style.setProperty("--l1", greens[0]); p.style.setProperty("--l2", greens[1]);
+        p.innerHTML = "<i></i>"; pet.appendChild(p);
+      }
+      stage.appendChild(pet);
+    }
     world = window.RWArt.mount(host, { interactive: true, onView: (k) => stage.classList.toggle("far", k < 1.06) });
     host.querySelectorAll(".hs").forEach((h) => h.addEventListener("click", () => open(h.dataset.zone)));
     document.getElementById("w-card").innerHTML = `<small>RAZAN — BEYOND IDEAS</small><span class="orn">✦ ❦ ✦</span><h1>${t(u.worldTitle)}</h1><p>${t(u.worldHint)}</p>`;

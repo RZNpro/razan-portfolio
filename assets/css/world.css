@@ -241,3 +241,62 @@ html[data-theme="dark"] .pc-txt b { color: #F3EFE3; }
 html[data-theme="dark"] .pc-txt small { color: #D9C49A; }
 html[data-theme="dark"] .pc-go { background: #E9DFC6; color: #1C2A21; }
 html[data-theme="dark"] .world-stage { background: #1C2A21; }
+
+/* ===== the river flows (streaks clipped to the river in the painting) ===== */
+.art-scene .river { pointer-events: none; animation: floatY 9s ease-in-out infinite;
+  -webkit-mask: url(../img/art/river-mask.png) 0 0 / 100% 100% no-repeat; mask: url(../img/art/river-mask.png) 0 0 / 100% 100% no-repeat; }
+.river span { position: absolute; inset: -60px; mix-blend-mode: screen; }
+.river .flow-a { opacity: .5; background: repeating-linear-gradient(125deg, rgba(255,255,255,0) 0 22px, rgba(225,245,255,.55) 24px 27px, rgba(255,255,255,0) 30px 58px); animation: riverA 3.2s linear infinite; }
+.river .flow-b { opacity: .35; background: repeating-linear-gradient(140deg, rgba(255,255,255,0) 0 40px, rgba(200,235,255,.6) 42px 44px, rgba(255,255,255,0) 47px 90px); animation: riverB 5.5s linear infinite; }
+@keyframes riverA { from { transform: translate(0, 0); } to { transform: translate(47px, 34px); } }
+@keyframes riverB { from { transform: translate(0, 0); } to { transform: translate(69px, 59px); } }
+
+/* ===== leaping fish ===== */
+.fishes { height: 944px; pointer-events: none; animation: floatY 9s ease-in-out infinite; }
+.fish { position: absolute; width: 0; height: 0; }
+.fish-arc, .fish-body { position: absolute; display: block; }
+.fish-arc { left: -14px; top: -10px; animation: fishX var(--dur) linear var(--delay) infinite; }
+.fish-body { width: 28px; height: 14px; animation: fishY var(--dur) linear var(--delay) infinite; transform-origin: 50% 50%; }
+.fish-body svg { width: 100%; height: 100%; display: block; transform: scaleX(calc(var(--dir) * -1)); filter: drop-shadow(0 2px 2px rgba(0,0,0,.25)); }
+.splash { position: absolute; left: -12px; top: -4px; width: 24px; height: 8px; border-radius: 50%; border: 2px solid rgba(255,255,255,.85); opacity: 0; animation: splash var(--dur) ease-out var(--delay) infinite; }
+.splash.s2 { left: calc(-12px + 46px * var(--dir)); animation-name: splash2; }
+/* whole cycle = --dur; the leap happens in the first ~16% then the fish rests under water */
+@keyframes fishX { 0%, 2% { transform: translateX(0); } 16%, 100% { transform: translateX(calc(46px * var(--dir))); } }
+@keyframes fishY {
+  0%, 1.9% { transform: translateY(0) rotate(calc(-35deg * var(--dir))); opacity: 0; }
+  2% { opacity: 1; transform: translateY(0) rotate(calc(-35deg * var(--dir))); }
+  9% { transform: translateY(-38px) rotate(0deg); animation-timing-function: ease-in; }
+  16% { transform: translateY(0) rotate(calc(40deg * var(--dir))); opacity: 1; }
+  16.5%, 100% { opacity: 0; transform: translateY(4px) rotate(calc(40deg * var(--dir))); }
+}
+@keyframes splash { 0%, 1.5% { opacity: 0; transform: scale(.3); } 3% { opacity: .9; } 8% { opacity: 0; transform: scale(1.6); } 100% { opacity: 0; } }
+@keyframes splash2 { 0%, 15.5% { opacity: 0; transform: scale(.3); } 17% { opacity: .9; } 23% { opacity: 0; transform: scale(1.7); } 100% { opacity: 0; } }
+
+/* ===== blossom petals drifting left → right across the title ===== */
+.petals { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+.petals span { position: absolute; left: 0; top: var(--y); animation: petalX var(--t) linear var(--delay) infinite; }
+.petals i { display: block; width: calc(12px * var(--s)); height: calc(9px * var(--s)); border-radius: 80% 10% 80% 10%;
+  background: radial-gradient(circle at 30% 30%, #FFE4EA, #F3B6C3 55%, #E58FA4); box-shadow: 0 1px 2px rgba(150,60,80,.25);
+  animation: petalSway calc(var(--t) / 3) ease-in-out infinite alternate; }
+@keyframes petalX { from { transform: translate(-30px, 0); } to { transform: translate(105vw, var(--rise)); } }
+@keyframes petalSway { from { transform: translateY(-12px) rotate(0deg) rotateX(0deg); } to { transform: translateY(14px) rotate(260deg) rotateX(60deg); } }
+@media (prefers-reduced-motion: reduce) { .petals, .fishes { display: none; } }
+
+
+/* fish: small, short leap that lands back on the same water */
+.fish-body { width: 18px; height: 9px; } .fish-arc { left: -9px; top: -6px; }
+.splash { left: -8px; top: -3px; width: 16px; height: 6px; border-width: 1.5px; }
+.splash.s2 { left: calc(-8px + 16px * var(--dir)); }
+@keyframes fishX { 0%, 2% { transform: translateX(0); } 16%, 100% { transform: translateX(calc(16px * var(--dir))); } }
+@keyframes fishY {
+  0%, 1.9% { transform: translateY(0) rotate(calc(-35deg * var(--dir))); opacity: 0; }
+  2% { opacity: 1; transform: translateY(0) rotate(calc(-35deg * var(--dir))); }
+  9% { transform: translateY(-22px) rotate(0deg); animation-timing-function: ease-in; }
+  16% { transform: translateY(0) rotate(calc(40deg * var(--dir))); opacity: 1; }
+  16.5%, 100% { opacity: 0; transform: translateY(3px) rotate(calc(40deg * var(--dir))); }
+}
+/* leaves instead of petals: greens of the island */
+.petals i { width: calc(14px * var(--s)); height: calc(8px * var(--s)); border-radius: 0 100% 0 100%;
+  background: linear-gradient(135deg, var(--l1, #9DBF7E), var(--l2, #4F7A4A)); box-shadow: inset 0 0 0 .5px rgba(255,255,255,.25), 0 1px 2px rgba(30,50,30,.25); }
+.petals i::after { content: ""; position: absolute; inset: 45% 10% auto 10%; height: 1px; background: rgba(240,255,220,.55); transform: rotate(-28deg); }
+.petals i { position: relative; }

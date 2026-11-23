@@ -13,13 +13,13 @@
   const SECTIONS = [
     ["person", "الملف الشخصي"], ["about", "نبذة عني"], ["projects", "المشاريع"], ["categories", "تصنيفات المشاريع"],
     ["experience", "الخبرات"], ["achievements", "الإنجازات"], ["library", "المكتبة والمهارات"],
-    ["zones", "أماكن الخريطة"], ["workshop", "مشاريع الورشة"], ["ui", "نصوص الواجهة"]
+    ["zones", "أماكن الخريطة"], ["ui", "نصوص الواجهة"]
   ];
   const LABEL = {
     name: "الاسم", brand: "العلامة", title: "العنوان", focus: "مجالات التركيز", headline: "العبارة الرئيسية", intro: "المقدمة",
     location: "الموقع", email: "البريد", phone: "رقم الجوال (يظهر في السيرة)", linkedin: "LinkedIn", github: "GitHub", cv: "ملف السيرة (PDF)", roles: "الأدوار (الفوتر)", quote: "الاقتباس",
     lead: "الفقرة الأولى", body: "الفقرة الثانية", facts: "معلومات سريعة", k: "العنوان", v: "القيمة", interests: "الاهتمامات",
-    slug: "المعرّف (رابط الصفحة)", featured: "مشروع مميّز (يظهر كبير)", cat: "التصنيف", year: "السنة", image: "صورة المشروع", art: "موضع الصورة في اللوحة",
+    slug: "المعرّف (رابط الصفحة)", featured: "مشروع مميّز (يظهر كبير)", cat: "التصنيف", year: "السنة", image: "صورة غلاف (تغطي البطاقة)", logo: "الشعار / الهوية", logoBg: "لون خلفية الشعار", art: "موضع الصورة في اللوحة",
     kicker: "الوصف القصير", summary: "الملخص", role: "دوري", tags: "الوسوم", context: "السياق", challenge: "التحدي", approach: "المنهج (خطوات)",
     solution: "الحل", outcome: "النتيجة", tools: "الأدوات", links: "الروابط", label: "النص", url: "الرابط", award: "الجائزة", status: "الحالة",
     org: "الجهة", date: "التاريخ", points: "النقاط", icon: "الأيقونة", project: "مرتبط بمشروع", education: "التعليم", t: "العنوان", o: "الجهة / الوصف", y: "السنة",
@@ -54,6 +54,8 @@
     const lab = `<label class="lab">${esc(LABEL[key] || key)}</label>`;
     if (key === "icon") return `<div class="f">${lab}<button class="iconpick" data-icon='${P(path)}'><svg viewBox="0 0 24 24"><path d="${window.ICONS[v] || ""}"/></svg><span>${esc(v)}</span></button></div>`;
     if (key === "image") return `<div class="f">${lab}${imageField(path, v)}</div>`;
+    if (key === "logo") return `<div class="f">${lab}${imageField(path, v)}</div>`;
+    if (key === "logoBg") return `<div class="f">${lab}<div class="colorrow"><input type="color" data-p='${P(path)}' value="${esc(v || "#F3EFE3")}"><span>${esc(v || "—")}</span></div></div>`;
     if ((key === "art" || key === "pos") && Array.isArray(v)) return `<div class="f">${lab}<div class="artrow">${window.RWArt.paint(v, 0.5, "mini")}<span>x ${v[0]} · y ${v[1]}</span><button data-art='${P(path)}' data-kind="${key}">اختيار من اللوحة</button></div></div>`;
     if (key === "cat") return `<div class="f">${lab}<select data-p='${P(path)}'>${Object.keys(data.categories).filter((k) => k !== "all").map((k) => `<option value="${k}" ${k === v ? "selected" : ""}>${esc(data.categories[k].ar)}</option>`).join("")}</select></div>`;
     if (key === "project") return `<div class="f">${lab}<select data-p='${P(path)}'><option value="">—</option>${data.projects.map((p) => `<option value="${p.slug}" ${p.slug === v ? "selected" : ""}>${esc(p.title.ar)}</option>`).join("")}</select></div>`;
@@ -96,10 +98,9 @@
     let html = `<h1>${lab}</h1>`;
     if (current === "projects") {
       // make sure every project can take an image
-      data.projects.forEach((p) => { if (!("image" in p)) p.image = ""; });
+      data.projects.forEach((p) => { ["image", "logo", "logoBg"].forEach((k) => { if (!(k in p)) p[k] = ""; }); });
       html += `<p class="hint">لكل مشروع: الصورة (أو مقطع من اللوحة)، العنوان، الوصف، الوسوم، وكل أقسام صفحة دراسة الحالة.</p>`;
     }
-    if (current === "workshop") html += `<p class="hint">معرّفات المشاريع اللي تظهر في «الورشة» على الخريطة: ${data.projects.map((p) => `<code>${p.slug}</code>`).join(" ")}</p>`;
     html += Array.isArray(v) && v.every((x) => typeof x !== "string") ? objList([current], v)
       : Array.isArray(v) ? strList([current], v, "ltr")
       : Object.keys(v).map((k) => field(k, [current, k], v[k])).join("");

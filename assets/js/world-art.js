@@ -54,6 +54,22 @@
     }
     scene.appendChild(fx);
 
+    // the river itself flows: moving light streaks masked to the river's shape in the painting
+    const river = place(el("div", "ly river"), 467, 39, 1182); river.style.setProperty("--d", 18); river.style.height = "755px";
+    river.innerHTML = `<span class="flow-a"></span><span class="flow-b"></span>`;
+    scene.appendChild(river);
+
+    // fish that leap out of the river now and then (scene px, on the water)
+    const fishLayer = el("div", "ly fishes"); fishLayer.style.setProperty("--d", 18); place(fishLayer, 0, 0, W);
+    const FISH = `<svg viewBox="0 0 40 20" aria-hidden="true"><defs><linearGradient id="fishG" x1="0" x2="1"><stop offset="0" stop-color="#F7B267"/><stop offset=".6" stop-color="#F08A4B"/><stop offset="1" stop-color="#E9D7B4"/></linearGradient></defs>
+      <path d="M4 10 C10 2 24 2 31 10 C24 18 10 18 4 10Z" fill="url(#fishG)"/><path d="M30 10 L39 3 L37 10 L39 17Z" fill="#E9874A"/><circle cx="10" cy="8.6" r="1.4" fill="#2b2b2b"/><path d="M15 5 Q19 2 22 5" fill="none" stroke="#fff" stroke-width="1.2" opacity=".6"/></svg>`;
+    [[1187, 370, 0, 9.5, 1], [1277, 443, 3.4, 11, -1], [1119, 636, 6.8, 12.5, 1]].forEach(([x, y, delay, dur, dir]) => {
+      const f = place(el("span", "fish"), x, y); f.style.setProperty("--delay", delay + "s"); f.style.setProperty("--dur", dur + "s"); f.style.setProperty("--dir", dir);
+      f.innerHTML = `<i class="fish-arc"><i class="fish-body">${FISH}</i></i><b class="splash s1"></b><b class="splash s2"></b>`;
+      fishLayer.appendChild(f);
+    });
+    scene.appendChild(fishLayer);
+
     // drifting mist between island and foreground
     const mist = el("div", "ly mist"); mist.style.setProperty("--d", 26); place(mist, 0, 0, W);
     [[200, 640, 520], [900, 760, 640], [1300, 600, 420], [-100, 420, 460]].forEach(([x, y, w], i) => { const m = place(el("span", "wisp"), x, y, w); m.style.animationDelay = -(i * 9) + "s"; mist.appendChild(m); });

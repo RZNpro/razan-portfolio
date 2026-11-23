@@ -92,6 +92,12 @@ window.ICONS = {
     </div>`;
   };
 
+  // a project's picture: uploaded cover image > its logo on its brand colour > a window onto the painting
+  App.visual = (p, z = 1, cls = "") => {
+    if (p.image) return `<img class="pimg ${cls}" src="${App.esc(p.image)}" alt="" loading="lazy">`;
+    if (p.logo) return `<div class="plogo ${cls}" style="--lbg:${App.esc(p.logoBg || "#F3EFE3")}"><img src="${App.esc(p.logo)}" alt="${App.esc(App.t(p.title))}" loading="lazy"></div>`;
+    return window.RWArt ? window.RWArt.paint(p.art, z, cls) : "";
+  };
   App.reveal = () => {
     const els = document.querySelectorAll(".rv:not(.in)");
     if (!("IntersectionObserver" in window)) { els.forEach((e) => e.classList.add("in")); return; }

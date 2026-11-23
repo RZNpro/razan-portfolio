@@ -33,7 +33,7 @@
             <p class="cs-kick rv">${esc(t(p.kicker))}</p>
             <p class="tags rv" style="margin-top:16px">${p.tags.map((x) => `<span>${esc(x)}</span>`).join("")}</p>
           </div>
-          <div class="cs-art rv">${p.image ? `<img class="pimg" src="${esc(p.image)}" alt="${esc(t(p.title))}">` : window.RWArt.paint(p.art, 1.1)}</div>
+          <div class="cs-art rv">${A.visual(p, 1.1)}</div>
         </div>
         <dl class="cs-meta rv">${meta.map(([k, v]) => `<div><dt>${t(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>
       </div></section>

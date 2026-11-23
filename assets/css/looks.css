@@ -1,0 +1,122 @@
+/* Enhancement "looks" layered on the original design (html[data-look="1|2|3"]).
+   1 = soft glass · 2 = living motion · 3 = liquid glass + motion. 0 / none = the original. */
+
+/* ---------- shared: scroll progress + look switcher ---------- */
+.lk-progress { position: fixed; top: 0; inset-inline: 0; height: 3px; z-index: 60; transform-origin: right; transform: scaleX(var(--p, 0)); background: linear-gradient(90deg, var(--gold), var(--forest)); display: none; }
+html[dir="ltr"] .lk-progress { transform-origin: left; }
+html[data-look] .lk-progress { display: block; }
+.lk-switch { position: fixed; bottom: 16px; right: 16px; z-index: 95; display: flex; gap: 4px; align-items: center; padding: 6px; border-radius: 999px; background: #2F4738; color: #F3EFE3; font: 600 13px "IBM Plex Sans Arabic", sans-serif; box-shadow: 0 12px 30px -10px rgba(0,0,0,.6); direction: rtl; }
+.lk-switch span { padding: 0 8px; opacity: .8; }
+.lk-switch button { border: 0; border-radius: 999px; padding: 7px 12px; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.lk-switch button.on { background: #C9A45C; color: #2a1f10; }
+
+/* =========================================================
+   GLASS (looks 1 and 3)
+   ========================================================= */
+.lk-blobs { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; display: none; }
+html[data-look="1"] .lk-blobs, html[data-look="3"] .lk-blobs { display: block; }
+.lk-blobs i { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .55; animation: lkFloat var(--t) ease-in-out infinite alternate; }
+@keyframes lkFloat { to { transform: translate(var(--x), var(--y)) scale(1.18); } }
+html[data-theme="dark"] .lk-blobs i { opacity: .22; }
+
+html[data-look="1"], html[data-look="3"] {
+  --gl-bg: rgba(255, 253, 247, .52); --gl-edge: rgba(255, 255, 255, .75);
+  --gl-sh: 0 1px 1px rgba(30,45,35,.04), 0 10px 26px -10px rgba(30,45,35,.22), 0 34px 60px -34px rgba(30,45,35,.38);
+}
+html[data-theme="dark"][data-look="1"], html[data-theme="dark"][data-look="3"] {
+  --gl-bg: rgba(40, 60, 47, .5); --gl-edge: rgba(243, 239, 227, .14);
+  --gl-sh: 0 1px 1px rgba(0,0,0,.2), 0 14px 30px -12px rgba(0,0,0,.55), 0 34px 60px -34px rgba(0,0,0,.7);
+}
+html[data-look="1"] .gl, html[data-look="3"] .gl {
+  background: var(--gl-bg) !important; backdrop-filter: blur(18px) saturate(165%); -webkit-backdrop-filter: blur(18px) saturate(165%);
+  border-color: var(--gl-edge) !important; box-shadow: var(--gl-sh), inset 0 1px 0 rgba(255,255,255,.6) !important; position: relative; isolation: isolate;
+}
+html[data-theme="dark"][data-look="1"] .gl, html[data-theme="dark"][data-look="3"] .gl { box-shadow: var(--gl-sh), inset 0 1px 0 rgba(255,255,255,.08) !important; }
+/* specular light following the pointer */
+html[data-look="1"] .gl::after, html[data-look="3"] .gl::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 2; opacity: 0; transition: opacity .45s;
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 0%), rgba(255,255,255,.45), transparent 46%); mix-blend-mode: soft-light;
+}
+html[data-look="1"] .gl:hover::after, html[data-look="3"] .gl:hover::after { opacity: 1; }
+html[data-look="1"] #site-header, html[data-look="3"] #site-header {
+  background: rgba(243,239,227,.55); backdrop-filter: blur(22px) saturate(180%); -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border-bottom-color: rgba(255,255,255,.6); box-shadow: 0 10px 30px -20px rgba(30,45,35,.4);
+}
+html[data-theme="dark"][data-look="1"] #site-header, html[data-theme="dark"][data-look="3"] #site-header { background: rgba(28,42,33,.6); border-bottom-color: rgba(243,239,227,.08); }
+html[data-look="1"] .nav, html[data-look="3"] .nav { background: rgba(255,255,255,.35); box-shadow: inset 0 0 0 1px rgba(255,255,255,.6); }
+html[data-theme="dark"][data-look="1"] .nav, html[data-theme="dark"][data-look="3"] .nav { background: rgba(243,239,227,.05); box-shadow: inset 0 0 0 1px rgba(243,239,227,.08); }
+/* sheen sweep on buttons */
+html[data-look="1"] .btn, html[data-look="3"] .btn { position: relative; overflow: hidden; }
+html[data-look="1"] .btn::before, html[data-look="3"] .btn::before {
+  content: ""; position: absolute; inset: 0; transform: translateX(-130%) skewX(-22deg); pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent); transition: transform .9s cubic-bezier(.2,.8,.2,1);
+}
+html[data-look="1"] .btn:hover::before, html[data-look="3"] .btn:hover::before { transform: translateX(130%) skewX(-22deg); }
+html[data-look="1"] .btn-ghost, html[data-look="3"] .btn-ghost { backdrop-filter: blur(14px) saturate(160%); box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 8px 20px -12px rgba(30,45,35,.35); }
+html[data-look="1"] .chip, html[data-look="3"] .chip { backdrop-filter: blur(8px); background: rgba(255,255,255,.5); box-shadow: inset 0 1px 0 rgba(255,255,255,.8); }
+html[data-theme="dark"][data-look="1"] .chip, html[data-theme="dark"][data-look="3"] .chip { background: rgba(243,239,227,.06); box-shadow: none; }
+
+/* =========================================================
+   MOTION (looks 2 and 3)
+   ========================================================= */
+/* headline words rise in one by one */
+html[data-look="2"] .hero-txt h1 .lw, html[data-look="3"] .hero-txt h1 .lw {
+  display: inline-block; opacity: 0; transform: translateY(.5em) rotate(2deg); filter: blur(6px);
+  animation: lkWord .9s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(var(--w) * 90ms + 150ms);
+}
+@keyframes lkWord { to { opacity: 1; transform: none; filter: none; } }
+/* richer entrances: rise + slight scale, staggered by --d (set in looks.js) */
+html[data-look="2"] .rv, html[data-look="3"] .rv { transform: translateY(28px) scale(.98); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); transition-delay: var(--d, 0ms); }
+html[data-look="2"] .rv.in, html[data-look="3"] .rv.in { transform: none; }
+/* cards lift and tilt (transform set from looks.js) */
+html[data-look="2"] .tilt, html[data-look="3"] .tilt { transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s; transform-style: preserve-3d; will-change: transform; }
+html[data-look="2"] .tilt:hover, html[data-look="3"] .tilt:hover { box-shadow: 0 30px 60px -28px rgba(30,45,35,.55); }
+html[data-look="2"] .magnet, html[data-look="3"] .magnet { transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+/* section headings: a gold line grows under the title */
+html[data-look="2"] .sec-h h2, html[data-look="3"] .sec-h h2 { position: relative; padding-bottom: 14px; }
+html[data-look="2"] .sec-h h2::after, html[data-look="3"] .sec-h h2::after {
+  content: ""; position: absolute; inset-inline-start: 0; bottom: 0; height: 3px; width: 90px; border-radius: 3px; background: var(--gold);
+  transform: scaleX(0); transform-origin: var(--o, right); transition: transform 1.1s .25s cubic-bezier(.2,.8,.2,1);
+}
+html[dir="ltr"] .sec-h h2::after { --o: left; }
+html[data-look="2"] .sec-h.in h2::after, html[data-look="3"] .sec-h.in h2::after { transform: scaleX(1); }
+/* timeline draws itself as you scroll */
+html[data-look="2"] .tl::before, html[data-look="3"] .tl::before { background: var(--line); }
+html[data-look="2"] .tl::after, html[data-look="3"] .tl::after {
+  content: ""; position: absolute; inset-inline-start: 11px; top: 8px; width: 2px; height: calc(var(--fill, 0) * (100% - 16px));
+  background: linear-gradient(var(--gold), var(--forest)); box-shadow: 0 0 12px rgba(201,164,92,.6); border-radius: 2px;
+}
+html[data-look="2"] .tl-dot, html[data-look="3"] .tl-dot { transition: background .4s, transform .4s; }
+html[data-look="2"] .tl > li.lit .tl-dot, html[data-look="3"] .tl > li.lit .tl-dot { background: var(--gold); transform: scale(1.25); }
+/* project pictures drift slightly with scroll */
+html[data-look="2"] .p-art > *, html[data-look="3"] .p-art > * { transform: translateY(var(--py, 0)) scale(1.06); transition: transform .2s linear; }
+html[data-look="2"] .pcard:hover .p-art > *, html[data-look="3"] .pcard:hover .p-art > * { transform: translateY(var(--py, 0)) scale(1.1); }
+/* soft light that follows the cursor across the page */
+.lk-cursor { position: fixed; left: 0; top: 0; width: 520px; height: 520px; margin: -260px 0 0 -260px; border-radius: 50%; pointer-events: none; z-index: 0; display: none;
+  background: radial-gradient(circle, rgba(201,164,92,.16), transparent 62%); transition: transform .25s ease-out; }
+html[data-look="2"] .lk-cursor, html[data-look="3"] .lk-cursor { display: block; }
+
+/* =========================================================
+   LOOK 3 extras: the painting as a living backdrop behind the intro + liquid buttons
+   ========================================================= */
+html[data-look="3"] #hero { position: relative; isolation: isolate; }
+html[data-look="3"] #hero::before {
+  content: ""; position: absolute; inset: -80px 0 -40px; z-index: -1; pointer-events: none;
+  background: url(../img/art/island.webp) 75% 40% / 75% auto no-repeat, url(../img/art/sky.webp) center / cover;
+  filter: blur(42px) saturate(1.3); opacity: .5; animation: lkDrift 30s ease-in-out infinite alternate;
+  -webkit-mask: linear-gradient(#000 60%, transparent); mask: linear-gradient(#000 60%, transparent);
+}
+html[data-theme="dark"][data-look="3"] #hero::before { opacity: .22; }
+@keyframes lkDrift { to { transform: scale(1.08) translate(-2%, 1.5%); } }
+html[data-look="3"] .btn-solid { background: var(--forest); }
+html[data-look="3"] .btn-solid::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--burgundy);
+  clip-path: circle(0% at var(--bx, 50%) var(--by, 50%)); transition: clip-path .7s cubic-bezier(.2,.8,.2,1); }
+html[data-look="3"] .btn-solid:hover::after { clip-path: circle(150% at var(--bx, 50%) var(--by, 50%)); }
+html[data-look="3"] .btn-solid { isolation: isolate; }
+html[data-theme="dark"][data-look="3"] .btn-solid::after { background: #fff8e6; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lk-blobs i, html[data-look] .hero-txt h1 .lw, html[data-look="3"] #hero::before { animation: none !important; opacity: 1; filter: none; transform: none; }
+  .lk-cursor { display: none !important; }
+}
+@media (hover: none) { .lk-cursor { display: none !important; } }
