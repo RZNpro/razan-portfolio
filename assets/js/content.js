@@ -491,8 +491,8 @@ window.CONTENT = {
       "logo": "",
       "logoBg": "",
       "imgFit": "",
-      "imgZoom": 95,
-      "imgPos": "",
+      "imgZoom": 100,
+      "imgPos": "48% 49%",
       "links": [
         {
           "type": "deck",
