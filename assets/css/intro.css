@@ -76,3 +76,11 @@ html[dir="rtl"] .qs-btn.next .ic, html[dir="ltr"] .qs-btn.prev .ic { transform: 
 .quick.at-start .qs-btn.prev, .quick.at-end .qs-btn.next { opacity: 0; pointer-events: none; }
 html[data-theme="dark"] .qs-btn { background: #E9DFC6; color: #1C2A21; }
 @media (max-width: 760px) { .qs-btn { display: none; } }
+
+/* strip arrows: a large bare chevron (no circle, no frame) so they never look like the card arrows */
+.qs-btn { width: 44px; height: 72px; margin-top: -44px; border-radius: 0; background: none !important; box-shadow: none !important; color: var(--forest-d); opacity: .75; }
+.qs-btn:hover { transform: scale(1.15); opacity: 1; }
+.qs-btn .ic { width: 40px; height: 40px; stroke-width: 2.4; }
+.qs-btn .ic path { d: path("M9 4l8 8-8 8"); }
+html[data-theme="dark"] .qs-btn { color: #F3EFE3; }
+.qs-btn.prev { inset-inline-start: -40px; } .qs-btn.next { inset-inline-end: -40px; }
