@@ -112,7 +112,7 @@
 
     /* ---------- camera ---------- */
     const cover = opts.fit !== "contain";
-    let cs = { s: 1, x: 0, y: 0 }, base = 1, minS = 1, anim = 0, homeView = { s: 1, x: 0, y: 0 };
+    let cs = { s: 1, x: 0, y: 0 }, base = 1, minS = 1, anim = 0, homeView = { s: 1, x: 0, y: 0 }, parHook = null;
     const size = () => [host.clientWidth, host.clientHeight];
     function clamp(c) {
       const [w, h] = size(); const sw = W * c.s, sh = H * c.s;
@@ -125,7 +125,8 @@
       aura.style.transform = `translate(${cs.x + W / 2 * cs.s}px, ${cs.y + H / 2 * cs.s}px) scale(${cs.s * 1.9}) translate(${-W / 2}px, ${-H / 2}px)`;
       // edges melt into the nature around them only as you zoom out past the opening view (the opening view stays crisp)
       const k = base > minS ? Math.max(0, Math.min(1, (base - cs.s) / ((base - minS) * 0.6))) : 0;
-      cam.style.setProperty("--fx", (7 * k).toFixed(2) + "%"); cam.style.setProperty("--fy", (13 * k).toFixed(2) + "%"); if (opts.onView) opts.onView(cs.s / (base || 1)); }
+      cam.style.setProperty("--fx", (7 * k).toFixed(2) + "%"); cam.style.setProperty("--fy", (13 * k).toFixed(2) + "%");
+      if (parHook) parHook(); if (opts.onView) opts.onView(cs.s / (base || 1)); }
     function home() {
       const [w, h] = size(); base = cover ? Math.max(w / W, h / H) : Math.min(w / W, h / H);
       minS = Math.min(base, Math.min(w / W, h / H)); // zoom out past the opening view, but only until the whole painting shows (its paper edges)
@@ -158,13 +159,21 @@
     // re-fit only when the box really changes size; keep a focused view otherwise
     new ResizeObserver(() => { const [w, h] = size(); if (w === lastW && h === lastH) return; lastW = w; lastH = h; moved ? apply(cs) : apply(home()); }).observe(host);
 
-    // parallax from pointer position
+    // parallax from pointer position — limited so a layer never slides past the painting's edge (no strip beyond the paper)
+    let rawX = 0, rawY = 0;
+    const DMAX = 34; // deepest layer (the foreground trees)
+    function setPar() {
+      const [w, h] = size(), sw = W * cs.s, sh = H * cs.s, k = DMAX * cs.s;
+      const lim = (v, lo, hi) => Math.max(Math.min(0, lo), Math.min(Math.max(0, hi), v));
+      const px = lim(rawX, cs.x / k, (cs.x + sw - w) / k), py = lim(rawY, cs.y / (0.6 * k), (cs.y + sh - h) / (0.6 * k));
+      host.style.setProperty("--px", px.toFixed(3)); host.style.setProperty("--py", py.toFixed(3));
+    }
+    parHook = setPar;
     host.addEventListener("pointermove", (e) => {
       const r = host.getBoundingClientRect();
-      host.style.setProperty("--px", (((e.clientX - r.left) / r.width) * 2 - 1).toFixed(3));
-      host.style.setProperty("--py", (((e.clientY - r.top) / r.height) * 2 - 1).toFixed(3));
+      rawX = ((e.clientX - r.left) / r.width) * 2 - 1; rawY = ((e.clientY - r.top) / r.height) * 2 - 1; setPar();
     });
-    host.addEventListener("pointerleave", () => { host.style.setProperty("--px", 0); host.style.setProperty("--py", 0); });
+    host.addEventListener("pointerleave", () => { rawX = 0; rawY = 0; setPar(); });
 
     // drag to pan + wheel zoom (interactive only)
     if (opts.interactive) {
