@@ -85,6 +85,16 @@
       `</div><button class="car-btn next" aria-label="Next">${ic("arrow")}</button></div>`;
     document.getElementById("w-list").querySelectorAll("[data-z]").forEach((b) => b.onclick = () => open(b.dataset.z));
     const track = document.querySelector(".car-track"), step = () => (track.querySelector(".pc")?.offsetWidth || 220) + 14;
+    // show only whole cards at their normal size; if the next card is only just short of fitting, shrink a hair so it fits whole
+    const fitCards = () => {
+      const box = document.getElementById("w-list"); if (!track.offsetParent || !box.offsetWidth) return;
+      track.style.removeProperty("--pcw"); track.style.width = "";
+      const cw = track.querySelector(".pc").offsetWidth, gap = 14, avail = box.offsetWidth;
+      let n = Math.max(1, Math.floor((avail + gap) / (cw + gap))), w = cw;
+      const nextW = (avail - gap * n) / (n + 1); if (n < C.zones.length && nextW >= cw * 0.86) { n += 1; w = Math.floor(nextW); track.style.setProperty("--pcw", w + "px"); }
+      n = Math.min(n, C.zones.length); track.style.width = (n * w + (n - 1) * gap + 40) + "px";
+    };
+    fitCards(); new ResizeObserver(fitCards).observe(document.getElementById("w-list"));
     const dir = A.lang === "ar" ? -1 : 1; // RTL scrolls the other way
     document.querySelector(".car-btn.next").onclick = () => track.scrollBy({ left: step() * dir, behavior: "smooth" });
     document.querySelector(".car-btn.prev").onclick = () => track.scrollBy({ left: -step() * dir, behavior: "smooth" });

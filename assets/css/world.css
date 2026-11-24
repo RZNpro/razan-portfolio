@@ -199,15 +199,12 @@ html[lang="en"] .world-page .w-card h1 { font-family: "DM Serif Display", serif;
 .w-chips { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
 .w-chips button { display: inline-flex; gap: 6px; align-items: center; font: 600 .84rem var(--f-body); padding: .55em .95em; border-radius: 999px; border: 1px solid var(--line); background: rgba(250,247,240,.9); color: var(--forest-d); cursor: pointer; box-shadow: var(--shadow); }
 .w-chips button.on { background: var(--forest); color: var(--ivory); }
-.w-cards { display: none; position: relative; container-type: inline-size; }
-/* always whole cards: 4 across on wide strips, 3 on medium, 2 on narrow */
-.car-track { --pcw: calc((100cqi - 3 * 14px - 8px) / 4); }
-@container (max-width: 820px) { .car-track { --pcw: calc((100cqi - 2 * 14px - 8px) / 3); } }
-@container (max-width: 480px) { .car-track { --pcw: calc((100cqi - 14px - 8px) / 2); } }
+.w-cards { display: none; position: relative; }
 .world-stage.far:not(:has(.drawer.open)) .w-chips { display: none; }
-.world-stage.far:not(:has(.drawer.open)) .w-cards { display: block; }
+.world-stage.far:not(:has(.drawer.open)) .w-cards { display: block; width: fit-content; max-width: 100%; }
 .world-page .world-stage.far .w-list { left: 470px; right: 20px; max-width: none; }
-.car-track { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 6px 4px 10px; }
+/* only whole cards show (width set in world-page.js); room around them so their shadows aren't cut into a grey frame */
+.car-track { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 20px; scrollbar-width: none; padding: 10px 20px 30px; margin: -10px -20px -30px; clip-path: inset(0 12px 0 12px); }
 .car-track::-webkit-scrollbar { display: none; }
 .pc { flex: 0 0 var(--pcw, 224px); scroll-snap-align: start; display: flex; flex-direction: column; text-align: start; padding: 0; border: 0; cursor: pointer; border-radius: 18px; overflow: hidden; position: relative;
   background: linear-gradient(180deg, #FBF5E6, #F1E6CC); box-shadow: 0 14px 30px -14px rgba(30,40,30,.7), inset 0 0 0 1px rgba(201,164,92,.6); transition: transform .35s, box-shadow .35s; font: inherit; color: #2F4738; }
@@ -227,7 +224,7 @@ html[dir="rtl"] .car-btn.next .ic { transform: scaleX(-1); }
 @media (max-width: 900px) {
   .world-page .world-stage.far .w-list { left: 12px; right: 12px; bottom: 12px; }
   .world-stage.far .w-card { bottom: 210px; }
-  .pc-img { height: 84px; }
+  .pc { flex-basis: var(--pcw, 180px); } .pc-img { height: 84px; }
 }
 .world-page .w-card h1 { margin-bottom: 20px; line-height: 1; }
 /* the stage must never scroll (hidden drawer sits off-screen) */
