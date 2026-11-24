@@ -490,7 +490,7 @@ window.CONTENT = {
       "image": "assets/img/projects/athar-portal.webp",
       "logo": "",
       "logoBg": "",
-      "imgFit": "contain",
+      "imgFit": "",
       "imgZoom": 95,
       "imgPos": "",
       "links": [
