@@ -51,7 +51,7 @@
     if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
       const shoot = () => {
         star.classList.remove("go"); void star.offsetWidth;
-        place(star, 470 + Math.random() * 300, -10 + Math.random() * 40); // empty sky right of the three painted stars, flying parallel to them
+        place(star, 545 + Math.random() * 70, 8 + Math.random() * 30); // the open sky above the distant cloud castle; it dives into the clouds there, never toward the island
         star.style.setProperty("--len", (150 + Math.random() * 110).toFixed(0) + "px");
         star.classList.add("go");
         setTimeout(shoot, 6500 + Math.random() * 7000);
