@@ -9,6 +9,44 @@
   let data = clone(window.CONTENT);
   let dirHandle = null;
   const pendingFiles = {}; // path -> Blob (uploads waiting to be written on publish)
+  let studio = false;       // true when opened through the studio (tools/studio.py): direct publish + translation
+  const canWrite = () => studio || !!dirHandle;
+
+  /* ---------- auto-translation: whatever you write in one language is translated into the other ---------- */
+  const autoFilled = new Set();      // fields filled by translation (editing them = fixing the translation, not a new source)
+  async function translate(text, from, to) {
+    const r = await fetch("/api/translate", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text, from, to }) });
+    const j = await r.json(); if (!j.ok) throw new Error(j.error || "translate failed"); return j.text;
+  }
+  // path ends in ar|en (plain pair) or ar|en, i (list pair). Returns the path of the twin field, or null.
+  function twinOf(path) {
+    const k = path[path.length - 1];
+    if ((k === "ar" || k === "en") && isBi(get(path.slice(0, -1)))) return [...path.slice(0, -1), k === "ar" ? "en" : "ar"];
+    const l = path[path.length - 2];
+    if (typeof k === "number" && (l === "ar" || l === "en") && isBi(get(path.slice(0, -2)))) return [...path.slice(0, -2), l === "ar" ? "en" : "ar", k];
+    return null;
+  }
+  async function autoTranslate(path, el) {
+    if (!studio) return;
+    const twin = twinOf(path); if (!twin) return;
+    const key = JSON.stringify(path), text = get(path);
+    if (autoFilled.has(key)) return;      // this side is the translation: her fixes stay here and don't bounce back
+    if (typeof text !== "string" || !text.trim()) return;
+    const last = path[path.length - 1], from = last === "ar" || last === "en" ? last : path[path.length - 2], to = from === "ar" ? "en" : "ar";
+    const twinEl = [...document.querySelectorAll("[data-p]")].find((x) => x.dataset.p === JSON.stringify(twin));
+    if (twinEl) twinEl.classList.add("translating");
+    status(to === "en" ? "… يترجم للإنجليزي" : "… يترجم للعربي");
+    try {
+      const out = await translate(text, from, to);
+      if (get(path) !== text) return;                                 // she kept typing; the next change will translate again
+      const parent = get(twin.slice(0, -1)); if (Array.isArray(parent)) while (parent.length < twin[twin.length - 1]) parent.push("");
+      set(twin, out); autoFilled.add(JSON.stringify(twin));
+      if (twinEl) { twinEl.value = out; twinEl.classList.add("auto"); }
+      status(to === "en" ? "✓ ترجمت للإنجليزي — تقدرين تعدلين الترجمة" : "✓ ترجمت للعربي — تقدرين تعدلين الترجمة");
+      if (!twinEl) render(el && el.closest("details")?.id);
+    } catch (e) { status("⚠️ ما قدرت أترجم الحين — اكتبي الترجمة يدويًا أو جربي بعد شوي", true); }
+    finally { if (twinEl) twinEl.classList.remove("translating"); }
+  }
 
   const SECTIONS = [
     ["person", "الملف الشخصي"], ["about", "نبذة عني"], ["projects", "المشاريع"], ["categories", "تصنيفات المشاريع"],
@@ -120,9 +158,10 @@
   });
   document.addEventListener("change", async (e) => {
     if (e.target.matches("select[data-p]")) set(JSON.parse(e.target.dataset.p), e.target.value);
+    if (e.target.matches("input[data-p]:not([type=checkbox]):not([type=number]):not([type=color]), textarea[data-p]")) { e.target.classList.remove("auto"); autoTranslate(JSON.parse(e.target.dataset.p), e.target); }
     if (e.target.dataset.doc) {
       const path = JSON.parse(e.target.dataset.doc); const f = e.target.files[0]; if (!f) return;
-      if (!dirHandle && !(await connect())) return;
+      if (!canWrite() && !(await connect())) return;
       const owner = get(path.slice(0, -3)) || {}; const safe = f.name.replace(/[^\w.\-]+/g, "-");
       const name = `assets/docs/${owner.slug ? owner.slug + "-" : ""}${safe}`;
       pendingFiles[name] = f; set(path, name); status("الملف جاهز — يُكتب في مجلد المشروع عند النشر"); render(e.target.closest("details")?.id);
@@ -131,7 +170,7 @@
       const path = JSON.parse(e.target.dataset.img); const f = e.target.files[0]; if (!f) return;
       const blob = await toWebp(f, 1600);
       const owner = get(path.slice(0, -1)); const name = `assets/img/uploads/${owner.slug || "img"}-${Date.now().toString(36)}.webp`;
-      if (dirHandle) { pendingFiles[name] = blob; set(path, name); status("الصورة جاهزة — تُكتب في المجلد عند النشر"); }
+      if (canWrite()) { pendingFiles[name] = blob; set(path, name); status("الصورة جاهزة — تُكتب في المجلد عند النشر"); }
       else { set(path, await blobToDataURL(blob)); status("الصورة محفوظة داخل المسودة (اربطي المجلد لحفظها كملف)"); }
       render(e.target.closest("details")?.id);
     }
@@ -139,8 +178,10 @@
   document.addEventListener("click", (e) => {
     const b = e.target.closest("button,a"); if (!b) return;
     const d = b.dataset;
-    if (d.del) { e.preventDefault(); if (!confirm("حذف هذا العنصر؟")) return; const p = JSON.parse(d.del); get(p.slice(0, -1)).splice(p[p.length - 1], 1); save(); render(); }
-    if (d.addstr) { e.preventDefault(); get(JSON.parse(d.addstr)).push(""); save(); render(); }
+    if (d.del) { e.preventDefault(); if (!confirm("حذف هذا العنصر؟")) return; const p = JSON.parse(d.del); const tw = twinOf(p);
+      get(p.slice(0, -1)).splice(p[p.length - 1], 1); if (tw && Array.isArray(get(tw.slice(0, -1)))) get(tw.slice(0, -1)).splice(tw[tw.length - 1], 1); save(); render(b.closest("details")?.id); }
+    if (d.addstr) { e.preventDefault(); const p = JSON.parse(d.addstr); get(p).push(""); const l = p[p.length - 1];
+      if ((l === "ar" || l === "en") && isBi(get(p.slice(0, -1)))) { const o = get([...p.slice(0, -1), l === "ar" ? "en" : "ar"]); if (Array.isArray(o)) o.push(""); } save(); render(b.closest("details")?.id); }
     if (d.addobj) { e.preventDefault(); const arr = get(JSON.parse(d.addobj)); arr.push(blank(arr[0])); save(); render(`it-${JSON.parse(d.addobj).join("-")}-${arr.length - 1}`); }
     if (d.dup) { e.preventDefault(); const p = JSON.parse(d.dup); const arr = get(p.slice(0, -1)); const c = clone(arr[p[p.length - 1]]); if (c.slug) c.slug += "-copy"; arr.splice(p[p.length - 1] + 1, 0, c); save(); render(); }
     if (d.move) { e.preventDefault(); const p = JSON.parse(d.move); const arr = get(p.slice(0, -1)); const i = p[p.length - 1], j = i + Number(d.d); if (j < 0 || j >= arr.length) return; [arr[i], arr[j]] = [arr[j], arr[i]]; save(); render(); }
@@ -199,11 +240,26 @@
     const fh = await dir.getFileHandle(parts[parts.length - 1], { create: true }); const w = await fh.createWritable(); await w.write(blob); await w.close();
   }
   async function publish() {
+    if (studio) return publishStudio();
     if (!dirHandle && !(await connect())) return;
     for (const [path, blob] of Object.entries(pendingFiles)) { await writeFile(dirHandle, path, blob); delete pendingFiles[path]; }
     await writeFile(dirHandle, "assets/js/content.js", new Blob([serialize()], { type: "text/javascript" }));
     localStorage.removeItem("rz-content-draft");
     status("✓ نُشر — content.js محدّث في مجلد المشروع. ارفعي التحديث للموقع.");
+  }
+  async function publishStudio() {
+    const btn = $("#publish"); btn.disabled = true; status("… جاري النشر على الموقع");
+    try {
+      const files = {};
+      for (const [path, blob] of Object.entries(pendingFiles)) files[path] = (await blobToDataURL(blob)).split(",")[1];
+      const r = await fetch("/api/publish", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ content: serialize(), files }) });
+      const j = await r.json();
+      if (!j.ok) throw new Error(j.error || "publish failed");
+      Object.keys(files).forEach((p) => delete pendingFiles[p]);
+      localStorage.removeItem("rz-content-draft");
+      status(j.pushed ? "✓ نُشر! يظهر على الموقع خلال دقيقة تقريبًا" : "✓ ما فيه تعديلات جديدة — الموقع محدّث");
+    } catch (e) { status("⚠️ ما نجح النشر: " + e.message, true); }
+    finally { btn.disabled = false; }
   }
   function download() {
     const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([serialize()], { type: "text/javascript" })); a.download = "content.js"; a.click();
@@ -223,5 +279,12 @@
   $("#discard").onclick = () => { if (!confirm("تجاهل كل التعديلات غير المنشورة؟")) return; localStorage.removeItem("rz-content-draft"); location.reload(); };
   $("#preview").onclick = () => open("index.html", "_blank");
   if (!window.RZ_LOCAL) $("#main").innerHTML = "<h1>المحرر يعمل على جهازك فقط</h1>";
-  else { status(window.RZ_DRAFT ? "تعملين على مسودة محفوظة (غير منشورة)" : "المحتوى المنشور — أي تعديل يُحفظ كمسودة"); route(); }
+  else {
+    status(window.RZ_DRAFT ? "تعملين على مسودة محفوظة (غير منشورة)" : "المحتوى المنشور — أي تعديل يُحفظ كمسودة"); route();
+    fetch("/api/ping").then((r) => r.ok && r.json()).then((j) => {
+      if (!j || !j.ok) return; studio = true; document.body.classList.add("studio");
+      $("#publish").textContent = "نشر على الموقع";
+      if (!window.RZ_DRAFT) status("✓ متصل — النشر يروح للموقع مباشرة، والترجمة تلقائية");
+    }).catch(() => {});
+  }
 })();

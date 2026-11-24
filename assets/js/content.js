@@ -201,8 +201,8 @@ window.CONTENT = {
         "en": "An interactive experience of Al-Rass history at Al-Jurayf, Qassim — from needs study to brand, website and financial plan."
       },
       "role": {
-        "ar": "قائدة نموذج العمل والمنتج",
-        "en": "Business Model & Product Lead"
+        "ar": "قائدة ومصممة نموذج العمل والمنتج",
+        "en": "Business Model & Product Lead and Designer"
       },
       "tags": [
         "Product Strategy",
@@ -219,7 +219,7 @@ window.CONTENT = {
           "دراسة ميدانية وتحليل للوضع الراهن",
           "نموذج تجاري: دخول مجاني، تذاكر متدرّجة، ومصادر إيراد",
           "حجم السوق وخريطة المنافسة",
-          "مرحلة صفر، خارطة طريق، ونموذج أولي",
+          "مرحلة الصفر، خارطة طريق، ونموذج أولي",
           "مؤشرات قياس الأثر، الشراكات، والتمويل المطلوب"
         ],
         "en": [
