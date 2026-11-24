@@ -25,7 +25,8 @@
     // progressive: show the light 1x art at once, then swap in the sharp 2x (AI-upscaled) version
     if (hi) {
       const big = new Image(); big.decoding = "async";
-      big.onload = () => { img.src = big.src; if (file === "island") MAXS = 2.4; };
+      // decode first, then swap, then ask the camera to repaint (some browsers otherwise keep a blank layer until you touch the map)
+      big.onload = () => { (big.decode ? big.decode() : Promise.resolve()).catch(() => {}).then(() => { img.src = big.src; if (file === "island") MAXS = 2.4; requestAnimationFrame(() => dispatchEvent(new Event("rw-art-swap"))); }); };
       const go = () => { big.src = BASE + "2x/" + file + ".webp"; };
       document.readyState === "complete" ? setTimeout(go, 150) : addEventListener("load", () => setTimeout(go, 150), { once: true });
     }
@@ -36,6 +37,8 @@
     const A = window.App, C = window.CONTENT, t = (o) => A.t(o);
     host.classList.add("art-host");
     host.innerHTML = "";
+    // nature beyond the painting: a soft, blurred continuation of its own sky and trees, so zooming out never shows an edge
+    const aura = el("div", "art-aura"); if (opts.interactive) host.appendChild(aura);
     const cam = el("div", "art-cam"); const scene = el("div", "art-scene"); cam.appendChild(scene); host.appendChild(cam);
 
     const hi = !!opts.interactive;
@@ -100,7 +103,11 @@
       c.y = sh >= h ? Math.min(0, Math.max(h - sh, c.y)) : (h - sh) / 2;
       return c;
     }
-    function apply(c) { cs = clamp({ ...c }); cam.style.transform = `translate(${cs.x}px, ${cs.y}px) scale(${cs.s})`; if (opts.onView) opts.onView(cs.s / (base || 1)); }
+    function apply(c) { cs = clamp({ ...c }); cam.style.transform = `translate(${cs.x}px, ${cs.y}px) scale(${cs.s})`;
+      aura.style.transform = `translate(${cs.x + W / 2 * cs.s}px, ${cs.y + H / 2 * cs.s}px) scale(${cs.s * 1.9}) translate(${-W / 2}px, ${-H / 2}px)`;
+      // edges melt into the nature around them only as you zoom out past the opening view (the opening view stays crisp)
+      const k = base > minS ? Math.max(0, Math.min(1, (base - cs.s) / ((base - minS) * 0.6))) : 0;
+      cam.style.setProperty("--fx", (7 * k).toFixed(2) + "%"); cam.style.setProperty("--fy", (13 * k).toFixed(2) + "%"); if (opts.onView) opts.onView(cs.s / (base || 1)); }
     function home() {
       const [w, h] = size(); base = cover ? Math.max(w / W, h / H) : Math.min(w / W, h / H);
       minS = Math.min(base, Math.min(w / W, h / H)); // zoom out past the opening view, but only until the whole painting shows (its paper edges)
@@ -127,6 +134,7 @@
       return { s, x: px - (px - cs.x) * (s / cs.s), y: py - (py - cs.y) * (s / cs.s) };
     }
     let lastW = 0, lastH = 0, moved = false;
+    addEventListener("rw-art-swap", () => { cam.style.transform += " translateZ(0)"; requestAnimationFrame(() => apply(cs)); });
     apply(home());
     // re-fit only when the box really changes size; keep a focused view otherwise
     new ResizeObserver(() => { const [w, h] = size(); if (w === lastW && h === lastH) return; lastW = w; lastH = h; moved ? apply(cs) : apply(home()); }).observe(host);
