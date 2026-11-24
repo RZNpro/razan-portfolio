@@ -43,3 +43,6 @@ html[lang="ar"] .cv-sec h2 { letter-spacing: 0; font-size: 12pt; }
   .cv-sheet { width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
   a { color: inherit; }
 }
+
+/* on screen: contact links get a comfortable tap height (print layout unchanged) */
+@media screen { .cv-contact a { display: inline-flex; align-items: center; min-height: 24px; padding: 2px 0; } }

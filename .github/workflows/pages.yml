@@ -23,7 +23,7 @@ jobs:
       - name: Build public folder (without the editor)
         run: |
           mkdir _site
-          cp -r index.html world.html project.html cv.html assets _site/
+          cp -r index.html world.html project.html cv.html 404.html robots.txt sitemap.xml assets _site/
           rm -f _site/assets/js/admin.js _site/assets/css/admin.css
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5

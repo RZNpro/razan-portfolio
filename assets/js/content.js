@@ -33,8 +33,8 @@ window.CONTENT = {
       "en": "Turning Ideas into <em>Impact</em>."
     },
     "intro": {
-      "ar": "أحوّل الأفكار إلى حلول ذات معنى، بالإبداع والتفكير الاستراتيجي والتقنية.",
-      "en": "I transform ideas into meaningful solutions through creativity, strategic thinking, and technology."
+      "ar": "أصنع من الأفكار حلولًا ذات معنى، بالإبداع والتفكير الاستراتيجي والتقنية.",
+      "en": "I shape ideas into meaningful solutions through creativity, strategic thinking, and technology."
     },
     "location": {
       "ar": "الرياض، المملكة العربية السعودية",

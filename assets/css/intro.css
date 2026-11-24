@@ -26,7 +26,7 @@ html[lang="ar"] .sm-name { font-family: "Aref Ruqaa", "Amiri", serif; line-heigh
 .sm-roles li { --c: #405D4B; position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px;
   font: 700 clamp(.98rem, 1.25vw, 1.12rem)/1 var(--f-body); color: #fff; background: var(--c); box-shadow: 0 10px 22px -12px var(--c);
   opacity: 0; transform: translateY(18px) scale(.9); animation: smPill .7s cubic-bezier(.2,.9,.25,1.2) forwards; animation-delay: calc(.9s + var(--i) * .14s); }
-.sm-roles li:nth-child(2) { --c: #814B50; } .sm-roles li:nth-child(3) { --c: #80604A; } .sm-roles li:nth-child(4) { --c: #B08A3E; }
+.sm-roles li:nth-child(2) { --c: #814B50; } .sm-roles li:nth-child(3) { --c: #80604A; } .sm-roles li:nth-child(4) { --c: #8E6A26; }
 .sm-roles li .ic { width: 1.1em; height: 1.1em; }
 .sm-roles li::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%); transform: translateX(-120%);
   animation: smShine 4.5s ease-in-out infinite; animation-delay: calc(2.2s + var(--i) * .25s); }
