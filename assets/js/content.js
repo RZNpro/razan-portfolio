@@ -1474,8 +1474,8 @@ window.CONTENT = {
           "en": "Diploma in Project Management (PMP)"
         },
         "o": {
-          "ar": "كلية لندن للتدريب المهني — معتمد من المؤسسة العامة للتدريب التقني والمهني ومؤسسة Scope",
-          "en": "London College for Professional Training — accredited by TVTC & Scope Training"
+          "ar": "كلية لندن للتدريب المهني — معتمد من المؤسسة العامة للتدريب التقني والمهني ومؤسسة Scope للتدريب",
+          "en": "London Vocational Training College - Accredited by the Technical and Vocational Training Corporation and Scope Training Foundation"
         },
         "y": "2026"
       },
@@ -1493,7 +1493,7 @@ window.CONTENT = {
       {
         "t": {
           "ar": "البرنامج المهني المتقدم: مهارات القطاع غير الربحي - تخصص إدارة المشاريع التنموية",
-          "en": "Advanced Professional Program: Non-Profit Project Management"
+          "en": "Masterclass: Non-Profit Sector Skills - Development Project Management Specialization"
         },
         "o": {
           "ar": "مؤسسة مسك — المركز الثاني على الدفعة",
@@ -1525,18 +1525,18 @@ window.CONTENT = {
           "en": "Modern Application Development & Integration"
         },
         "o": {
-          "ar": "مسرّعة مهارات، 2026 — بناء تطبيق متكامل بأدوات Claude Code وClaude Design وClaude Cowork وربطه بالخوادم وقاعدة البيانات",
-          "en": "Maharat Accelerator, 2026 — built a full app with Claude Code, Claude Design & Claude Cowork, integrated with servers and a database"
+          "ar": "مسرّعة مهارات، 2026 — بناء تطبيق متكامل بأدوات Claude Code وClaude Design وClaude Cowork وربطه بالخوادم وقاعدة البيانات، والنشر في فارسال و الربط بقاعدة بيانات نيون",
+          "en": "Maharat Accelerator, 2026 — Building an integrated application using Claude Code, Claude Design, and Claude Cowork tools, connecting it to servers and the database, publishing it in Varsal, and connecting it to the Neon database."
         }
       },
       {
         "t": "Elements of AI for Business",
-        "o": "University of Helsinki & MinnaLearn"
+        "o": "University of Helsinki & MinnaLearn، تعلّم الآلة وأتمتة العمليات (n8n)"
       },
       {
         "t": {
-          "ar": "تطوير ألعاب متقدم بـ Unity، أنميشن وفن رقمي",
-          "en": "Advanced Unity Game Development, Animation & Digital Art"
+          "ar": "معسكر تطوير ألعاب متقدم بـ Unity، أنميشن وفن رقمي",
+          "en": "Advanced game development camp with Unity, animation and digital art"
         },
         "o": {
           "ar": "جمعية صناع، 2026",
@@ -1545,8 +1545,8 @@ window.CONTENT = {
       },
       {
         "t": {
-          "ar": "تصميم تجربة وواجهة المستخدم · المنتجات الرقمية والابتكار",
-          "en": "UX/UI Design · Digital Products & Innovation"
+          "ar": "ادارة المنتجات الرقمية والابتكار",
+          "en": "Digital product management and innovation"
         },
         "o": {
           "ar": "مسرّعة مهارات",
@@ -1555,8 +1555,18 @@ window.CONTENT = {
       },
       {
         "t": {
-          "ar": "إدارة المنتجات الرقمية",
-          "en": "Digital Product Management"
+          "ar": "تصميم تجربة وواجهة المستخدم",
+          "en": "User experience and interface design"
+        },
+        "o": {
+          "ar": "مسرّعة مهارات",
+          "en": "Maharat Accelerator"
+        }
+      },
+      {
+        "t": {
+          "ar": "إدارة المنتجات",
+          "en": "Product management"
         },
         "o": {
           "ar": "دروب",
@@ -1575,8 +1585,8 @@ window.CONTENT = {
       },
       {
         "t": {
-          "ar": "تدريب المدربين والتدريب عن بُعد",
-          "en": "Train the Trainer & Remote Training"
+          "ar": "تدريب المدربين (TOT)",
+          "en": "Training of Trainers (TOT)"
         },
         "o": {
           "ar": "هدف",
@@ -1585,12 +1595,12 @@ window.CONTENT = {
       },
       {
         "t": {
-          "ar": "تعلّم الآلة وأتمتة العمليات (n8n)",
-          "en": "Machine Learning & Automation (n8n)"
+          "ar": "التدريب عن بُعد",
+          "en": "Remote training"
         },
         "o": {
-          "ar": "تعلّم ذاتي",
-          "en": "Self-directed"
+          "ar": "هدف",
+          "en": "Hadaf"
         }
       }
     ],
