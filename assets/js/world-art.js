@@ -165,7 +165,10 @@
       host.addEventListener("wheel", (e) => { e.preventDefault(); cancelAnimationFrame(anim); const r = host.getBoundingClientRect(); apply(zoomBy(e.deltaY > 0 ? 0.9 : 1.1, e.clientX - r.left, e.clientY - r.top)); }, { passive: false });
     }
 
-    return { host, hotspots: hs, focus, home: () => { fly(home()); moved = false; }, zoomIn: () => fly(zoomBy(1.3), 400), zoomOut: () => fly(zoomBy(1 / 1.3), 400) };
+    // the whole island in view (the reset button's second press)
+    const overview = () => { const [w, h] = size(); const sc = minS; return { s: sc, x: (w - W * sc) / 2, y: (h - H * sc) / 2 }; };
+    const atHome = () => Math.abs(cs.s - homeView.s) < 0.004 && Math.abs(cs.x - homeView.x) < 3 && Math.abs(cs.y - homeView.y) < 3;
+    return { host, hotspots: hs, focus, atHome, overview: () => { fly(overview()); }, home: () => { fly(home()); moved = false; }, zoomIn: () => fly(zoomBy(1.3), 400), zoomOut: () => fly(zoomBy(1 / 1.3), 400) };
   }
 
   /* A window onto the painting centred on scene point (x, y); z = zoom (1 = native size). */

@@ -93,7 +93,8 @@
   }
   document.getElementById("zin").onclick = () => world.zoomIn();
   document.getElementById("zout").onclick = () => world.zoomOut();
-  document.getElementById("zreset").onclick = () => (active ? close() : world.home());
+  // reset: back to the opening view; pressed again there, it shows the whole island
+  document.getElementById("zreset").onclick = () => (active ? close() : world.atHome() ? world.overview() : world.home());
   addEventListener("keydown", (e) => { if (e.key === "Escape" && active) close(); });
 
   A.boot(render);
