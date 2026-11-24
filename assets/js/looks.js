@@ -32,7 +32,7 @@
   /* ---------- per-render enhancements (re-run after every render, e.g. language switch) ---------- */
   function enhance() {
     // glass surfaces
-    document.querySelectorAll(".pcard, .facts > div, .tl-card, .acard, .shelf, .sk, .qcard, .hero-world, .cs-meta > div, .steps li, .outs li").forEach((el) => el.classList.add("gl"));
+    document.querySelectorAll(".pcard, .facts > div, .tl-card, .acard, .shelf, .sk, .qcard, .cs-meta > div, .steps li, .outs li").forEach((el) => el.classList.add("gl"));
     if (!has("2", "3")) return;
     // headline: split into words that rise in
     const h1 = document.querySelector(".hero-txt h1, .cs-top h1");

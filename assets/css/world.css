@@ -136,10 +136,11 @@ button.hs:focus-visible { outline: none; }
 @keyframes ringPulse { 0%, 100% { box-shadow: 0 0 0 4px rgba(201,164,92,.45), 0 0 14px 4px rgba(255,240,200,.5); } 50% { box-shadow: 0 0 0 9px rgba(201,164,92,.15), 0 0 26px 10px rgba(255,240,200,.85); } }
 .world-page .art-host { position: absolute; inset: 0; cursor: grab; touch-action: none; }
 .world-page .art-host.dragging { cursor: grabbing; }
-.hero-world.art-wrap { background: #E9E6EC; }
+
 .hero-world .art-host { position: absolute; inset: 0; }
 /* Safari drops rounded-corner clipping when moving layers are inside: clip explicitly */
-.hero-world .art-host { clip-path: inset(0 round 30px); -webkit-clip-path: inset(0 round 30px); }
+.hero-world .art-host { inset: -1px; clip-path: inset(0 round 31px); -webkit-clip-path: inset(0 round 31px); }
+.hero-world.art-wrap { background: #3f5a3c; box-shadow: 0 30px 60px -30px rgba(47,71,56,.45); }
 .hero-world .hs-lab { font-size: 13px; padding: 6px 12px; }
 @media (prefers-reduced-motion: reduce) { .art-scene .ly { transition: none; transform: none; } }
 /* keep the title card over open sky (left side of the painting) in both languages */
