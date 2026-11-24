@@ -103,7 +103,7 @@
     function apply(c) { cs = clamp({ ...c }); cam.style.transform = `translate(${cs.x}px, ${cs.y}px) scale(${cs.s})`; if (opts.onView) opts.onView(cs.s / (base || 1)); }
     function home() {
       const [w, h] = size(); base = cover ? Math.max(w / W, h / H) : Math.min(w / W, h / H);
-      minS = Math.min(base, Math.min(w / W, h / H) * 0.75); // you can zoom out past the opening view, down to a bit smaller than the whole island
+      minS = Math.min(base, Math.min(w / W, h / H)); // zoom out past the opening view, but only until the whole painting shows (its paper edges)
       const s = base; const cx = cover ? 1060 : W / 2, cy = cover ? 430 : H / 2;
       return { s, x: w / 2 - cx * s, y: h / 2 - cy * s };
     }
