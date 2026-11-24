@@ -55,13 +55,47 @@ window.CONTENT = {
     }
   },
   "about": {
+    "now": {
+      "ar": "حاليًا متدربة في أكاديمية مطوري Apple — أكاديمية طويق، الرياض.",
+      "en": "Currently a trainee at the Apple Developer Academy — Tuwaiq Academy, Riyadh."
+    },
+    "approachTitle": {
+      "ar": "كيف أشتغل",
+      "en": "How I work"
+    },
+    "approach": {
+      "ar": [
+        "ألاحظ المشكلة",
+        "أتعاطف مع أصحابها وأحلّلها",
+        "أولّد الحلول",
+        "أدرسها وأقيّمها",
+        "أجرّب بنموذج أولي",
+        "أنتج وأطلق"
+      ],
+      "en": [
+        "Notice the problem",
+        "Empathise and analyse",
+        "Generate ideas",
+        "Study and evaluate",
+        "Prototype and test",
+        "Build and launch"
+      ]
+    },
+    "seekingTitle": {
+      "ar": "وش أدوّر عليه",
+      "en": "What I'm looking for"
+    },
+    "seeking": {
+      "ar": "فرص أتعامل فيها مع الأفكار: أحتضنها، أطوّرها، وأحوّلها إلى منتجات — رقمية أو حقيقية — كمستشارة مشاريع، أو مطوّرة أعمال، أو مديرة منتج.",
+      "en": "Roles where I work with ideas — shaping, growing and turning them into products, digital or physical — as a project consultant, business developer or product manager."
+    },
     "lead": {
       "ar": "متخصصة في تحليل الأعمال وتسليم المشاريع والمنتجات، أحوّل مدخلات أصحاب المصلحة غير المنظمة إلى نطاق عمل واضح، والتحليل إلى قرارات.",
       "en": "Business analysis and project & product delivery specialist — I turn unstructured stakeholder input into defined scope, and analysis into decisions."
     },
     "body": {
-      "ar": "خلفيتي تشمل التنسيق مع العملاء وتحديد المتطلبات والتقارير التنفيذية: ميثاق المشروع، والإطار المنطقي، ومصفوفة المخاطر، ووثائق نطاق العمل، ثم عروض ونماذج أعمال ولوحات معلومات جاهزة لاتخاذ القرار. حاصلة على بكالوريوس علوم الحاسب (4.63 من 5) ودبلوم PMP وشهادة سكرم، مع قدرة عملية على الذكاء الاصطناعي وبناء النماذج الأولية لتسريع التوثيق والتحليل. حاليًا متدربة في أكاديمية مطوري Apple.",
-      "en": "My background spans client coordination, requirement definition and executive reporting: charters, logframes, risk matrices and SOWs, turned into decision-ready presentations, business models and dashboards. I hold a BSc in Computer Science (GPA 4.63/5), a PMP Diploma and Scrum certification, with hands-on AI and prototyping skills I use to accelerate documentation and analysis. I'm currently a trainee at the Apple Developer Academy."
+      "ar": "خلفيتي تشمل التنسيق مع العملاء وتحديد المتطلبات والتقارير التنفيذية: ميثاق المشروع، والإطار المنطقي، ومصفوفة المخاطر، ووثائق نطاق العمل، ثم عروض ونماذج أعمال ولوحات معلومات جاهزة لاتخاذ القرار. حاصلة على بكالوريوس علوم الحاسب (4.63 من 5) ودبلوم PMP وشهادة سكرم، مع قدرة عملية على الذكاء الاصطناعي وبناء النماذج الأولية لتسريع التوثيق والتحليل.",
+      "en": "My background spans client coordination, requirement definition and executive reporting: charters, logframes, risk matrices and SOWs, turned into decision-ready presentations, business models and dashboards. I hold a BSc in Computer Science (GPA 4.63/5), a PMP Diploma and Scrum certification, with hands-on AI and prototyping skills I use to accelerate documentation and analysis."
     },
     "facts": [
       {
@@ -224,7 +258,11 @@ window.CONTENT = {
       ],
       "links": [
         {
-          "label": "Instagram @hisn.ars",
+          "type": "social",
+          "label": {
+            "ar": "حساب إنستقرام @hisn.ars",
+            "en": "Instagram @hisn.ars"
+          },
           "url": "https://instagram.com/hisn.ars"
         }
       ],
@@ -317,7 +355,8 @@ window.CONTENT = {
       ],
       "image": "",
       "logo": "assets/img/projects/madad.webp",
-      "logoBg": "#212145"
+      "logoBg": "#212145",
+      "links": []
     },
     {
       "slug": "athar-portal",
@@ -403,7 +442,8 @@ window.CONTENT = {
       ],
       "image": "assets/img/projects/athar-portal.webp",
       "logo": "",
-      "logoBg": ""
+      "logoBg": "",
+      "links": []
     },
     {
       "slug": "rafiq",
@@ -484,7 +524,8 @@ window.CONTENT = {
       ],
       "image": "",
       "logo": "",
-      "logoBg": ""
+      "logoBg": "",
+      "links": []
     },
     {
       "slug": "clarity",
@@ -561,7 +602,8 @@ window.CONTENT = {
       },
       "image": "",
       "logo": "assets/img/projects/clarity.webp",
-      "logoBg": "#EEEAF7"
+      "logoBg": "#EEEAF7",
+      "links": []
     },
     {
       "slug": "docs-chatbot",
@@ -640,7 +682,8 @@ window.CONTENT = {
       ],
       "image": "assets/img/projects/docs-chatbot.webp",
       "logo": "",
-      "logoBg": ""
+      "logoBg": "",
+      "links": []
     },
     {
       "slug": "ewc-game",
@@ -717,8 +760,9 @@ window.CONTENT = {
       ],
       "links": [
         {
+          "type": "app",
           "label": {
-            "ar": "جرّب اللعبة",
+            "ar": "العب اللعبة",
             "en": "Play the game"
           },
           "url": "https://gd.games/games/0aa1bf0c-89ef-46dc-9514-7362ba13d5de"
@@ -807,7 +851,8 @@ window.CONTENT = {
       },
       "image": "",
       "logo": "assets/img/projects/guardian-of-vision.webp",
-      "logoBg": "#042e66"
+      "logoBg": "#042e66",
+      "links": []
     },
     {
       "slug": "sorting-hat",
@@ -883,7 +928,8 @@ window.CONTENT = {
       },
       "image": "",
       "logo": "assets/img/projects/sorting-hat.webp",
-      "logoBg": "#2E2A3F"
+      "logoBg": "#2E2A3F",
+      "links": []
     },
     {
       "slug": "learning-journey",
@@ -951,7 +997,11 @@ window.CONTENT = {
       ],
       "links": [
         {
-          "label": "GitHub",
+          "type": "code",
+          "label": {
+            "ar": "الكود المصدري على GitHub",
+            "en": "Source code on GitHub"
+          },
           "url": "https://github.com/RZNpro/learning-app-challange"
         }
       ],
@@ -1023,7 +1073,8 @@ window.CONTENT = {
       ],
       "image": "",
       "logo": "",
-      "logoBg": ""
+      "logoBg": "",
+      "links": []
     }
   ],
   "experience": [
@@ -1950,8 +2001,8 @@ window.CONTENT = {
       "en": "Tools"
     },
     "links": {
-      "ar": "روابط",
-      "en": "Links"
+      "ar": "روابط ومواد",
+      "en": "Links & materials"
     },
     "context": {
       "ar": "السياق",
@@ -1992,6 +2043,36 @@ window.CONTENT = {
     "seeProject": {
       "ar": "عرض المشروع",
       "en": "View project"
+    },
+    "linkTypes": {
+      "site": {
+        "ar": "موقع",
+        "en": "Website"
+      },
+      "code": {
+        "ar": "كود مصدري",
+        "en": "Source code"
+      },
+      "app": {
+        "ar": "تطبيق / تجربة",
+        "en": "App / demo"
+      },
+      "deck": {
+        "ar": "عرض تقديمي",
+        "en": "Presentation"
+      },
+      "doc": {
+        "ar": "مستند",
+        "en": "Document"
+      },
+      "video": {
+        "ar": "فيديو",
+        "en": "Video"
+      },
+      "social": {
+        "ar": "حساب",
+        "en": "Account"
+      }
     }
   }
 };

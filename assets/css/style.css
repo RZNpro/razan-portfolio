@@ -353,3 +353,25 @@ html[data-theme="dark"] .dev-badge a { background: #E9DFC6; color: #1C2A21; }
 .pcard.big .plogo { height: 100%; min-height: 300px; }
 .cs-art .plogo { height: 360px; border-radius: 22px; }
 @media (max-width: 860px) { .pcard.big .plogo { min-height: 220px; } .cs-art .plogo { height: 260px; } }
+
+/* About: now / how I work / what I'm looking for */
+.ab-now { display: flex; gap: 10px; align-items: center; font-weight: 700; color: var(--forest-d) !important; }
+.ab-dot { width: 10px; height: 10px; border-radius: 50%; background: #4FA66C; flex: none; box-shadow: 0 0 0 4px rgba(79,166,108,.18); }
+.ab-steps { list-style: none; padding: 0; margin: 0 0 6px; display: flex; flex-wrap: wrap; gap: 8px; counter-reset: s; }
+.ab-steps li { counter-increment: s; display: inline-flex; align-items: center; gap: 8px; padding: .45em .95em .45em .5em; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); font-weight: 600; font-size: .92rem; color: var(--forest-d); }
+html[dir="rtl"] .ab-steps li { padding: .45em .5em .45em .95em; }
+.ab-steps li::before { content: counter(s); display: grid; place-items: center; width: 1.6em; height: 1.6em; border-radius: 50%; background: var(--forest); color: var(--ivory); font-size: .8rem; }
+.ab-seek { font-size: 1.08rem !important; color: var(--ink) !important; border-inline-start: 3px solid var(--gold); padding-inline-start: 14px; }
+
+/* links & materials on project pages */
+.mats { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.mat { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 18px; text-decoration: none; background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow); transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s; }
+.mat:hover { transform: translateY(-4px); box-shadow: 0 22px 40px -22px rgba(30,45,35,.55); }
+.mat-ic { flex: none; width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: var(--forest); color: var(--ivory); }
+html[data-theme="dark"] .mat-ic { color: #1C2A21; }
+.mat-ic .ic { width: 22px; height: 22px; }
+.mat-t { display: grid; gap: 1px; flex: 1; min-width: 0; }
+.mat-t small { font-size: .78rem; font-weight: 700; color: var(--walnut); }
+.mat-t b { color: var(--forest-d); font-size: 1rem; }
+.mat-t em { font-style: normal; font-size: .82rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mat-go { color: var(--muted); }

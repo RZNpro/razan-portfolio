@@ -44,6 +44,9 @@
         <div class="about-txt rv">
           <p class="lead">${esc(t(a.lead))}</p>
           <p>${esc(t(a.body))}</p>
+          ${a.now ? `<p class="ab-now"><span class="ab-dot"></span>${esc(t(a.now))}</p>` : ""}
+          ${a.approach ? `<h3 class="mini">${esc(t(a.approachTitle))}</h3><ol class="ab-steps">${t(a.approach).map((x) => `<li>${esc(x)}</li>`).join("")}</ol>` : ""}
+          ${a.seeking ? `<h3 class="mini">${esc(t(a.seekingTitle))}</h3><p class="ab-seek">${esc(t(a.seeking))}</p>` : ""}
           <h3 class="mini">${t(u.interests)}</h3>
           <p class="chips">${t(a.interests).map((x) => `<span class="chip">${esc(x)}</span>`).join("")}</p>
         </div>

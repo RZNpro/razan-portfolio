@@ -1,0 +1,78 @@
+/* The intro (name + signature + roles) and the arch cards strip. */
+
+
+/* =========================================================
+   HERO 1 — name first: the name is the headline, then the role, then the value line
+   ========================================================= */
+.sm-name { font-size: clamp(3.4rem, 7.6vw, 7rem) !important; line-height: 1.04 !important; margin: 10px 0 14px !important; color: var(--forest-d); }
+html[lang="ar"] .sm-name { font-family: "Aref Ruqaa", "Amiri", serif; line-height: 1.25 !important; }
+.sm-role { font: 700 clamp(1.25rem, 1.9vw, 1.7rem)/1.4 var(--f-body); color: var(--forest-d); margin: 0 0 10px; }
+.sm-tag { font: 400 clamp(1.4rem, 2.3vw, 2rem)/1.35 var(--f-head); color: var(--walnut); margin: 0 0 6px; }
+.sm-tag em { font-style: normal; color: var(--burgundy); }
+
+
+/* HERO 3 — signature: the name written large with a gold stroke drawn beneath it */
+.sm-sign { position: relative; display: inline-block; padding-bottom: 18px; }
+.sm-stroke { position: absolute; inset-inline: 0; bottom: -4px; width: 100%; height: 26px; overflow: visible; }
+.sm-stroke path { fill: none; stroke: var(--gold); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 700; stroke-dashoffset: 700; animation: smDraw 1.8s .7s cubic-bezier(.65,0,.35,1) forwards; }
+@keyframes smDraw { to { stroke-dashoffset: 0; } }
+.sm-quote { margin: 12px 0 10px; padding-inline-start: 18px; border-inline-start: 3px solid var(--gold); font: 400 clamp(1.4rem, 2.2vw, 1.9rem)/1.4 var(--f-head); color: var(--forest-d); }
+.sm-quote em { font-style: normal; color: var(--burgundy); }
+@media (prefers-reduced-motion: reduce) { .sm-stroke path { animation: none; stroke-dashoffset: 0; } .sm-caret { animation: none; } }
+
+
+/* HERO 4 — signature + all roles at once: coloured pills that fly in one after another, then a light passes over them */
+.sm-roles { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 8px; padding: 0; }
+.sm-roles li { --c: #405D4B; position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px;
+  font: 700 clamp(.98rem, 1.25vw, 1.12rem)/1 var(--f-body); color: #fff; background: var(--c); box-shadow: 0 10px 22px -12px var(--c);
+  opacity: 0; transform: translateY(18px) scale(.9); animation: smPill .7s cubic-bezier(.2,.9,.25,1.2) forwards; animation-delay: calc(.9s + var(--i) * .14s); }
+.sm-roles li:nth-child(2) { --c: #814B50; } .sm-roles li:nth-child(3) { --c: #80604A; } .sm-roles li:nth-child(4) { --c: #B08A3E; }
+.sm-roles li .ic { width: 1.1em; height: 1.1em; }
+.sm-roles li::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%); transform: translateX(-120%);
+  animation: smShine 4.5s ease-in-out infinite; animation-delay: calc(2.2s + var(--i) * .25s); }
+.sm-roles li:hover { transform: translateY(-3px) scale(1.04); transition: transform .3s; }
+@keyframes smPill { to { opacity: 1; transform: none; } }
+@keyframes smShine { 0%, 60% { transform: translateX(-120%); } 85%, 100% { transform: translateX(120%); } }
+html[data-theme="dark"] .sm-roles li:nth-child(1) { --c: #5B7F66; }
+@media (prefers-reduced-motion: reduce) { .sm-roles li { animation: none; opacity: 1; transform: none; } .sm-roles li::after { display: none; } }
+
+/* roles: smaller pills (chosen intro) */
+.sm-roles { gap: 7px; margin: 14px 0 6px; }
+.sm-roles li { padding: 7px 13px; gap: 6px; font-size: clamp(.84rem, 1vw, .94rem); }
+.sm-roles li .ic { width: 1em; height: 1em; }
+
+
+/* =========================================================
+   BUILDING CARDS — arch cards for each place
+   ========================================================= */
+.quick { margin-top: 40px; gap: 18px; }
+.quick .paint { position: absolute; inset: 0; width: 100%; height: 100%; transition: transform 1s cubic-bezier(.2,.8,.2,1); }
+.qc-go { position: absolute; inset-block-end: 16px; inset-inline-end: 16px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: #F3EFE3; color: #2F4738; font-style: normal; transition: transform .4s cubic-bezier(.2,.8,.2,1); }
+.qc-go .ic { width: 18px; height: 18px; }
+
+
+/* each building framed in an arch like a gateway */
+
+.qc3 { position: relative; display: flex; align-items: center; gap: 22px; padding: 16px 18px; border-radius: 26px; text-decoration: none; background: var(--paper); box-shadow: 0 16px 34px -22px rgba(20,35,25,.5); transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s; }
+.qc3:hover { transform: translateY(-5px); box-shadow: 0 26px 46px -22px rgba(20,35,25,.6); } .qc3:hover .paint { transform: scale(1.1); } .qc3:hover .qc-go { transform: translateX(-4px); }
+.qc-arch { position: relative; flex: none; width: 118px; height: 150px; border-radius: 999px 999px 18px 18px; overflow: hidden; box-shadow: 0 0 0 5px var(--paper), 0 0 0 6.5px rgba(201,164,92,.7); }
+.qc3 .qc-txt { display: grid; gap: 4px; padding-inline-end: 50px; }
+.qc3 small { font: 700 13.5px var(--f-body); color: var(--walnut); } .qc3 b { font: 700 clamp(24px, 2.2vw, 30px)/1.15 var(--f-head); color: var(--forest-d); } .qc3 em { font-style: normal; color: var(--muted); font-size: 15px; }
+.qc3 .qc-go { background: #2F4738; color: #F3EFE3; top: 50%; bottom: auto; margin-top: -20px; }
+
+
+/* arches as one horizontal strip */
+.quick { display: block; position: relative; }
+.qs-track { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 6px; padding: 14px 6px 26px; scrollbar-width: none; cursor: grab;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
+.qs-track::-webkit-scrollbar { display: none; }
+.qs-track.dragging { cursor: grabbing; scroll-snap-type: none; } .qs-track.dragging .qc3 { pointer-events: none; }
+.qs-track .qc3 { flex: 0 0 min(400px, 82vw); scroll-snap-align: start; }
+.qs-btn { position: absolute; top: 50%; z-index: 3; width: 48px; height: 48px; margin-top: -32px; border-radius: 50%; border: 0; display: grid; place-items: center; cursor: pointer;
+  background: #2F4738; color: #F3EFE3; box-shadow: 0 12px 24px -10px rgba(20,35,25,.6); transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .3s; }
+.qs-btn:hover { transform: scale(1.08); } .qs-btn .ic { width: 20px; height: 20px; }
+.qs-btn.prev { inset-inline-start: -14px; } .qs-btn.next { inset-inline-end: -14px; }
+html[dir="rtl"] .qs-btn.next .ic, html[dir="ltr"] .qs-btn.prev .ic { transform: scaleX(-1); }
+.quick.at-start .qs-btn.prev, .quick.at-end .qs-btn.next { opacity: 0; pointer-events: none; }
+html[data-theme="dark"] .qs-btn { background: #E9DFC6; color: #1C2A21; }
+@media (max-width: 760px) { .qs-btn { display: none; } }

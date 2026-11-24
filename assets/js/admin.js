@@ -18,10 +18,10 @@
   const LABEL = {
     name: "الاسم", brand: "العلامة", title: "العنوان", focus: "مجالات التركيز", headline: "العبارة الرئيسية", intro: "المقدمة",
     location: "الموقع", email: "البريد", phone: "رقم الجوال (يظهر في السيرة)", linkedin: "LinkedIn", github: "GitHub", cv: "ملف السيرة (PDF)", roles: "الأدوار (الفوتر)", quote: "الاقتباس",
-    lead: "الفقرة الأولى", body: "الفقرة الثانية", facts: "معلومات سريعة", k: "العنوان", v: "القيمة", interests: "الاهتمامات",
+    lead: "الفقرة الأولى", now: "وش أسوي الحين", approachTitle: "عنوان المنهج", approach: "خطوات منهجي", seekingTitle: "عنوان الفرص", seeking: "وش أدوّر عليه", body: "الفقرة الثانية", facts: "معلومات سريعة", k: "العنوان", v: "القيمة", interests: "الاهتمامات",
     slug: "المعرّف (رابط الصفحة)", featured: "مشروع مميّز (يظهر كبير)", cat: "التصنيف", year: "السنة", image: "صورة غلاف (تغطي البطاقة)", logo: "الشعار / الهوية", logoBg: "لون خلفية الشعار", art: "موضع الصورة في اللوحة",
     kicker: "الوصف القصير", summary: "الملخص", role: "دوري", tags: "الوسوم", context: "السياق", challenge: "التحدي", approach: "المنهج (خطوات)",
-    solution: "الحل", outcome: "النتيجة", tools: "الأدوات", links: "الروابط", label: "النص", url: "الرابط", award: "الجائزة", status: "الحالة",
+    solution: "الحل", outcome: "النتيجة", tools: "الأدوات", links: "الروابط", label: "النص", url: "الرابط أو الملف", type: "نوع الرابط", award: "الجائزة", status: "الحالة",
     org: "الجهة", date: "التاريخ", points: "النقاط", icon: "الأيقونة", project: "مرتبط بمشروع", education: "التعليم", t: "العنوان", o: "الجهة / الوصف", y: "السنة",
     certifications: "الشهادات", courses: "الدورات", skills: "المهارات", g: "المجموعة", items: "العناصر", languages: "اللغات", l: "اللغة", n: "المستوى (1–5)",
     id: "المعرّف", pos: "موضع المبنى في اللوحة", place: "اسم المكان", section: "القسم", q: "السؤال", href: "الرابط"
@@ -55,6 +55,8 @@
     if (key === "icon") return `<div class="f">${lab}<button class="iconpick" data-icon='${P(path)}'><svg viewBox="0 0 24 24"><path d="${window.ICONS[v] || ""}"/></svg><span>${esc(v)}</span></button></div>`;
     if (key === "image") return `<div class="f">${lab}${imageField(path, v)}</div>`;
     if (key === "logo") return `<div class="f">${lab}${imageField(path, v)}</div>`;
+    if (key === "type" && path.includes("links")) return `<div class="f">${lab}<select data-p='${P(path)}'>${Object.entries(data.ui.linkTypes || {}).map(([k, n]) => `<option value="${k}" ${k === v ? "selected" : ""}>${esc(n.ar)}</option>`).join("")}</select></div>`;
+    if (key === "url" && path.includes("links")) return `<div class="f">${lab}<div class="urlrow">${input(path, v)}<label class="btn">رفع ملف (PDF…)<input type="file" data-doc='${P(path)}' hidden></label></div><small class="hint">رابط موقع، أو ارفعي ملف (عرض، مستند) فيُحفظ في المشروع ويُنشر معه.</small></div>`;
     if (key === "logoBg") return `<div class="f">${lab}<div class="colorrow"><input type="color" data-p='${P(path)}' value="${esc(v || "#F3EFE3")}"><span>${esc(v || "—")}</span></div></div>`;
     if ((key === "art" || key === "pos") && Array.isArray(v)) return `<div class="f">${lab}<div class="artrow">${window.RWArt.paint(v, 0.5, "mini")}<span>x ${v[0]} · y ${v[1]}</span><button data-art='${P(path)}' data-kind="${key}">اختيار من اللوحة</button></div></div>`;
     if (key === "cat") return `<div class="f">${lab}<select data-p='${P(path)}'>${Object.keys(data.categories).filter((k) => k !== "all").map((k) => `<option value="${k}" ${k === v ? "selected" : ""}>${esc(data.categories[k].ar)}</option>`).join("")}</select></div>`;
@@ -118,6 +120,13 @@
   });
   document.addEventListener("change", async (e) => {
     if (e.target.matches("select[data-p]")) set(JSON.parse(e.target.dataset.p), e.target.value);
+    if (e.target.dataset.doc) {
+      const path = JSON.parse(e.target.dataset.doc); const f = e.target.files[0]; if (!f) return;
+      if (!dirHandle && !(await connect())) return;
+      const owner = get(path.slice(0, -3)) || {}; const safe = f.name.replace(/[^\w.\-]+/g, "-");
+      const name = `assets/docs/${owner.slug ? owner.slug + "-" : ""}${safe}`;
+      pendingFiles[name] = f; set(path, name); status("الملف جاهز — يُكتب في مجلد المشروع عند النشر"); render(e.target.closest("details")?.id);
+    }
     if (e.target.dataset.img) {
       const path = JSON.parse(e.target.dataset.img); const f = e.target.files[0]; if (!f) return;
       const blob = await toWebp(f, 1600);

@@ -3,7 +3,7 @@
 (function () {
   const A = window.App; if (!A) return;
   const qs = new URLSearchParams(location.search).get("look");
-  if (qs !== null) localStorage.setItem("rz-look", qs);
+  if (qs !== null) { localStorage.setItem("rz-look", qs); const u = new URL(location.href); u.searchParams.delete("look"); history.replaceState(null, "", u.pathname + u.search + u.hash); }
   const DEFAULT = "3"; // liquid glass + motion — chosen look
   let look = localStorage.getItem("rz-look") || DEFAULT;
   const root = document.documentElement;
