@@ -285,10 +285,13 @@ html[lang="ar"] .cs-meta dt { letter-spacing: 0; font-size: .82rem; }
 .dev-badge { position: fixed; bottom: 16px; left: 16px; z-index: 90; display: flex; gap: 8px; align-items: center; direction: rtl; font: 600 13px "IBM Plex Sans Arabic", sans-serif; }
 .dev-badge a { background: #2F4738; color: #F3EFE3; text-decoration: none; padding: 8px 14px; border-radius: 999px; box-shadow: 0 8px 20px -8px rgba(0,0,0,.6); }
 .dev-badge span { background: #C9A45C; color: #2a1f10; padding: 6px 12px; border-radius: 999px; }
-.p-art .pimg, .cs-art .pimg { width: 100%; height: 200px; object-fit: cover; display: block; transition: transform .6s ease; }
+/* uploaded pictures: framed by the editor's fit / zoom / position (App.frame) */
+.pimgw { width: 100%; height: 200px; overflow: hidden; background: var(--lbg); display: block; }
+.pimgw .pimg { width: 100%; height: 100%; display: block; object-fit: var(--fit, cover); object-position: var(--pos, 50% 50%); scale: var(--z, 1); transform-origin: var(--pos, 50% 50%); transition: transform .6s ease; }
 .pcard:hover .p-art .pimg { transform: scale(1.04); }
-.pcard.big .p-art .pimg { height: 100%; min-height: 300px; }
-.cs-art .pimg { height: 360px; }
+.pcard.big .p-art .pimgw { height: 100%; min-height: 300px; }
+.cs-art .pimgw { height: 360px; border-radius: 22px; }
+@media (max-width: 860px) { .pcard.big .p-art .pimgw { min-height: 220px; } .cs-art .pimgw { height: 260px; } }
 
 /* =========================================================
    DARK MODE — deep forest green, colours inverted
@@ -347,8 +350,8 @@ html[data-theme="dark"] .dev-badge a { background: #E9DFC6; color: #1C2A21; }
 .theme:hover .ic { transform: rotate(30deg); }
 
 /* project logos: shown on their own brand colour, never cropped */
-.plogo { display: grid; place-items: center; width: 100%; height: 200px; background: radial-gradient(120% 90% at 50% 30%, color-mix(in oklab, var(--lbg) 82%, #fff), var(--lbg)); overflow: hidden; }
-.plogo img { max-width: 72%; max-height: 72%; object-fit: contain; filter: drop-shadow(0 10px 18px rgba(0,0,0,.22)); transition: transform .6s cubic-bezier(.2,.8,.2,1); border-radius: 14px; }
+.plogo { display: grid; grid-template: 100% / 100%; place-items: center; width: 100%; height: 200px; background: radial-gradient(120% 90% at 50% 30%, color-mix(in oklab, var(--lbg) 82%, #fff), var(--lbg)); overflow: hidden; }
+.plogo img { max-width: 72%; max-height: 72%; object-fit: contain; scale: var(--z, 1); filter: drop-shadow(0 10px 18px rgba(0,0,0,.22)); transition: transform .6s cubic-bezier(.2,.8,.2,1); border-radius: 14px; }
 .pcard:hover .plogo img { transform: scale(1.06) translateY(-3px); }
 .pcard.big .plogo { height: 100%; min-height: 300px; }
 .cs-art .plogo { height: 360px; border-radius: 22px; }

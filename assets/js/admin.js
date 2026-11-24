@@ -88,7 +88,7 @@
     name: "الاسم", brand: "العلامة", title: "العنوان", focus: "مجالات التركيز", headline: "العبارة الرئيسية", intro: "المقدمة",
     location: "الموقع", email: "البريد", phone: "رقم الجوال (يظهر في السيرة)", linkedin: "LinkedIn", github: "GitHub", cv: "ملف السيرة (PDF)", roles: "الأدوار (الفوتر)", quote: "الاقتباس",
     lead: "الفقرة الأولى", now: "وش أسوي الحين", approachTitle: "عنوان المنهج", approach: "خطوات منهجي", seekingTitle: "عنوان الفرص", seeking: "وش أدوّر عليه", body: "الفقرة الثانية", facts: "معلومات سريعة", k: "العنوان", v: "القيمة", interests: "الاهتمامات",
-    slug: "المعرّف (رابط الصفحة)", featured: "مشروع مميّز (يظهر كبير)", cat: "التصنيف", year: "السنة", image: "صورة غلاف (تغطي البطاقة)", logo: "الشعار / الهوية", logoBg: "لون خلفية الشعار", art: "موضع الصورة في اللوحة",
+    slug: "المعرّف (رابط الصفحة)", featured: "مشروع مميّز (يظهر كبير)", cat: "التصنيف", year: "السنة", image: "صورة غلاف (تغطي البطاقة)", logo: "الشعار / الهوية", logoBg: "لون الخلفية (خلف الشعار أو الصورة)", imgFit: "ضبط الصورة في البطاقة", art: "موضع الصورة في اللوحة",
     kicker: "الوصف القصير", summary: "الملخص", role: "دوري", tags: "الوسوم", context: "السياق", challenge: "التحدي", approach: "المنهج (خطوات)",
     solution: "الحل", outcome: "النتيجة", tools: "الأدوات", links: "الروابط", label: "النص", url: "الرابط أو الملف", type: "نوع الرابط", award: "الجائزة", status: "الحالة",
     org: "الجهة", date: "التاريخ", points: "النقاط", icon: "الأيقونة", project: "مرتبط بمشروع", education: "التعليم", t: "العنوان", o: "الجهة / الوصف", y: "السنة",
@@ -132,6 +132,8 @@
     if (key === "logo") return `<div class="f">${lab}${imageField(path, v)}</div>`;
     if (key === "type" && path.includes("links")) return `<div class="f">${lab}<select data-p='${P(path)}'>${Object.entries(data.ui.linkTypes || {}).map(([k, n]) => `<option value="${k}" ${k === v ? "selected" : ""}>${esc(n.ar)}</option>`).join("")}</select></div>`;
     if (key === "url" && path.includes("links")) return `<div class="f">${lab}<div class="urlrow">${input(path, v)}<label class="btn">رفع ملف (PDF…)<input type="file" data-doc='${P(path)}' hidden></label></div><small class="hint">رابط موقع، أو ارفعي ملف (عرض، مستند) فيُحفظ في المشروع ويُنشر معه.</small></div>`;
+    if (key === "imgZoom" || key === "imgPos") return "";
+    if (key === "imgFit") return `<div class="f">${lab}${framer(path.slice(0, -1))}</div>`;
     if (key === "logoBg") return `<div class="f">${lab}<div class="colorrow"><input type="color" data-p='${P(path)}' value="${esc(v || "#F3EFE3")}"><span>${esc(v || "—")}</span></div></div>`;
     if ((key === "art" || key === "pos") && Array.isArray(v)) return `<div class="f">${lab}<div class="artrow">${window.RWArt.paint(v, 0.5, "mini")}<span>x ${v[0]} · y ${v[1]}</span><button data-art='${P(path)}' data-kind="${key}">اختيار من اللوحة</button></div></div>`;
     if (key === "cat") return `<div class="f">${lab}<select data-p='${P(path)}'>${Object.keys(data.categories).filter((k) => k !== "all").map((k) => `<option value="${k}" ${k === v ? "selected" : ""}>${esc(data.categories[k].ar)}</option>`).join("")}</select></div>`;
@@ -160,6 +162,39 @@
         <div class="ibody">${Object.keys(o).map((k) => field(k, [...path, i, k], o[k])).join("")}</div></details>`).join("")}
       <button class="add" data-addobj='${P(path)}'>＋ إضافة عنصر</button></div>`;
   }
+  /* framing: how the picture sits inside the project card (fill / whole picture, zoom, visible part) */
+  function framer(base) {
+    const p = get(base); const isImg = !!p.image; const z = Number(p.imgZoom) || 100;
+    if (!p.image && !p.logo) return `<small class="hint">ارفعي صورة أو شعار أول، بعدها تقدرين تضبطينه هنا.</small>`;
+    return `<div class="framer" data-base='${P(base)}'>
+      <div class="fr-prev">${window.App.visual(p)}<span class="fr-dot" style="${isImg ? `left:${(p.imgPos || "50% 50%").split(" ")[0]};top:${(p.imgPos || "50% 50%").split(" ")[1]}` : "display:none"}"></span></div>
+      <div class="fr-ctl">
+        ${isImg ? `<div class="seg"><button data-fit="cover" class="${p.imgFit !== "contain" ? "on" : ""}">تعبئة الإطار</button><button data-fit="contain" class="${p.imgFit === "contain" ? "on" : ""}">الصورة كاملة</button></div>` : ""}
+        <label class="zoom">الحجم <input type="range" min="40" max="250" step="5" value="${z}" data-zoom><b>${z}%</b></label>
+        ${isImg ? `<small class="hint">اضغطي على المعاينة لاختيار الجزء اللي يظهر من الصورة.</small>` : `<small class="hint">كبّري أو صغّري الشعار داخل البطاقة.</small>`}
+        <button class="fr-reset">إرجاع الافتراضي</button>
+      </div></div>`;
+  }
+  function refreshFramer(box) {
+    const base = JSON.parse(box.dataset.base); box.outerHTML = framer(base);
+  }
+  document.addEventListener("click", (e) => {
+    const box = e.target.closest(".framer"); if (!box) return;
+    const base = JSON.parse(box.dataset.base); const p = get(base);
+    if (e.target.dataset.fit) { e.preventDefault(); p.imgFit = e.target.dataset.fit === "contain" ? "contain" : ""; save(); refreshFramer(box); }
+    else if (e.target.classList.contains("fr-reset")) { e.preventDefault(); p.imgFit = ""; p.imgZoom = 100; p.imgPos = ""; save(); refreshFramer(box); }
+    else if (e.target.closest(".fr-prev") && p.image) {
+      const r = box.querySelector(".fr-prev").getBoundingClientRect();
+      const x = Math.round(Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * 100), y = Math.round(Math.max(0, Math.min(1, (e.clientY - r.top) / r.height)) * 100);
+      p.imgPos = `${x}% ${y}%`; save(); refreshFramer(box);
+    }
+  });
+  document.addEventListener("input", (e) => {
+    if (!e.target.matches("[data-zoom]")) return;
+    const box = e.target.closest(".framer"); const p = get(JSON.parse(box.dataset.base));
+    p.imgZoom = Number(e.target.value); e.target.nextElementSibling.textContent = p.imgZoom + "%";
+    box.querySelector(".fr-prev > *").style.setProperty("--z", p.imgZoom / 100); save();
+  });
   function imageField(path, v) {
     const src = v ? (pendingFiles[v] ? URL.createObjectURL(pendingFiles[v]) : v) : "";
     return `<div class="imgf">${src ? `<img src="${esc(src)}" alt="">` : `<div class="noimg">لا توجد صورة — يُعرض مقطع من اللوحة</div>`}
@@ -175,7 +210,7 @@
     let html = `<h1>${lab}</h1>`;
     if (current === "projects") {
       // make sure every project can take an image
-      data.projects.forEach((p) => { ["image", "logo", "logoBg"].forEach((k) => { if (!(k in p)) p[k] = ""; }); });
+      data.projects.forEach((p) => { ["image", "logo", "logoBg"].forEach((k) => { if (!(k in p)) p[k] = ""; }); if (!("imgFit" in p)) p.imgFit = ""; if (!("imgZoom" in p)) p.imgZoom = 100; if (!("imgPos" in p)) p.imgPos = ""; });
       html += `<p class="hint">لكل مشروع: الصورة (أو مقطع من اللوحة)، العنوان، الوصف، الوسوم، وكل أقسام صفحة دراسة الحالة.</p>`;
     }
     html += Array.isArray(v) && v.every((x) => typeof x !== "string") ? objList([current], v)

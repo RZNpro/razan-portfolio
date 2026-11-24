@@ -292,7 +292,10 @@ window.CONTENT = {
       },
       "image": "",
       "logo": "assets/img/projects/al-hisn.webp",
-      "logoBg": "#330a0a"
+      "logoBg": "#330a0a",
+      "imgFit": "",
+      "imgZoom": 100,
+      "imgPos": ""
     },
     {
       "slug": "madad",
@@ -372,6 +375,9 @@ window.CONTENT = {
       "image": "",
       "logo": "assets/img/projects/madad.webp",
       "logoBg": "#212145",
+      "imgFit": "",
+      "imgZoom": 100,
+      "imgPos": "",
       "links": [
         {
           "type": "app",
@@ -484,6 +490,9 @@ window.CONTENT = {
       "image": "assets/img/projects/athar-portal.webp",
       "logo": "",
       "logoBg": "",
+      "imgFit": "",
+      "imgZoom": 100,
+      "imgPos": "",
       "links": [
         {
           "type": "deck",
@@ -575,6 +584,9 @@ window.CONTENT = {
       "image": "",
       "logo": "",
       "logoBg": "",
+      "imgFit": "",
+      "imgZoom": 100,
+      "imgPos": "",
       "links": []
     },
     {
@@ -653,6 +665,9 @@ window.CONTENT = {
       "image": "",
       "logo": "assets/img/projects/clarity.webp",
       "logoBg": "#EEEAF7",
+      "imgFit": "",
+      "imgZoom": 100,
+      "imgPos": "",
       "links": [
         {
           "type": "deck",
@@ -743,6 +758,9 @@ window.CONTENT = {
       "image": "assets/img/projects/docs-chatbot.webp",
       "logo": "",
       "logoBg": "",
+      "imgFit": "",
+      "imgZoom": 100,
+      "imgPos": "",
       "links": []
     },
     {
@@ -837,8 +855,11 @@ window.CONTENT = {
         }
       ],
       "image": "",
-      "logo": "assets/img/projects/ewc-game.webp",
-      "logoBg": "#c7a68e"
+      "logo": "assets/img/projects/ewc-game-logo.webp",
+      "logoBg": "#c7a68e",
+      "imgFit": "",
+      "imgZoom": 100,
+      "imgPos": ""
     },
     {
       "slug": "guardian-of-vision",
@@ -920,6 +941,9 @@ window.CONTENT = {
       "image": "",
       "logo": "assets/img/projects/guardian-of-vision.webp",
       "logoBg": "#042e66",
+      "imgFit": "",
+      "imgZoom": 100,
+      "imgPos": "",
       "links": [
         {
           "type": "doc",
@@ -1004,8 +1028,11 @@ window.CONTENT = {
         "en": "Built for an Apple Developer Academy event — sorts participants into houses representing the Academy's specializations."
       },
       "image": "",
-      "logo": "assets/img/projects/sorting-hat.webp",
-      "logoBg": "#2E2A3F",
+      "logo": "assets/img/projects/sorting-hat-logo.webp",
+      "logoBg": "#1d0b3e",
+      "imgFit": "",
+      "imgZoom": 100,
+      "imgPos": "",
       "links": []
     },
     {
@@ -1084,7 +1111,10 @@ window.CONTENT = {
       ],
       "image": "assets/img/uploads/learning-journey-cover.webp",
       "logo": "",
-      "logoBg": "#FFF3E6"
+      "logoBg": "#120d0a",
+      "imgFit": "contain",
+      "imgZoom": 100,
+      "imgPos": ""
     },
     {
       "slug": "ajmal-bitarikhna",
@@ -1151,6 +1181,9 @@ window.CONTENT = {
       "image": "",
       "logo": "",
       "logoBg": "",
+      "imgFit": "",
+      "imgZoom": 100,
+      "imgPos": "",
       "links": []
     }
   ],

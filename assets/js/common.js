@@ -102,9 +102,14 @@ window.ICONS = {
   };
 
   // a project's picture: uploaded cover image > its logo on its brand colour > a window onto the painting
+  // framing set in the editor: imgFit (cover = fill the frame, contain = whole picture), imgZoom (%), imgPos ("x% y%")
+  App.frame = (p) => {
+    const zf = Math.max(30, Math.min(300, Number(p.imgZoom) || 100)) / 100;
+    return `--z:${zf};--fit:${p.imgFit === "contain" ? "contain" : "cover"};--pos:${App.esc(p.imgPos || "50% 50%")};--lbg:${App.esc(p.logoBg || "#F3EFE3")}`;
+  };
   App.visual = (p, z = 1, cls = "") => {
-    if (p.image) return `<img class="pimg ${cls}" src="${App.esc(p.image)}" alt="" loading="lazy">`;
-    if (p.logo) return `<div class="plogo ${cls}" style="--lbg:${App.esc(p.logoBg || "#F3EFE3")}"><img src="${App.esc(p.logo)}" alt="${App.esc(App.t(p.title))}" loading="lazy"></div>`;
+    if (p.image) return `<div class="pimgw ${cls}" style="${App.frame(p)}"><img class="pimg" src="${App.esc(p.image)}" alt="" loading="lazy"></div>`;
+    if (p.logo) return `<div class="plogo ${cls}" style="${App.frame(p)}"><img src="${App.esc(p.logo)}" alt="${App.esc(App.t(p.title))}" loading="lazy"></div>`;
     return window.RWArt ? window.RWArt.paint(p.art, z, cls) : "";
   };
   App.reveal = () => {
