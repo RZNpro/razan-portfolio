@@ -340,3 +340,13 @@ html[data-theme="dark"] .world-stage { background: #1C2A21; }
   .world-page .w-card p { font-size: clamp(15px, 1.15vw, 21px); }
   .world-page .world-stage.far .w-list { left: clamp(470px, 33vw, 640px); }
 }
+
+/* map card arrows: the same bare chevron as the professional page (no circle), with a soft shadow so it reads over the painting */
+.car-btn { width: 44px; height: 72px; margin-top: -42px; border: 0; border-radius: 0; background: none !important; box-shadow: none !important;
+  color: #FFFDF6; opacity: .8; filter: drop-shadow(0 1px 2px rgba(20,30,22,.75)) drop-shadow(0 0 8px rgba(20,30,22,.35)); transition: transform .3s cubic-bezier(.2,.8,.2,1), opacity .3s; }
+.car-btn:hover { transform: scale(1.15); opacity: 1; }
+.car-btn .ic { width: 38px; height: 38px; stroke-width: 2.4; }
+.car-btn .ic path { d: path("M9 4l8 8-8 8"); }
+.car-btn.prev { inset-inline-start: -22px; } .car-btn.next { inset-inline-end: -22px; }
+.w-cards.at-start .car-btn.prev, .w-cards.at-end .car-btn.next { opacity: 0; pointer-events: none; }
+html[data-theme="dark"] .car-btn { color: #FFFDF6; }

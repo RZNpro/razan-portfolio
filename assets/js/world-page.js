@@ -98,7 +98,11 @@
       const nextW = (avail - gap * n) / (n + 1); if (n < C.zones.length && nextW >= cw * 0.86) { n += 1; w = Math.floor(nextW); track.style.setProperty("--pcw", w + "px"); }
       n = Math.min(n, C.zones.length); track.style.width = (n * w + (n - 1) * gap + 40) + "px";
     };
-    fitCards(); new ResizeObserver(fitCards).observe(document.getElementById("w-list"));
+    // hide an arrow when there's nothing more on that side
+    const ends = () => { const max = track.scrollWidth - track.clientWidth, pos = Math.abs(track.scrollLeft); const box = track.parentElement;
+      box.classList.toggle("at-start", pos < 4); box.classList.toggle("at-end", pos > max - 4); };
+    track.addEventListener("scroll", ends, { passive: true });
+    fitCards(); ends(); new ResizeObserver(() => { fitCards(); ends(); }).observe(document.getElementById("w-list"));
     const dir = A.lang === "ar" ? -1 : 1; // RTL scrolls the other way
     document.querySelector(".car-btn.next").onclick = () => track.scrollBy({ left: step() * dir, behavior: "smooth" });
     document.querySelector(".car-btn.prev").onclick = () => track.scrollBy({ left: -step() * dir, behavior: "smooth" });
