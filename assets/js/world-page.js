@@ -89,7 +89,11 @@
     const fitCards = () => {
       const box = document.getElementById("w-list"); if (!track.offsetParent || !box.offsetWidth) return;
       track.style.removeProperty("--pcw"); track.style.width = "";
-      const cw = track.querySelector(".pc").offsetWidth, gap = 14, avail = box.offsetWidth;
+      const gap = 14, avail = box.offsetWidth;
+      // big screens: larger cards, about four and a half in view (the half says "there's more")
+      if (innerWidth >= 1480 && avail >= 860) { track.style.setProperty("--pcw", Math.floor((avail - 4 * gap) / 4.5) + "px"); track.style.width = (avail + 40) + "px"; return; }
+      // smaller screens: only whole cards at their normal size; if the next is only just short of fitting, shrink a hair so it fits
+      const cw = track.querySelector(".pc").offsetWidth;
       let n = Math.max(1, Math.floor((avail + gap) / (cw + gap))), w = cw;
       const nextW = (avail - gap * n) / (n + 1); if (n < C.zones.length && nextW >= cw * 0.86) { n += 1; w = Math.floor(nextW); track.style.setProperty("--pcw", w + "px"); }
       n = Math.min(n, C.zones.length); track.style.width = (n * w + (n - 1) * gap + 40) + "px";
