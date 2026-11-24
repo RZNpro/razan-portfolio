@@ -26,6 +26,37 @@
     if (typeof k === "number" && (l === "ar" || l === "en") && isBi(get(path.slice(0, -2)))) return [...path.slice(0, -2), l === "ar" ? "en" : "ar", k];
     return null;
   }
+  async function suggest(path, el) {
+    if (!studio || el.tagName !== "TEXTAREA") return;
+    const text = get(path); if (typeof text !== "string" || text.trim().length < 25) return;
+    const last = path[path.length - 1], lang = last === "en" || path[path.length - 2] === "en" ? "en" : "ar";
+    const host = el.parentElement; host.querySelector(".sugg")?.remove();
+    const box = document.createElement("div"); box.className = "sugg loading"; box.dir = lang === "ar" ? "rtl" : "ltr";
+    box.textContent = "… أدوّر صياغة أفضل"; host.appendChild(box);
+    try {
+      const r = await fetch("/api/suggest", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text, lang }) });
+      const j = await r.json();
+      const fixes = j.fixes || [];
+      if (get(path) !== text || !j.ok || (!fixes.length && (!j.suggestion || j.suggestion.trim() === text.trim()))) { box.remove(); return; }
+      box.classList.remove("loading");
+      // spelling fixes: each one can be switched off before using them
+      const on = fixes.map(() => true);
+      const build = () => { let out = text; fixes.map((f, i) => [f, i]).sort((a, b) => b[0].o - a[0].o).forEach(([f, i]) => { if (on[i]) out = out.slice(0, f.o) + f.to + out.slice(f.o + f.n); }); return out; };
+      const paint = () => {
+        const result = j.suggestion || build();
+        box.innerHTML = `<b>💡 ${j.suggestion ? "اقتراح صياغة" : "تصحيحات مقترحة — اضغطي على أي تصحيح لإلغائه"}</b><p>${esc(result)}</p>
+          ${fixes.length && !j.suggestion ? `<div class="fx">${fixes.map((f, i) => `<button data-i="${i}" class="${on[i] ? "on" : ""}">${esc(f.from)} ${lang === "ar" ? "←" : "→"} ${esc(f.to)}</button>`).join("")}</div>` : ""}
+          <div><button class="use">استخدمي الاقتراح</button><button class="skip">تجاهل</button></div>`;
+        box.querySelectorAll(".fx button").forEach((b) => b.onclick = () => { on[b.dataset.i] = !on[b.dataset.i]; paint(); });
+        box.querySelector(".skip").onclick = () => box.remove();
+        box.querySelector(".use").onclick = () => {
+          const v = j.suggestion || build(); el.value = v; set(path, v); box.remove();
+          autoFilled.delete(JSON.stringify(path)); autoTranslate(path, el);
+        };
+      };
+      paint();
+    } catch (e) { box.remove(); }
+  }
   async function autoTranslate(path, el) {
     if (!studio) return;
     const twin = twinOf(path); if (!twin) return;
@@ -73,9 +104,15 @@
   let saveT;
   function save() {
     clearTimeout(saveT);
-    saveT = setTimeout(() => { try { localStorage.setItem("rz-content-draft", JSON.stringify(data)); status("✓ حُفظت المسودة — تظهر في الموقع على جهازك"); } catch (e) { status("⚠️ المسودة كبيرة جدًا للتخزين المحلي — اربطي مجلد المشروع للصور", true); } }, 250);
+    saveT = setTimeout(() => { try { localStorage.setItem("rz-content-draft", JSON.stringify(data)); if (!$("#status .undo") && !/^…/.test($("#status").textContent)) status("✓ حُفظت المسودة — تظهر في الموقع على جهازك"); } catch (e) { status("⚠️ المسودة كبيرة جدًا للتخزين المحلي — اربطي مجلد المشروع للصور", true); } }, 250);
   }
   function status(msg, bad) { const s = $("#status"); s.textContent = msg; s.classList.toggle("bad", !!bad); }
+  let undoSnap = null;
+  function undoable(msg, focusId) {
+    const s = $("#status"); s.classList.remove("bad");
+    s.innerHTML = `${esc(msg)} <button class="undo">تراجع</button>`;
+    s.querySelector(".undo").onclick = () => { if (!undoSnap) return; data = undoSnap; undoSnap = null; save(); render(focusId); status("↶ رجّعته"); };
+  }
 
   /* ---------- field renderers ---------- */
   const P = (path) => esc(JSON.stringify(path));
@@ -158,7 +195,7 @@
   });
   document.addEventListener("change", async (e) => {
     if (e.target.matches("select[data-p]")) set(JSON.parse(e.target.dataset.p), e.target.value);
-    if (e.target.matches("input[data-p]:not([type=checkbox]):not([type=number]):not([type=color]), textarea[data-p]")) { e.target.classList.remove("auto"); autoTranslate(JSON.parse(e.target.dataset.p), e.target); }
+    if (e.target.matches("input[data-p]:not([type=checkbox]):not([type=number]):not([type=color]), textarea[data-p]")) { e.target.classList.remove("auto"); const p = JSON.parse(e.target.dataset.p); autoTranslate(p, e.target); suggest(p, e.target); }
     if (e.target.dataset.doc) {
       const path = JSON.parse(e.target.dataset.doc); const f = e.target.files[0]; if (!f) return;
       if (!canWrite() && !(await connect())) return;
@@ -178,14 +215,15 @@
   document.addEventListener("click", (e) => {
     const b = e.target.closest("button,a"); if (!b) return;
     const d = b.dataset;
-    if (d.del) { e.preventDefault(); if (!confirm("حذف هذا العنصر؟")) return; const p = JSON.parse(d.del); const tw = twinOf(p);
-      get(p.slice(0, -1)).splice(p[p.length - 1], 1); if (tw && Array.isArray(get(tw.slice(0, -1)))) get(tw.slice(0, -1)).splice(tw[tw.length - 1], 1); save(); render(b.closest("details")?.id); }
+    if (d.del) { e.preventDefault(); undoSnap = clone(data); const p = JSON.parse(d.del); const tw = twinOf(p);
+      get(p.slice(0, -1)).splice(p[p.length - 1], 1); if (tw && Array.isArray(get(tw.slice(0, -1)))) get(tw.slice(0, -1)).splice(tw[tw.length - 1], 1); save();
+      const fid = b.closest("details")?.parentElement?.closest("details")?.id || b.closest("details")?.id; render(fid); undoable("🗑 انحذف", fid); }
     if (d.addstr) { e.preventDefault(); const p = JSON.parse(d.addstr); get(p).push(""); const l = p[p.length - 1];
       if ((l === "ar" || l === "en") && isBi(get(p.slice(0, -1)))) { const o = get([...p.slice(0, -1), l === "ar" ? "en" : "ar"]); if (Array.isArray(o)) o.push(""); } save(); render(b.closest("details")?.id); }
     if (d.addobj) { e.preventDefault(); const arr = get(JSON.parse(d.addobj)); arr.push(blank(arr[0])); save(); render(`it-${JSON.parse(d.addobj).join("-")}-${arr.length - 1}`); }
     if (d.dup) { e.preventDefault(); const p = JSON.parse(d.dup); const arr = get(p.slice(0, -1)); const c = clone(arr[p[p.length - 1]]); if (c.slug) c.slug += "-copy"; arr.splice(p[p.length - 1] + 1, 0, c); save(); render(); }
     if (d.move) { e.preventDefault(); const p = JSON.parse(d.move); const arr = get(p.slice(0, -1)); const i = p[p.length - 1], j = i + Number(d.d); if (j < 0 || j >= arr.length) return; [arr[i], arr[j]] = [arr[j], arr[i]]; save(); render(); }
-    if (d.clear) { e.preventDefault(); set(JSON.parse(d.clear), ""); render(b.closest("details")?.id); }
+    if (d.clear) { e.preventDefault(); undoSnap = clone(data); set(JSON.parse(d.clear), ""); const fid = b.closest("details")?.id; render(fid); undoable("انشالت الصورة", fid); }
     if (d.icon) { e.preventDefault(); iconPicker(JSON.parse(d.icon), b.closest("details")?.id); }
     if (d.art) { e.preventDefault(); artPicker(JSON.parse(d.art), b.closest("details")?.id); }
   });
@@ -276,7 +314,11 @@
   $("#connect").onclick = connect;
   $("#publish").onclick = publish;
   $("#download").onclick = download;
-  $("#discard").onclick = () => { if (!confirm("تجاهل كل التعديلات غير المنشورة؟")) return; localStorage.removeItem("rz-content-draft"); location.reload(); };
+  $("#discard").onclick = (e) => {
+    const b = e.currentTarget;
+    if (!b.dataset.armed) { b.dataset.armed = 1; b.textContent = "متأكدة؟ اضغطي مرة ثانية"; setTimeout(() => { delete b.dataset.armed; b.textContent = "تجاهل المسودة"; }, 4000); return; }
+    localStorage.removeItem("rz-content-draft"); location.reload();
+  };
   $("#preview").onclick = () => open("index.html", "_blank");
   if (!window.RZ_LOCAL) $("#main").innerHTML = "<h1>المحرر يعمل على جهازك فقط</h1>";
   else {

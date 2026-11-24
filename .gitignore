@@ -6,3 +6,6 @@ design-options.html
 # old exported CV PDFs (the site now builds its CV from content.js)
 assets/cv/
 options/
+
+# local secrets for the editor studio
+tools/studio.env

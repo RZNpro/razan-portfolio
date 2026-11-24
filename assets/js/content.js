@@ -201,8 +201,8 @@ window.CONTENT = {
         "en": "An interactive experience of Al-Rass history at Al-Jurayf, Qassim — from needs study to brand, website and financial plan."
       },
       "role": {
-        "ar": "قائدة ومصممة نموذج العمل والمنتج",
-        "en": "Business Model & Product Lead and Designer"
+        "ar": "قائدة نموذج العمل والمنتج",
+        "en": "Business Model & Product Lead"
       },
       "tags": [
         "Product Strategy",
@@ -219,7 +219,7 @@ window.CONTENT = {
           "دراسة ميدانية وتحليل للوضع الراهن",
           "نموذج تجاري: دخول مجاني، تذاكر متدرّجة، ومصادر إيراد",
           "حجم السوق وخريطة المنافسة",
-          "مرحلة الصفر، خارطة طريق، ونموذج أولي",
+          "مرحلة صفر، خارطة طريق، ونموذج أولي",
           "مؤشرات قياس الأثر، الشراكات، والتمويل المطلوب"
         ],
         "en": [
@@ -388,6 +388,14 @@ window.CONTENT = {
             "en": "Pitch deck excerpts (PDF)"
           },
           "url": "assets/docs/madad.pdf"
+        },
+        {
+          "type": "doc",
+          "label": {
+            "ar": "قصة احتياج باسلوب المانجا القصصي",
+            "en": "Needs story, told manga-style"
+          },
+          "url": ""
         }
       ]
     },
@@ -431,8 +439,8 @@ window.CONTENT = {
         "en": "Capstone of Misk's Non-Profit Project Management programme, endorsed by sector experts."
       },
       "challenge": {
-        "ar": "جمعيات تقدّم دروسًا ومحاضرات وخدمات قيّمة، لكن الناس لا يعرفون عنها: لا إعلان في وسائل التواصل ولا في مواقع الجمعيات، فيضيع الأثر.",
-        "en": "Associations run valuable classes, lectures and services, yet people never hear about them — nothing on social media or their own sites — so the impact is lost."
+        "ar": "جمعيات تقدّم دروسًا ومحاضرات وخدمات ومنتجات قيّمة، لكن الناس لا يعرفون عنها: لا إعلان في وسائل التواصل ولا في مواقع الجمعيات، فيضيع الأثر.",
+        "en": "Associations offer valuable classes, lectures, services and products, yet people never hear about them — nothing on social media or their own sites — so the impact is lost."
       },
       "approach": {
         "ar": [
@@ -587,12 +595,12 @@ window.CONTENT = {
         "en": "An iOS journal that helps you understand how you feel, one word at a time"
       },
       "summary": {
-        "ar": "سمِّ شعورك، افهمه، واختر استجابتك — تطبيق مبني على بحث ودراسة احتياج، بفريق من خمس مطوّرات.",
-        "en": "Name it, understand it, choose your response — an app grounded in research and a needs study, built by a team of five."
+        "ar": "سمِّ شعورك، افهمه، واختر استجابتك — تطبيق مبني على بحث ودراسة احتياج، يساعد الناس على فهم مشاعرهم وتحسين صحتهم النفسية.\nتطوير فريق مشترك من خمس مطوّرات.",
+        "en": "Name it, understand it, choose your response — an app grounded in research and a needs study that helps people understand their feelings and improve their mental health.\nBuilt together by a team of five developers."
       },
       "role": {
-        "ar": "عضوة فريق — بحث، تصميم، وتطوير",
-        "en": "Team member — research, design & development"
+        "ar": "قيادة وتنظيم الفريق والعمل — بحث، تصميم، وتطوير",
+        "en": "Led and organized the team and the work — research, design & development"
       },
       "tags": [
         "SwiftUI",
@@ -601,8 +609,8 @@ window.CONTENT = {
         "AI"
       ],
       "challenge": {
-        "ar": "تحت الضغط تضيق مفرداتنا العاطفية فيصبح كل شيء «متضايق» أو «تعبان»، وتطبيقات المزاج الحالية تتتبّع ولا تشرح.",
-        "en": "Under stress our emotional vocabulary shrinks — everything becomes “stressed” or “tired” — and today’s mood apps track feelings without explaining them."
+        "ar": "تحت الضغط تضيق مفرداتنا العاطفية فيصبح كل شيء «متضايق» أو «تعبان»، وتطبيقات المزاج الحالية تتتبّع ولا تشرح، مما يساعد في جعل صحتنا النفسية أسوأ.",
+        "en": "Under stress our emotional vocabulary shrinks — everything becomes “stressed” or “tired” — and today’s mood apps track feelings without explaining them, which can leave our mental health worse."
       },
       "approach": {
         "ar": [
@@ -619,8 +627,8 @@ window.CONTENT = {
         ]
       },
       "solution": {
-        "ar": "يوميات بمخطط مزاج بالكلمات، وخريطة حرارية، وقوالب كتابة، وتحليل بالذكاء الاصطناعي.",
-        "en": "A journal with a worded mood chart, a heatmap, writing templates and AI analysis."
+        "ar": "يوميات بمخطط مزاج بالكلمات، وخريطة مشاعر حرارية، وقوالب كتابة، وتحليل بالذكاء الاصطناعي.",
+        "en": "A journal with a worded mood chart, an emotion heatmap, writing templates and AI analysis."
       },
       "outcome": {
         "ar": [
@@ -670,8 +678,8 @@ window.CONTENT = {
         "en": "Intelligent Document Chatbot"
       },
       "kicker": {
-        "ar": "مشروع التخرج — CHATBOTPro",
-        "en": "Graduation project — CHATBOTPro"
+        "ar": "مشروع التخرج — CHATBOT Project",
+        "en": "Graduation project — CHATBOT Project"
       },
       "summary": {
         "ar": "روبوت محادثة بتقنية RAG يحصر إجاباته في الوثائق المعتمدة ويحافظ على أمن المعلومات.",
@@ -729,7 +737,8 @@ window.CONTENT = {
         "Python",
         "LangChain",
         "FAISS",
-        "Streamlit"
+        "Streamlit",
+        "RAG"
       ],
       "image": "assets/img/projects/docs-chatbot.webp",
       "logo": "",
@@ -746,8 +755,8 @@ window.CONTENT = {
       ],
       "year": "2024",
       "title": {
-        "ar": "لعبة كأس العالم للرياضات الإلكترونية",
-        "en": "Esports World Cup Game"
+        "ar": "لعبة ترويجية لكأس العالم للرياضات الإلكترونية",
+        "en": "Esports World Cup Promo Game"
       },
       "kicker": {
         "ar": "مشروع تسويقي تفاعلي بمفهوم التلعيب — GamifierSA",
@@ -768,28 +777,28 @@ window.CONTENT = {
         "Launched"
       ],
       "challenge": {
-        "ar": "تعزيز التفاعل الوطني الرقمي مع حدث كأس العالم للرياضات الإلكترونية بتجربة قصيرة وممتعة.",
-        "en": "Boost national digital engagement with the Esports World Cup through a short, enjoyable experience."
+        "ar": "تعزيز التفاعل الوطني الرقمي مع حدث كأس العالم للرياضات الإلكترونية بنسخته الاولى، بتجربة قصيرة وممتعة.",
+        "en": "Boost national digital engagement with the first edition of the Esports World Cup through a short, enjoyable experience."
       },
       "approach": {
         "ar": [
-          "باليت من ذهبي رمال الصحراء وأحمر الغروب",
-          "خلفيات بالذكاء الاصطناعي تستلهم جبل طويق",
-          "شعار بحروف مزخرفة بنمط الصحراء وأنميشن انترو",
-          "لعبة ذاكرة ببطاقات Pixel Art وبرمجة بنظام الأحداث",
-          "رواية مرئية بنهايات متعددة عبر Yarn"
+          "اختيار باليت من ذهبي رمال الصحراء وأحمر الغروب",
+          "تصميم خلفيات بالذكاء الاصطناعي تستلهم جبل طويق",
+          "تصميم شعار بحروف مزخرفة بنمط الصحراء وأنميشن انترو",
+          "تصميم لعبة ذاكرة ببطاقات Pixel Art وبرمجة بنظام الأحداث",
+          "تصميم وتطوير رواية مرئية بنهايات متعددة عبر Yarn"
         ],
         "en": [
-          "Palette of desert-sand gold and sunset red",
-          "AI-assisted backgrounds inspired by the Tuwaiq escarpment",
-          "Desert-patterned lettering logo and intro animation",
-          "Pixel-art memory game built with event logic",
-          "Visual novel with branching endings using Yarn"
+          "Chose a palette of desert-sand gold and sunset red",
+          "Designed AI-assisted backgrounds inspired by the Tuwaiq escarpment",
+          "Designed a desert-patterned lettering logo and intro animation",
+          "Designed a pixel-art memory game built with event logic",
+          "Designed and built a visual novel with branching endings using Yarn"
         ]
       },
       "solution": {
-        "ar": "تجربة ويب متكاملة تُلعب مباشرة من المتصفح.",
-        "en": "A complete web experience playable straight in the browser."
+        "ar": "تجربة ويب متكاملة سهلة الوصول تُلعب مباشرة من المتصفح.",
+        "en": "A complete, easy-to-reach web experience playable straight in the browser."
       },
       "outcome": {
         "ar": [
@@ -887,12 +896,12 @@ window.CONTENT = {
       },
       "outcome": {
         "ar": [
-          "فيديو اللعبة",
+          "فيديو مقدمة اللعبة وأنميشن القصة",
           "ملف يوثّق ثماني مراحل للتصميم والتطوير",
           "عرض الهاكاثون"
         ],
         "en": [
-          "Gameplay video",
+          "Game Intro and Story Animation video",
           "Document tracing eight design & development stages",
           "Hackathon pitch"
         ]
@@ -905,8 +914,8 @@ window.CONTENT = {
         "AI Art"
       ],
       "context": {
-        "ar": "هاكاثون Mega Future — جمعية صناع ومؤسسة مسك، مسار إكسبو الرياض.",
-        "en": "Mega Future Hackathon — Sonaa Association & Misk Foundation, Riyadh Expo track."
+        "ar": "هاكاثون Mega Future — جمعية صناع بدعم من مؤسسة مسك، مسار إكسبو الرياض.",
+        "en": "Mega Future Hackathon — Sonaa Association, supported by Misk Foundation, Riyadh Expo track."
       },
       "image": "",
       "logo": "assets/img/projects/guardian-of-vision.webp",
@@ -936,16 +945,16 @@ window.CONTENT = {
         "en": "The Sorting Hat"
       },
       "kicker": {
-        "ar": "تجربة تفاعلية بالكاميرا لفعالية «صناعة التعويذات»",
-        "en": "A camera-based interactive kiosk for the “Spellcraft” event"
+        "ar": "تجربة تفاعلية بالكاميرا مقتبسة من قبعة الاختيار في سلسلة هاري بوتر، لكن على تخصصات ومجالات التعلّم في أكاديمية مطوّري أبل.",
+        "en": "A camera-based interactive experience inspired by the Sorting Hat from the Harry Potter series — sorting visitors into learning tracks at the Apple Developer Academy."
       },
       "summary": {
-        "ar": "تطبيق ويب للآيباد: الكاميرا تتبّع الرأس وتلبس الزائرة قبعة، ثم تكشف لقبها بفيديو وصحيفة قابلة للمشاركة — بالعربية والإنجليزية ودون أي اتصال بالإنترنت.",
-        "en": "An iPad web app: the camera tracks the head, places a hat, then reveals the visitor’s title with a shareable video and scroll — Arabic & English, fully offline."
+        "ar": "تطبيق ويب للآيباد والحاسوب: الكاميرا تتبّع الرأس وتلبس الزائرة قبعة، ثم تكشف لقبها بفيديو وصحيفة قابلة للمشاركة — بالعربية والإنجليزية ودون أي اتصال بالإنترنت.",
+        "en": "A web app for iPad and computer: the camera tracks the head, places a hat, then reveals the visitor’s title with a shareable video and scroll — Arabic & English, fully offline."
       },
       "role": {
-        "ar": "تصميم وتطوير كامل + بطاقات التحديات",
-        "en": "End-to-end design & build + challenge cards"
+        "ar": "تصميم وتطوير كامل",
+        "en": "End-to-end design & build"
       },
       "tags": [
         "Web",
@@ -1021,8 +1030,8 @@ window.CONTENT = {
         "en": "Set what to learn and for how long, log or freeze each day, and watch your streak grow."
       },
       "role": {
-        "ar": "تصميم وتطوير",
-        "en": "Design & development"
+        "ar": "تطوير iOS",
+        "en": "iOS development"
       },
       "tags": [
         "SwiftUI",
@@ -1073,8 +1082,8 @@ window.CONTENT = {
           "url": "https://github.com/RZNpro/learning-app-challange"
         }
       ],
-      "image": "",
-      "logo": "assets/img/projects/learning-journey.webp",
+      "image": "assets/img/uploads/learning-journey-cover.webp",
+      "logo": "",
       "logoBg": "#FFF3E6"
     },
     {
@@ -1099,8 +1108,8 @@ window.CONTENT = {
         "en": "Filming and editing a short that brings the cultural and historic sites of Al-Rass back to life."
       },
       "role": {
-        "ar": "تصوير ومونتاج",
-        "en": "Filming & editing"
+        "ar": "إخراج ومونتاج",
+        "en": "Directing & editing"
       },
       "tags": [
         "Film",
@@ -1114,12 +1123,12 @@ window.CONTENT = {
       "approach": {
         "ar": [
           "اختيار المواقع والزوايا",
-          "تصوير المشاهد",
+          "إعداد المشاهد بأدوات الذكاء الاصطناعي",
           "مونتاج يبني إيقاع القصة"
         ],
         "en": [
           "Chose sites and angles",
-          "Filmed the scenes",
+          "Built the scenes with AI tools",
           "Edited to build the story’s rhythm"
         ]
       },

@@ -5,6 +5,9 @@ Serves the site on http://localhost:5180 and gives the editor (admin.html) two p
   * POST /api/publish   — writes content.js (+ uploaded images / files) and pushes to GitHub,
                           so the live site updates by itself about a minute later.
   * POST /api/translate — translates a piece of text Arabic <-> English.
+  * POST /api/suggest   — suggests better wording for a long text. Uses Claude when an API key is set
+                          (ANTHROPIC_API_KEY in tools/studio.env, never committed), otherwise LanguageTool
+                          (free spelling and grammar fixes).
 
 Only listens on this computer (127.0.0.1). Start it by double-clicking "تشغيل المحرر.command" in the project folder.
 """
@@ -50,6 +53,64 @@ def translate(text, src, dst):
         return json.loads(r.read().decode("utf-8"))["responseData"]["translatedText"]
 
 
+def load_env():
+    p = os.path.join(ROOT, "tools", "studio.env")
+    if os.path.exists(p):
+        for line in open(p, encoding="utf-8"):
+            if "=" in line and not line.lstrip().startswith("#"):
+                k, v = line.split("=", 1)
+                os.environ.setdefault(k.strip(), v.strip().strip('"'))
+
+
+SUGGEST_SYSTEM = (
+    "You edit the text of a personal portfolio website (a project manager, business analyst and product designer). "
+    "Rewrite the text you are given so it reads better: clearer, tighter, professional but warm, and correct in spelling "
+    "and grammar. Keep the same language (Modern Standard Arabic stays Arabic, English stays English), the same meaning "
+    "and facts, names, numbers and roughly the same length. Do not add claims. "
+    "Reply with the rewritten text only - no quotes, no explanation."
+)
+
+
+def suggest_claude(text):
+    import anthropic  # pip3 install anthropic
+    client = anthropic.Anthropic(timeout=40.0)
+    resp = client.beta.messages.create(
+        model="claude-opus-5-5",
+        max_tokens=2000,
+        betas=["server-side-fallback-2026-07-01"],
+        fallbacks="default",
+        output_config={"effort": "low"},
+        system=SUGGEST_SYSTEM,
+        messages=[{"role": "user", "content": text}],
+    )
+    if resp.stop_reason == "refusal":
+        raise RuntimeError("declined")
+    out = "".join(b.text for b in resp.content if b.type == "text").strip()
+    if not out:
+        raise RuntimeError("empty")
+    return out
+
+
+TASHKEEL = re.compile(r"[\u064B-\u0652\u0670]")
+
+
+def suggest_languagetool(text, lang):
+    q = urllib.parse.urlencode({"language": "ar" if lang == "ar" else "en-US", "text": text}).encode()
+    with urllib.request.urlopen("https://api.languagetool.org/v2/check", q, timeout=15) as r:
+        matches = json.loads(r.read().decode("utf-8"))["matches"]
+    fixes = []
+    for m in matches:
+        reps = [x["value"] for x in m.get("replacements", [])]
+        if not reps:
+            continue
+        o, n = m["offset"], m["length"]
+        orig, rep = text[o:o + n], reps[0]
+        if TASHKEEL.sub("", rep) == TASHKEEL.sub("", orig):  # only adds diacritics: skip
+            continue
+        fixes.append({"o": o, "n": n, "from": orig, "to": rep})
+    return fixes
+
+
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *a, **kw):
         super().__init__(*a, directory=ROOT, **kw)
@@ -90,6 +151,19 @@ class Handler(SimpleHTTPRequestHandler):
                 return self.reply(200, {"ok": True, "text": translate(body.get("text", ""), body.get("from", "ar"), body.get("to", "en"))})
             except Exception as e:
                 return self.reply(502, {"ok": False, "error": str(e)})
+        if self.path == "/api/suggest":
+            text, lang = body.get("text", ""), body.get("lang", "ar")
+            if len(text.strip()) < 25:
+                return self.reply(200, {"ok": True, "suggestion": ""})
+            if os.environ.get("ANTHROPIC_API_KEY"):
+                try:
+                    return self.reply(200, {"ok": True, "engine": "claude", "suggestion": suggest_claude(text)})
+                except Exception as e:
+                    print("suggest (claude) failed:", e, file=sys.stderr)
+            try:
+                return self.reply(200, {"ok": True, "engine": "languagetool", "fixes": suggest_languagetool(text, lang)})
+            except Exception as e:
+                return self.reply(502, {"ok": False, "error": str(e)})
         if self.path == "/api/publish":
             return self.publish(body)
         return self.reply(404, {"ok": False, "error": "not found"})
@@ -125,6 +199,7 @@ class Handler(SimpleHTTPRequestHandler):
 
 if __name__ == "__main__":
     os.chdir(ROOT)
+    load_env()
     srv = ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
     url = f"http://localhost:{PORT}/admin.html"
     print(f"Studio running → {url}\n(keep this window open while editing; close it when done)")

@@ -75,3 +75,15 @@ body.studio #connect, body.studio #download { display: none; }
 @keyframes trShim { to { background-position: -200% 0; } }
 .auto { box-shadow: inset 3px 0 0 #C9A45C; }
 [dir="rtl"] .auto, .bi > div:first-child .auto { box-shadow: inset -3px 0 0 #C9A45C; }
+#status .undo { margin-inline-start: 8px; border: 0; border-radius: 999px; padding: 3px 12px; background: #C9A45C; color: #2a1f10; font: inherit; font-weight: 700; cursor: pointer; }
+.sugg { margin-top: 6px; padding: 10px 12px; border-radius: 10px; background: rgba(201,164,92,.12); border: 1px solid rgba(201,164,92,.45); font-size: .9rem; }
+.sugg.loading { opacity: .7; font-size: .82rem; padding: 6px 12px; }
+.sugg b { display: block; font-size: .8rem; color: #8a6a2a; margin-bottom: 4px; }
+.sugg p { margin: 0 0 6px; white-space: pre-wrap; line-height: 1.7; }
+.sugg small { display: block; opacity: .75; margin-bottom: 6px; }
+.sugg div { display: flex; gap: 6px; }
+.sugg button { border: 0; border-radius: 999px; padding: 5px 12px; font: inherit; font-size: .82rem; cursor: pointer; background: #2F4738; color: #F3EFE3; }
+.sugg button.skip { background: transparent; color: inherit; box-shadow: inset 0 0 0 1px rgba(0,0,0,.2); }
+.sugg .fx { flex-wrap: wrap; margin-bottom: 8px; }
+.sugg .fx button { background: transparent; color: inherit; box-shadow: inset 0 0 0 1px rgba(0,0,0,.25); text-decoration: line-through; opacity: .55; }
+.sugg .fx button.on { background: rgba(47,71,56,.12); text-decoration: none; opacity: 1; }
