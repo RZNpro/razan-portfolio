@@ -87,8 +87,10 @@ html[dir="rtl"] .drawer { transform: translateX(calc(-100% - 40px)); }
 }
 
 /* ---------- Painted world (layered Canva art) ---------- */
-.art-host { position: relative; overflow: hidden; --px: 0; --py: 0; background: #E9E6EC; user-select: none; -webkit-user-select: none; }
+.art-host { position: relative; overflow: hidden; --px: 0; --py: 0; background: linear-gradient(180deg, #E6E4F0 0%, #ECEAF2 45%, #E9EEF0 100%); user-select: none; -webkit-user-select: none; }
 .art-cam { position: absolute; left: 0; top: 0; width: 1680px; height: 944px; transform-origin: 0 0; will-change: transform; }
+/* soft painted edges, so zooming out past the opening view blends into the sky instead of showing a hard frame */
+.art-host .art-cam { -webkit-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 5%, #000 95%, transparent); -webkit-mask-composite: source-in; mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 5%, #000 95%, transparent); mask-composite: intersect; }
 .art-scene { position: absolute; inset: 0; }
 .art-scene .ly { position: absolute; transform: translate3d(calc(var(--px) * var(--d) * -1px), calc(var(--py) * var(--d) * -0.6px), 0); transition: transform .9s cubic-bezier(.2,.8,.2,1); }
 .art-scene .ly img { display: block; width: 100%; height: auto; pointer-events: none; }

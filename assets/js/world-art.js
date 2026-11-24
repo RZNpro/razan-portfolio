@@ -92,7 +92,7 @@
 
     /* ---------- camera ---------- */
     const cover = opts.fit !== "contain";
-    let cs = { s: 1, x: 0, y: 0 }, base = 1, anim = 0;
+    let cs = { s: 1, x: 0, y: 0 }, base = 1, minS = 1, anim = 0;
     const size = () => [host.clientWidth, host.clientHeight];
     function clamp(c) {
       const [w, h] = size(); const sw = W * c.s, sh = H * c.s;
@@ -103,6 +103,7 @@
     function apply(c) { cs = clamp({ ...c }); cam.style.transform = `translate(${cs.x}px, ${cs.y}px) scale(${cs.s})`; if (opts.onView) opts.onView(cs.s / (base || 1)); }
     function home() {
       const [w, h] = size(); base = cover ? Math.max(w / W, h / H) : Math.min(w / W, h / H);
+      minS = Math.min(base, Math.min(w / W, h / H) * 0.75); // you can zoom out past the opening view, down to a bit smaller than the whole island
       const s = base; const cx = cover ? 1060 : W / 2, cy = cover ? 430 : H / 2;
       return { s, x: w / 2 - cx * s, y: h / 2 - cy * s };
     }
@@ -122,7 +123,7 @@
     }
     function zoomBy(f, px, py) {
       const [w, h] = size(); px = px ?? w / 2; py = py ?? h / 2;
-      const s = Math.min(Math.max(cs.s * f, base), Math.max(base, MAXS));
+      const s = Math.min(Math.max(cs.s * f, minS), Math.max(base, MAXS));
       return { s, x: px - (px - cs.x) * (s / cs.s), y: py - (py - cs.y) * (s / cs.s) };
     }
     let lastW = 0, lastH = 0, moved = false;
