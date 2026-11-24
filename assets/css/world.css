@@ -311,3 +311,17 @@ html[data-theme="dark"] .world-stage { background: #1C2A21; }
 .petals i { position: relative; }
 
 .art-fgcam { pointer-events: none; }
+
+/* shooting star: flies left to right and down, parallel to the three painted stars at the top left */
+.meteors { pointer-events: none; overflow: hidden; }
+.meteor { position: absolute; width: var(--len, 200px); height: 2.5px; border-radius: 3px; opacity: 0; transform-origin: 100% 50%;
+  background: linear-gradient(270deg, #fff 0%, #FFE9B0 14%, rgba(255,205,120,.7) 40%, rgba(170,190,255,.25) 75%, transparent);
+  filter: drop-shadow(0 0 2px rgba(120,130,190,.55)) drop-shadow(0 0 8px rgba(255,222,150,.9)); }
+.meteor::before { content: ""; position: absolute; right: -3px; top: 50%; width: 7px; height: 7px; margin-top: -3.5px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px 3px rgba(255,226,150,.95), 0 0 2px 1px rgba(110,120,190,.6); }
+.meteor.go { animation: meteor 1.6s cubic-bezier(.3,.1,.6,1) forwards; }
+@keyframes meteor {
+  0% { opacity: 0; transform: rotate(39deg) translateX(0) scaleX(.2); }
+  12% { opacity: 1; }
+  70% { opacity: 1; transform: rotate(39deg) translateX(240px) scaleX(1); }
+  100% { opacity: 0; transform: rotate(39deg) translateX(340px) scaleX(.6); }
+}

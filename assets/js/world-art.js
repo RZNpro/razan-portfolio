@@ -44,6 +44,21 @@
     const hi = !!opts.interactive;
     LAYERS.forEach((L) => scene.appendChild(layer(...L, hi)));
 
+    // a shooting star now and then: a bright streak that crosses the sky and fades (behind the island and islets)
+    const sky = el("div", "ly meteors"); sky.style.setProperty("--d", 6); place(sky, 0, 0, W); sky.style.height = H + "px";
+    const star = el("span", "meteor"); sky.appendChild(star);
+    scene.insertBefore(sky, scene.children[1]);
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const shoot = () => {
+        star.classList.remove("go"); void star.offsetWidth;
+        place(star, 470 + Math.random() * 300, -10 + Math.random() * 40); // empty sky right of the three painted stars, flying parallel to them
+        star.style.setProperty("--len", (150 + Math.random() * 110).toFixed(0) + "px");
+        star.classList.add("go");
+        setTimeout(shoot, 6500 + Math.random() * 7000);
+      };
+      setTimeout(shoot, 2200 + Math.random() * 2000);
+    }
+
     // ambient effects that ride with the island
     const fx = el("div", "ly fx"); fx.style.setProperty("--d", 18); place(fx, 0, 0, W);
     [[930, 590, 30, 85], [1290, 640, 30, 100], [1585, 560, 18, 60]].forEach(([x, y, w, h], i) => {
