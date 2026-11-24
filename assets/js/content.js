@@ -392,10 +392,10 @@ window.CONTENT = {
         {
           "type": "doc",
           "label": {
-            "ar": "قصة احتياج باسلوب المانجا القصصي",
-            "en": "Needs story, told manga-style"
+            "ar": "قصة احتياج بأسلوب المانجا (PDF)",
+            "en": "Needs story, told manga-style (PDF)"
           },
-          "url": ""
+          "url": "assets/docs/madad-manga-story.pdf"
         }
       ]
     },
