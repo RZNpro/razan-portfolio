@@ -490,8 +490,8 @@ window.CONTENT = {
       "image": "assets/img/projects/athar-portal.webp",
       "logo": "",
       "logoBg": "",
-      "imgFit": "",
-      "imgZoom": 100,
+      "imgFit": "contain",
+      "imgZoom": 95,
       "imgPos": "",
       "links": [
         {
@@ -666,7 +666,7 @@ window.CONTENT = {
       "logo": "assets/img/projects/clarity.webp",
       "logoBg": "#EEEAF7",
       "imgFit": "",
-      "imgZoom": 100,
+      "imgZoom": 120,
       "imgPos": "",
       "links": [
         {
@@ -758,9 +758,9 @@ window.CONTENT = {
       "image": "assets/img/projects/docs-chatbot.webp",
       "logo": "",
       "logoBg": "",
-      "imgFit": "",
-      "imgZoom": 100,
-      "imgPos": "",
+      "imgFit": "contain",
+      "imgZoom": 130,
+      "imgPos": "3% 50%",
       "links": []
     },
     {
@@ -1113,8 +1113,8 @@ window.CONTENT = {
       "logo": "",
       "logoBg": "#120d0a",
       "imgFit": "contain",
-      "imgZoom": 100,
-      "imgPos": ""
+      "imgZoom": 110,
+      "imgPos": "33% 11%"
     },
     {
       "slug": "ajmal-bitarikhna",
