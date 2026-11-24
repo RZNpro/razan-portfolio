@@ -84,14 +84,14 @@
         `<span class="pc-txt"><b>${short(z)}</b><small>${esc(t(z.section))}</small></span><span class="pc-go">${ic("arrow", "dir")}</span></button>`).join("") +
       `</div><button class="car-btn next" aria-label="Next">${ic("arrow")}</button></div>`;
     document.getElementById("w-list").querySelectorAll("[data-z]").forEach((b) => b.onclick = () => open(b.dataset.z));
-    const track = document.querySelector(".car-track"), step = () => (track.querySelector(".pc")?.offsetWidth || 220) + 14;
+    const track = document.querySelector(".car-track"), step = () => (track.querySelector(".pc")?.offsetWidth || 220) + (parseFloat(getComputedStyle(track).columnGap) || 14);
     // show only whole cards at their normal size; if the next card is only just short of fitting, shrink a hair so it fits whole
     const fitCards = () => {
       const box = document.getElementById("w-list"); if (!track.offsetParent || !box.offsetWidth) return;
-      track.style.removeProperty("--pcw"); track.style.width = "";
+      track.style.removeProperty("--pcw"); track.style.width = ""; track.style.gap = "";
       const gap = 14, avail = box.offsetWidth;
       // big screens: larger cards, about four and a half in view (the half says "there's more")
-      if (innerWidth >= 1480 && avail >= 860) { track.style.setProperty("--pcw", Math.floor((avail - 4 * gap) / 4.5) + "px"); track.style.width = (avail + 40) + "px"; return; }
+      if (innerWidth >= 1480 && avail >= 860) { const g = 18; track.style.gap = g + "px"; track.style.setProperty("--pcw", Math.floor((avail - 3 * g) / 3.5) + "px"); track.style.width = (avail + 40) + "px"; return; }
       // smaller screens: only whole cards at their normal size; if the next is only just short of fitting, shrink a hair so it fits
       const cw = track.querySelector(".pc").offsetWidth;
       let n = Math.max(1, Math.floor((avail + gap) / (cw + gap))), w = cw;
