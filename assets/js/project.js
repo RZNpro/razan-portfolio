@@ -7,7 +7,7 @@
   // links & materials: website, source code, app, deck, document, video, account
   const TYPE_IC = { site: "globe", code: "code", app: "play", deck: "deck", doc: "file", video: "play", social: "sparkle" };
   function linksHtml(p) {
-    const host = (u) => { try { return /^https?:/.test(u) ? new URL(u).hostname.replace(/^www\./, "") : (A.lang === "ar" ? "ملف" : "File"); } catch (e) { return ""; } };
+    const host = (u) => { try { return /^https?:/.test(u) ? new URL(u).hostname.replace(/^www\./, "") : (/\.pdf$/i.test(u) ? "PDF" : A.lang === "ar" ? "ملف" : "File"); } catch (e) { return ""; } };
     return `<div class="mats">${p.links.map((l) => `<a class="mat" href="${esc(l.url)}" target="_blank" rel="noopener">
       <span class="mat-ic">${ic(TYPE_IC[l.type] || "external")}</span>
       <span class="mat-t"><small>${esc(t((C.ui.linkTypes || {})[l.type]) || "")}</small><b>${esc(t(l.label))}</b><em dir="ltr">${esc(host(l.url))}</em></span>

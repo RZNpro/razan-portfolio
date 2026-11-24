@@ -258,6 +258,22 @@ window.CONTENT = {
       ],
       "links": [
         {
+          "type": "site",
+          "label": {
+            "ar": "موقع الحصن",
+            "en": "Al-Hisn website"
+          },
+          "url": "https://hisnars.netlify.app"
+        },
+        {
+          "type": "doc",
+          "label": {
+            "ar": "دليل الهوية البصرية (PDF)",
+            "en": "Brand identity guide (PDF)"
+          },
+          "url": "assets/docs/al-hisn-identity.pdf"
+        },
+        {
           "type": "social",
           "label": {
             "ar": "حساب إنستقرام @hisn.ars",
@@ -356,7 +372,24 @@ window.CONTENT = {
       "image": "",
       "logo": "assets/img/projects/madad.webp",
       "logoBg": "#212145",
-      "links": []
+      "links": [
+        {
+          "type": "app",
+          "label": {
+            "ar": "تجربة النموذج الأولي",
+            "en": "Try the prototype"
+          },
+          "url": "https://madad.base44.app"
+        },
+        {
+          "type": "deck",
+          "label": {
+            "ar": "مقتطفات من العرض (PDF)",
+            "en": "Pitch deck excerpts (PDF)"
+          },
+          "url": "assets/docs/madad.pdf"
+        }
+      ]
     },
     {
       "slug": "athar-portal",
@@ -443,7 +476,16 @@ window.CONTENT = {
       "image": "assets/img/projects/athar-portal.webp",
       "logo": "",
       "logoBg": "",
-      "links": []
+      "links": [
+        {
+          "type": "deck",
+          "label": {
+            "ar": "مقتطفات من العرض (PDF)",
+            "en": "Pitch deck excerpts (PDF)"
+          },
+          "url": "assets/docs/athar-portal.pdf"
+        }
+      ]
     },
     {
       "slug": "rafiq",
@@ -603,7 +645,16 @@ window.CONTENT = {
       "image": "",
       "logo": "assets/img/projects/clarity.webp",
       "logoBg": "#EEEAF7",
-      "links": []
+      "links": [
+        {
+          "type": "deck",
+          "label": {
+            "ar": "عرض المشروع (PDF)",
+            "en": "Project presentation (PDF)"
+          },
+          "url": "assets/docs/clarity.pdf"
+        }
+      ]
     },
     {
       "slug": "docs-chatbot",
@@ -766,6 +817,14 @@ window.CONTENT = {
             "en": "Play the game"
           },
           "url": "https://gd.games/games/0aa1bf0c-89ef-46dc-9514-7362ba13d5de"
+        },
+        {
+          "type": "doc",
+          "label": {
+            "ar": "مراحل تصميم وتطوير اللعبة (PDF)",
+            "en": "Design & build stages (PDF)"
+          },
+          "url": "assets/docs/ewc-game-stages.pdf"
         }
       ],
       "image": "",
@@ -852,7 +911,16 @@ window.CONTENT = {
       "image": "",
       "logo": "assets/img/projects/guardian-of-vision.webp",
       "logoBg": "#042e66",
-      "links": []
+      "links": [
+        {
+          "type": "doc",
+          "label": {
+            "ar": "مراحل تصميم وتطوير اللعبة (PDF)",
+            "en": "Design & build stages (PDF)"
+          },
+          "url": "assets/docs/vision-guardian-stages.pdf"
+        }
+      ]
     },
     {
       "slug": "sorting-hat",
