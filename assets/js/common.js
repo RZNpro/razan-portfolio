@@ -66,6 +66,10 @@ window.ICONS = {
         <a class="logo" href="index.html" aria-label="${App.esc(App.t(C.person.name))}"><span class="mark">R<i>✦</i></span><span class="logo-t">RAZAN<small>${App.lang === "ar" ? "ما وراء الأفكار" : "Beyond Ideas"}</small></span></a>
         <nav class="nav" id="main-nav" aria-label="Main">
           ${links.map((k) => `<a href="${base}#${k}" data-sec="${k}">${App.icon(icons[k])}<span>${App.t(u.nav[k])}</span></a>`).join("")}
+          <div class="nav-extra">
+            ${toggle.replace('class="btn btn-ghost sm"', 'class="nx"')}
+            <button class="nx" id="theme-btn-m">${App.icon(App.theme() === "dark" ? "sun" : "moon")}<span>${App.lang === "ar" ? (App.theme() === "dark" ? "الوضع الفاتح" : "الوضع الغامق") : (App.theme() === "dark" ? "Light mode" : "Dark mode")}</span></button>
+          </div>
         </nav>
         <div class="hdr-act">
           ${toggle}
@@ -76,7 +80,9 @@ window.ICONS = {
         </div>
       </div>`;
     document.getElementById("lang-btn").onclick = () => App.setLang(App.lang === "ar" ? "en" : "ar");
-    document.getElementById("theme-btn").onclick = () => App.setTheme(App.theme() === "dark" ? "light" : "dark");
+    const flipTheme = () => App.setTheme(App.theme() === "dark" ? "light" : "dark");
+    document.getElementById("theme-btn").onclick = flipTheme;
+    document.getElementById("theme-btn-m").onclick = flipTheme;
     const burger = document.getElementById("burger"), nav = document.getElementById("main-nav");
     burger.onclick = () => { const o = nav.classList.toggle("open"); burger.setAttribute("aria-expanded", o); };
     nav.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => nav.classList.remove("open")));

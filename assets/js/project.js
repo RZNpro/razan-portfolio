@@ -16,6 +16,7 @@
   function render() {
     const u = C.ui; const next = list[(idx + 1) % list.length];
     document.title = `${t(p.title)} — ${t(C.person.name)}`;
+    const md = document.querySelector('meta[name="description"]'); if (md && p.summary) md.content = t(p.summary);
     const meta = [
       [u.myRole, t(p.role)],
       [{ ar: "السنة", en: "Year" }, p.year || "—"],

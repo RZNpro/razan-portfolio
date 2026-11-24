@@ -386,3 +386,21 @@ html[data-theme="dark"] .mat-ic { color: #1C2A21; }
   html[data-theme="dark"] #main-nav.open a:hover { background: rgba(243,239,227,.08); }
   html[data-theme="dark"] #main-nav.open a.on { background: var(--gold); color: #2a1f10; }
 }
+
+/* phones: the header keeps logo + language + CV + menu; the map/site switch and theme move into the menu */
+.nav-extra { display: none; }
+@media (max-width: 560px) {
+  .hdr-in { padding: 0 14px; gap: 10px; }
+  .hdr-act { gap: 6px; margin-inline-start: auto; }
+  .hdr-act > a:first-child, .hdr-act .theme { display: none; }
+  .nav-extra { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; padding-top: 8px; border-top: 1px solid var(--line); }
+  .nav-extra .nx { display: flex; align-items: center; gap: .45em; padding: .5em .85em; border: 0; border-radius: 999px; background: none; font: 600 .88rem var(--f-body); color: inherit; text-decoration: none; cursor: pointer; text-align: start; }
+  .nav-extra .nx .ic { display: inline; }
+  #main-nav.open .nav-extra .nx { color: var(--ink); }
+  html[data-theme="dark"] #main-nav.open .nav-extra .nx { color: #F3EFE3; }
+}
+@media (max-width: 360px) { .logo-t small { display: none; } }
+
+/* nothing decorative may widen the page sideways (keeps phones from zooming out) */
+html, body { overflow-x: clip; }
+@media (max-width: 1120px) { .quick .qs-btn.prev { inset-inline-start: 0; } .quick .qs-btn.next { inset-inline-end: 0; } }
