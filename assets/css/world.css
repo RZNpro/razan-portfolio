@@ -138,6 +138,8 @@ button.hs:focus-visible { outline: none; }
 .world-page .art-host.dragging { cursor: grabbing; }
 .hero-world.art-wrap { background: #E9E6EC; }
 .hero-world .art-host { position: absolute; inset: 0; }
+/* Safari drops rounded-corner clipping when moving layers are inside: clip explicitly */
+.hero-world .art-host { clip-path: inset(0 round 30px); -webkit-clip-path: inset(0 round 30px); }
 .hero-world .hs-lab { font-size: 13px; padding: 6px 12px; }
 @media (prefers-reduced-motion: reduce) { .art-scene .ly { transition: none; transform: none; } }
 /* keep the title card over open sky (left side of the painting) in both languages */
