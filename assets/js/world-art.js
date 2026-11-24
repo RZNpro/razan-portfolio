@@ -91,11 +91,13 @@
       });
       scene.appendChild(hs);
     }
-    scene.appendChild(layer(...FG, hi));
+    // the foreground trees (by the title) live on their own sheet: crisp, never fogged, and they stay put when you zoom out
+    const fgCam = el("div", "art-cam art-fgcam"); const fgScene = el("div", "art-scene"); fgCam.appendChild(fgScene); host.appendChild(fgCam);
+    fgScene.appendChild(layer(...FG, hi));
 
     /* ---------- camera ---------- */
     const cover = opts.fit !== "contain";
-    let cs = { s: 1, x: 0, y: 0 }, base = 1, minS = 1, anim = 0;
+    let cs = { s: 1, x: 0, y: 0 }, base = 1, minS = 1, anim = 0, homeView = { s: 1, x: 0, y: 0 };
     const size = () => [host.clientWidth, host.clientHeight];
     function clamp(c) {
       const [w, h] = size(); const sw = W * c.s, sh = H * c.s;
@@ -104,6 +106,7 @@
       return c;
     }
     function apply(c) { cs = clamp({ ...c }); cam.style.transform = `translate(${cs.x}px, ${cs.y}px) scale(${cs.s})`;
+      const fs = cs.s >= base ? cs : homeView; fgCam.style.transform = `translate(${fs.x}px, ${fs.y}px) scale(${fs.s})`;
       aura.style.transform = `translate(${cs.x + W / 2 * cs.s}px, ${cs.y + H / 2 * cs.s}px) scale(${cs.s * 1.9}) translate(${-W / 2}px, ${-H / 2}px)`;
       // edges melt into the nature around them only as you zoom out past the opening view (the opening view stays crisp)
       const k = base > minS ? Math.max(0, Math.min(1, (base - cs.s) / ((base - minS) * 0.6))) : 0;
@@ -112,7 +115,8 @@
       const [w, h] = size(); base = cover ? Math.max(w / W, h / H) : Math.min(w / W, h / H);
       minS = Math.min(base, Math.min(w / W, h / H)); // zoom out past the opening view, but only until the whole painting shows (its paper edges)
       const s = base; const cx = cover ? 1060 : W / 2, cy = cover ? 430 : H / 2;
-      return { s, x: w / 2 - cx * s, y: h / 2 - cy * s };
+      homeView = clamp({ s, x: w / 2 - cx * s, y: h / 2 - cy * s });
+      return { ...homeView };
     }
     function fly(to, ms = 900) {
       cancelAnimationFrame(anim); moved = true;
@@ -134,7 +138,7 @@
       return { s, x: px - (px - cs.x) * (s / cs.s), y: py - (py - cs.y) * (s / cs.s) };
     }
     let lastW = 0, lastH = 0, moved = false;
-    addEventListener("rw-art-swap", () => { cam.style.transform += " translateZ(0)"; requestAnimationFrame(() => apply(cs)); });
+    addEventListener("rw-art-swap", () => { cam.style.transform += " translateZ(0)"; fgCam.style.transform += " translateZ(0)"; requestAnimationFrame(() => apply(cs)); });
     apply(home());
     // re-fit only when the box really changes size; keep a focused view otherwise
     new ResizeObserver(() => { const [w, h] = size(); if (w === lastW && h === lastH) return; lastW = w; lastH = h; moved ? apply(cs) : apply(home()); }).observe(host);

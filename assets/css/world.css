@@ -91,9 +91,9 @@ html[dir="rtl"] .drawer { transform: translateX(calc(-100% - 40px)); }
 .art-cam { position: absolute; left: 0; top: 0; width: 1680px; height: 944px; transform-origin: 0 0; will-change: transform; }
 /* the painting melts into a blurred continuation of its own sky and greenery (no visible edge when zoomed out) */
 .art-aura { position: absolute; left: 0; top: 0; width: 1680px; height: 944px; transform-origin: 0 0; pointer-events: none;
-  background: url(../img/art/foreground.webp) center bottom / 100% auto no-repeat, url(../img/art/sky.webp) center / cover;
+  background: url(../img/art/sky.webp) center / cover;
   filter: blur(18px) saturate(1.15); opacity: .95; }
-.world-stage .art-cam {
+.world-stage .art-cam:not(.art-fgcam) {
   --fx: 0%; --fy: 0%;
   -webkit-mask: linear-gradient(90deg, transparent, #000 var(--fx), #000 calc(100% - var(--fx)), transparent), linear-gradient(180deg, transparent, #000 var(--fy), #000 calc(100% - var(--fy)), transparent); -webkit-mask-composite: source-in;
   mask: linear-gradient(90deg, transparent, #000 var(--fx), #000 calc(100% - var(--fx)), transparent), linear-gradient(180deg, transparent, #000 var(--fy), #000 calc(100% - var(--fy)), transparent); mask-composite: intersect; }
@@ -308,3 +308,5 @@ html[data-theme="dark"] .world-stage { background: #1C2A21; }
   background: linear-gradient(135deg, var(--l1, #9DBF7E), var(--l2, #4F7A4A)); box-shadow: inset 0 0 0 .5px rgba(255,255,255,.25), 0 1px 2px rgba(30,50,30,.25); }
 .petals i::after { content: ""; position: absolute; inset: 45% 10% auto 10%; height: 1px; background: rgba(240,255,220,.55); transform: rotate(-28deg); }
 .petals i { position: relative; }
+
+.art-fgcam { pointer-events: none; }
