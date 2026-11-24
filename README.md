@@ -18,11 +18,22 @@
 
 هذا ملفي الشخصي: مديرة مشاريع ومحللة أعمال ومصممة منتجات رقمية ومطوّرة حلول ذكاء اصطناعي. الموقع واجهتان مترابطتان لنفس المحتوى، كل واحدة لقارئ مختلف.
 
+## المميزات
+
+- **خريطة تفاعلية** — جزيرة طائرة مرسومة، كل مبنى فيها قسم، وتقترب الكاميرا منه بضغطة.
+- **عالم حيّ** — طبقات بعمق، ونهر يجري، وأسماك تقفز، وأوراق خضراء تطير.
+- **عرض مهني سريع** — نفس المحتوى بترتيب واضح لمن يبغى المعلومة مباشرة.
+- **دراسات حالة للمشاريع** — التحدي، والدور، والمنهج، والحل، والنتيجة، مع الروابط والمواد.
+- **سيرة ذاتية تلقائية** — تُبنى من نفس المحتوى وتتحدّث معه.
+- **عربي وإنجليزي** — مع اتجاه الكتابة الصحيح لكل لغة.
+- **وضع فاتح وغامق** — والخريطة تبقى نهارًا في الوضعين.
+- **محرر محتوى محلي** — أعدّل النصوص والصور والأيقونات بدون ما ألمس الكود.
+
+## لقطات الشاشة
+
 ### ١. العالم التفاعلي — خريطة حيّة
 
 <img src="docs/readme/world.jpg" alt="الخريطة التفاعلية: جزيرة طائرة فيها مباني تمثل أقسام الموقع" width="100%">
-
-جزيرة طائرة مرسومة، كل مبنى فيها قسم من مسيرتي:
 
 | المكان | القسم |
 |---|---|
@@ -33,13 +44,19 @@
 | المكتبة | المعرفة والمهارات |
 | البوابة | التواصل |
 
-تضغط على أي مبنى فتقترب الكاميرا منه وتنفتح لوحته.
-
 ### ٢. العرض المهني — الموقع
 
 <img src="docs/readme/site.jpg" alt="الواجهة المهنية: الاسم والأدوار والمشاريع" width="100%">
 
-نفس المحتوى بترتيب واضح وسريع: النبذة، والمشاريع كدراسات حالة (التحدي، الدور، المنهج، الحل، النتيجة، الروابط)، والخبرات، والإنجازات، والمكتبة، والتواصل، وسيرة ذاتية تُبنى تلقائيًا من المحتوى. بالعربي والإنجليزي، فاتح وغامق، بزجاج شفاف وحركة خفيفة.
+النبذة، والمشاريع، والخبرات، والإنجازات، والمكتبة، والتواصل — بزجاج شفاف وحركة خفيفة.
+
+## التقنيات
+
+- **HTML وCSS وJavaScript** خالصة — بدون أي خطوة بناء.
+- **رسومات الخريطة** مقسّمة إلى طبقات ومكبّرة بدقة عالية، عشان تبقى حادّة عند التقريب.
+- **كل النصوص** في `assets/js/content.js`، ومحرر محلي (`admin.html`) يعدّلها.
+- **التشغيل محليًا:** `python3 -m http.server 5173` ← http://localhost:5173
+- **النشر** تلقائي على GitHub Pages مع كل دفع (push) إلى فرع `main`.
 
 ## ليش اخترت هذا التصميم؟
 
@@ -51,24 +68,34 @@
 
 الرسالة اللي أبغاها توصل: *« أستخدم الإبداع لصناعة تجارب وحلول»*
 
-
 </div>
 
 ---
 
 ## About (English)
 
-My portfolio as two connected interfaces over the same content:
+My portfolio as two connected interfaces over the same content.
 
-1. **Explorer World** — a painted floating island where each building is a section (Town → About, Observatory → Experience, Lab → Projects, Castle → Achievements, Library → Knowledge, Gateway → Contact). Click a building to fly to it. Layered parallax art, a flowing river, leaping fish, drifting leaves.
-2. **Professional View** — the same content, fast and clear: case studies (challenge, role, approach, solution, outcome, links), experience, awards, skills and an auto-generated CV. Arabic/English, light/dark.
+## Features
 
-**Why:** creative and professional aren't opposites. The site *looks* like a world but *behaves* like an executive portfolio — a recruiter never has to play to find my qualifications. No pictures of people, so the impression is of the work, not of me.
+- **Explorer World** — a painted floating island where each building is a section (Town → About, Observatory → Experience, Lab → Projects, Castle → Achievements, Library → Knowledge, Gateway → Contact). Click a building to fly to it.
+- **A living map** — layered parallax art, a flowing river, leaping fish, drifting leaves.
+- **Professional View** — the same content, fast and clear.
+- **Case studies** — challenge, role, approach, solution, outcome, links and materials.
+- **Auto-generated CV** built from the same content.
+- **Arabic / English** and **light / dark**.
+- **Local content editor** for text, images and icons.
 
-## Built with
+## Technologies
 
-Plain HTML, CSS and JavaScript — no build step. Painted map art layered and upscaled for sharp zoom. All text lives in `assets/js/content.js`; a local editor (`admin.html`) edits it.
+- Plain HTML, CSS and JavaScript — no build step.
+- Painted map art layered and upscaled for sharp zoom.
+- All text lives in `assets/js/content.js`; a local editor (`admin.html`) edits it.
+- Run locally: `python3 -m http.server 5173` → http://localhost:5173
+- Deploys to GitHub Pages on every push to `main`.
 
-Run locally: `python3 -m http.server 5173` → http://localhost:5173 · Deploys to GitHub Pages on every push to `main`.
+## Why this design
+
+Creative and professional aren't opposites. The site *looks* like a world but *behaves* like an executive portfolio — a recruiter never has to play to find my qualifications. No pictures of people, so the impression is of the work, not of me.
 
 <sub>© Razan Al-Awadh</sub>
