@@ -457,3 +457,23 @@ html[data-theme="dark"] .wcard { background: #24362A; }
   .wriver { overflow-x: auto; -webkit-mask: none; mask: none; } .wtrack { animation: none; } .wcard { animation: none; }
   .wtrack > [aria-hidden="true"] { display: none; }
 }
+
+/* words as glass "tweets" (replaces the card stream) */
+.words .words-h { margin-bottom: 32px; }
+.wsky { position: relative; height: 360px; border-radius: 28px; overflow: hidden; isolation: isolate; container-type: inline-size;
+  background: url(../img/art/sky.webp) center 30% / cover;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.wsky::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(243,239,227,.15), rgba(243,239,227,.35)); }
+.tw { position: absolute; top: var(--y); left: 0; max-width: 290px; padding: 9px 14px 10px; border-radius: 16px; cursor: default;
+  background: rgba(255,253,247,.42); -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255,255,255,.75); box-shadow: 0 10px 26px -14px rgba(30,45,35,.45), inset 0 1px 0 rgba(255,255,255,.8);
+  animation: twfly var(--dur) linear var(--delay) infinite; will-change: transform; }
+@keyframes twfly { from { transform: translateX(calc(100cqw + 20px)) scale(var(--s)); } to { transform: translateX(-330px) scale(var(--s)); } }
+.tw:hover, .tw:focus, .tw.open { animation-play-state: paused; background: rgba(255,253,247,.82); z-index: 3; outline: none; }
+.tw .who { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; font-size: 12.5px; color: #2F4738; }
+.tw .who b { font-weight: 700; } .tw .who span { color: #5F665C; font-size: 11.5px; } .tw .who span::before { content: "· "; }
+.tw p { margin: 3px 0 0; font-size: 13.5px; line-height: 1.55; color: #26302A; }
+.tw .full { display: none; }
+.tw:hover .full, .tw:focus .full, .tw.open .full { display: block; } .tw:hover .full ~ *, .tw:has(.full):is(:hover, :focus, .open) .short { display: none; }
+@media (max-width: 760px) { .wsky { height: 420px; } .tw { max-width: 240px; } }
+@media (prefers-reduced-motion: reduce) { .tw { animation: none; position: static; display: inline-block; margin: 8px; max-width: none; } .wsky { height: auto; padding: 12px; -webkit-mask: none; mask: none; } }

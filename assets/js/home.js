@@ -81,14 +81,17 @@
         box.className = "words empty rv in";
         box.innerHTML = `<p class="words-invite">${esc(t(W.invite))}</p>${invite}`; return;
       }
-      let list = rows.slice(); while (list.length < 6) list = list.concat(rows);   // enough cards to fill the stream
-      const card = (r) => `<figure class="wcard" dir="auto"><blockquote>${esc(r.text)}</blockquote>
-        <figcaption><span class="wav" aria-hidden="true">${esc((r.name.trim()[0] || "✦").toUpperCase())}</span><span><b>${esc(r.name)}</b>${r.role ? `<small>${esc(r.role)}</small>` : ""}</span></figcaption></figure>`;
+      // small glass "tweets" drifting right-to-left at random heights and speeds over the map's sky
+      const lanes = [6, 30, 54, 76, 18, 64, 42];
+      const cut = (x) => x.length > 120 ? x.slice(0, 117).replace(/\s+\S*$/, "") + "…" : x;
+      const tw = (r, i) => { const dur = 26 + Math.random() * 18;
+        return `<div class="tw" tabindex="0" dir="auto" style="--y:${lanes[i % lanes.length] + Math.random() * 5}%;--s:${(0.92 + Math.random() * 0.14).toFixed(2)};--dur:${dur.toFixed(1)}s;--delay:${(-(i / rows.length) * dur - Math.random() * 4).toFixed(1)}s">
+          <div class="who"><b>${esc(r.name)}</b>${r.role ? `<span>${esc(r.role)}</span>` : ""}</div>
+          <p class="short">${esc(cut(r.text))}</p>${r.text.length > 120 ? `<p class="full">${esc(r.text)}</p>` : ""}</div>`; };
       box.className = "words rv in";
       box.innerHTML = `<header class="words-h"><div><h3>${esc(t(W.title))}</h3><p>${esc(t(W.lead))}</p></div>${invite}</header>
-        <div class="wriver" style="--dur:${Math.max(30, list.length * 9)}s" aria-label="${esc(t(W.title))}">
-          <div class="wtrack">${list.map(card).join("")}${list.map(card).join("").replace(/<figure /g, '<figure aria-hidden="true" ')}</div>
-        </div>`;
+        <div class="wsky" aria-label="${esc(t(W.title))}">${rows.slice(0, 12).map(tw).join("")}</div>`;
+      box.querySelectorAll(".tw").forEach((el) => el.addEventListener("click", () => el.classList.toggle("open")));
     };
     if (wordsRows) return paint(wordsRows);
     paint([]);
