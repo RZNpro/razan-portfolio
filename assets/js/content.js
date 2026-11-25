@@ -156,6 +156,26 @@ window.CONTENT = {
       ]
     }
   },
+  "words": {
+    "title": {
+      "ar": "كلمات ممن عرفوني",
+      "en": "Words from people I’ve worked with"
+    },
+    "lead": {
+      "ar": "زملاء ومشرفون وفرق عملت معهم — بكلماتهم.",
+      "en": "Colleagues, mentors and teammates — in their own words."
+    },
+    "invite": {
+      "ar": "اشتغلت معي أو عرفتني؟ يسعدني تترك كلمة.",
+      "en": "Worked with me or know my work? I’d love a word from you."
+    },
+    "cta": {
+      "ar": "أضف كلمتك",
+      "en": "Leave a word"
+    },
+    "form": "https://forms.gle/7Sgz5ynVdpg8LxqR7",
+    "csv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT_A6hJlBGLzyH4DWUsU3ENHdneZZjZt9kgcpS3Qs4QqN6fjlfLCnzKC3smbvs4HJBmF1Mb5MmR_feW/pub?output=csv"
+  },
   "categories": {
     "all": {
       "ar": "الكل",

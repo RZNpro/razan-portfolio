@@ -53,7 +53,56 @@
         <dl class="facts rv">
           ${a.facts.map((f) => `<div><dt>${esc(t(f.k))}</dt><dd>${esc(t(f.v))}</dd></div>`).join("")}
         </dl>
-      </div></div>`;
+      </div>
+      <div class="words" id="words"></div></div>`;
+    words();
+  }
+
+  /* ---------- words from people who know her: read from the Google Form's published sheet, approved rows only ---------- */
+  let wordsRows = null; // cached across re-renders (language switch)
+  function parseCSV(txt) {
+    const rows = []; let row = [], f = "", q = false;
+    for (let i = 0; i < txt.length; i++) {
+      const c = txt[i];
+      if (q) { if (c === '"') { if (txt[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+      else if (c === '"') q = true;
+      else if (c === ",") { row.push(f); f = ""; }
+      else if (c === "\n" || c === "\r") { if (c === "\r" && txt[i + 1] === "\n") i++; row.push(f); rows.push(row); row = []; f = ""; }
+      else f += c;
+    }
+    if (f || row.length) { row.push(f); rows.push(row); }
+    return rows;
+  }
+  function words() {
+    const W = C.words, box = document.getElementById("words"); if (!W || !box) return;
+    const invite = `<a class="btn btn-solid words-cta" href="${esc(W.form)}" target="_blank" rel="noopener">${ic("sparkle")}<span>${esc(t(W.cta))}</span></a>`;
+    const paint = (rows) => {
+      if (!rows.length) {   // nothing approved yet: just a quiet invitation
+        box.className = "words empty rv in";
+        box.innerHTML = `<p class="words-invite">${esc(t(W.invite))}</p>${invite}`; return;
+      }
+      let list = rows.slice(); while (list.length < 6) list = list.concat(rows);   // enough cards to fill the stream
+      const card = (r) => `<figure class="wcard" dir="auto"><blockquote>${esc(r.text)}</blockquote>
+        <figcaption><span class="wav" aria-hidden="true">${esc((r.name.trim()[0] || "✦").toUpperCase())}</span><span><b>${esc(r.name)}</b>${r.role ? `<small>${esc(r.role)}</small>` : ""}</span></figcaption></figure>`;
+      box.className = "words rv in";
+      box.innerHTML = `<header class="words-h"><div><h3>${esc(t(W.title))}</h3><p>${esc(t(W.lead))}</p></div>${invite}</header>
+        <div class="wriver" style="--dur:${Math.max(30, list.length * 9)}s" aria-label="${esc(t(W.title))}">
+          <div class="wtrack">${list.map(card).join("")}${list.map(card).join("").replace(/<figure /g, '<figure aria-hidden="true" ')}</div>
+        </div>`;
+    };
+    if (wordsRows) return paint(wordsRows);
+    paint([]);
+    if (!W.csv) return;
+    fetch(W.csv, { cache: "no-store" }).then((r) => r.ok ? r.text() : "").then((txt) => {
+      const rows = parseCSV(txt || ""); if (rows.length < 2) { wordsRows = []; return paint([]); }
+      const h = rows[0].map((x) => x.trim());
+      const col = (re) => h.findIndex((x) => re.test(x));
+      const iN = col(/الاسم|name/i), iR = col(/الصفة|العلاقة|role|relation/i), iT = col(/التعليق|comment|word/i), iA = col(/الاعتماد|approv/i);
+      wordsRows = rows.slice(1).filter((r) => iA >= 0 && /^\s*(نعم|yes|✓)\s*$/i.test(r[iA] || ""))
+        .map((r) => ({ name: (r[iN] || "").trim().slice(0, 60), role: (r[iR] || "").trim().slice(0, 80), text: (r[iT] || "").trim().slice(0, 420) }))
+        .filter((r) => r.name && r.text).reverse();   // newest first
+      paint(wordsRows);
+    }).catch(() => { wordsRows = []; paint([]); });
   }
 
   function projCard(p, big) {
