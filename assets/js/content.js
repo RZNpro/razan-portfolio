@@ -236,6 +236,7 @@ window.CONTENT = {
       },
       "outcome": {
         "ar": [
+          "موقع رسمي يعرض 5 تجارب تفاعلية للزوار",
           "المركز الخامس في هاكاثون السياحة مع ثناء اللجنة والمشاركين",
           "موقع إلكتروني رسمي منشور بالهوية المعتمدة",
           "دليل هوية بصرية كامل",
@@ -243,6 +244,7 @@ window.CONTENT = {
           "حساب إنستقرام @hisn.ars"
         ],
         "en": [
+          "An official website presenting 5 interactive visitor experiences",
           "5th place at the Tourism Hackathon, with recognition from judges and participants",
           "Official website launched in the approved identity",
           "Complete visual identity guide",
@@ -295,7 +297,23 @@ window.CONTENT = {
       "logoBg": "#330a0a",
       "imgFit": "",
       "imgZoom": 100,
-      "imgPos": ""
+      "imgPos": "",
+      "gallery": [
+        {
+          "src": "assets/img/gallery/al-hisn-1.webp",
+          "cap": {
+            "ar": "الصفحة الرئيسية لموقع الحصن",
+            "en": "The Al-Hisn website home page"
+          }
+        },
+        {
+          "src": "assets/img/gallery/al-hisn-2.webp",
+          "cap": {
+            "ar": "لوحة الألوان من دليل الهوية",
+            "en": "Colour palette from the identity guide"
+          }
+        }
+      ]
     },
     {
       "slug": "madad",
@@ -356,11 +374,15 @@ window.CONTENT = {
       },
       "outcome": {
         "ar": [
+          "3 مخرجات أساسية في هاكاثون من 3 أيام: الأظرف الذكية، الدفع الفوري Flash Pay، وواجهة ثنائية",
+          "نموذج عالي الدقة بـ4 واجهات رئيسية، اختُبر مع عينة مستخدمين",
           "وثيقة PRD شاملة (16 صفحة) جاهزة للتنفيذ",
           "فيديو POC يشرح التطبيق وواجهاته",
           "عرض تقديمي للهاكاثون"
         ],
         "en": [
+          "3 core deliverables in a 3-day hackathon: smart envelopes, Flash Pay instant payments and a dual-mode UI",
+          "High-fidelity prototype with 4 main screens, tested with a user sample",
           "Comprehensive 16-page PRD, ready to build",
           "POC video walking through the app and its screens",
           "Hackathon pitch deck"
@@ -402,6 +424,29 @@ window.CONTENT = {
             "en": "Needs story, told manga-style (PDF)"
           },
           "url": "assets/docs/madad-manga-story.pdf"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "assets/img/gallery/madad-1.webp",
+          "cap": {
+            "ar": "الشاشة الرئيسية في النموذج الأولي",
+            "en": "Home screen in the working prototype"
+          }
+        },
+        {
+          "src": "assets/img/gallery/madad-2.webp",
+          "cap": {
+            "ar": "الواجهات الرئيسية: الرئيسية، المحافظ، الدفع والعمليات",
+            "en": "Main screens: home, wallets, payments and activity"
+          }
+        },
+        {
+          "src": "assets/img/gallery/madad-3.webp",
+          "cap": {
+            "ar": "واجهة التلعيب ونافذة النظام",
+            "en": "The gamified “system” mode"
+          }
         }
       ]
     },
@@ -470,11 +515,17 @@ window.CONTENT = {
       },
       "outcome": {
         "ar": [
+          "استبيانان لدراسة الاحتياج: الأفراد والجمعيات، مع جلسة خبير من القطاع",
+          "كشفت الدراسة أن 65.7% من المستفيدين يفتقرون للوعي بخدمات الجمعيات، و70% من الجمعيات تعاني ضعف التسويق",
+          "نموذج أولي بواجهتين: للأفراد، وللجهات مع تقارير أثر بالذكاء الاصطناعي",
           "ميدالية الابتكار لجودة الحل والتنفيذ — إمباكتثون الذكاء الاصطناعي في القطاع غير الربحي",
           "حزمة إدارة مشروع متكاملة",
           "دراسة احتياج مفصّلة ونموذج تطبيق (Mockup)"
         ],
         "en": [
+          "Two needs surveys — individuals and non-profits — plus an expert session",
+          "Research showed 65.7% of beneficiaries lack awareness of non-profit services, and ~70% of non-profits struggle with marketing",
+          "MVP with two interfaces — individuals, and organisations with AI-generated impact reports",
           "Innovation Medal for solution quality and execution — AI in Non-Profits Impactathon",
           "Complete project-management pack",
           "Detailed needs study and app mockup"
@@ -501,6 +552,29 @@ window.CONTENT = {
             "en": "Pitch deck excerpts (PDF)"
           },
           "url": "assets/docs/athar-portal.pdf"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "assets/img/gallery/athar-portal-1.webp",
+          "cap": {
+            "ar": "تطبيق بوابة الأثر",
+            "en": "The Athar Portal app"
+          }
+        },
+        {
+          "src": "assets/img/gallery/athar-portal-2.webp",
+          "cap": {
+            "ar": "واجهة الأفراد",
+            "en": "The individuals’ interface"
+          }
+        },
+        {
+          "src": "assets/img/gallery/athar-portal-3.webp",
+          "cap": {
+            "ar": "أقسام واجهة التطبيق",
+            "en": "Sections of the app interface"
+          }
         }
       ]
     },
@@ -563,11 +637,11 @@ window.CONTENT = {
       },
       "outcome": {
         "ar": [
-          "أكثر من 48 تحديثًا مدمجًا منذ أغسطس 2026",
+          "55 تحديثًا على الكود منذ أغسطس 2026، وقاعدة بيانات من 14 جدولًا",
           "حزمة تسليم تصميم كاملة"
         ],
         "en": [
-          "48+ merged updates since August 2026",
+          "55 code updates since August 2026 and a 14-table database",
           "Complete design hand-off package"
         ]
       },
@@ -587,7 +661,23 @@ window.CONTENT = {
       "imgFit": "",
       "imgZoom": 100,
       "imgPos": "",
-      "links": []
+      "links": [],
+      "gallery": [
+        {
+          "src": "assets/img/gallery/rafiq-1.webp",
+          "cap": {
+            "ar": "صفحة اليوم بالوضعين الليلي والنهاري",
+            "en": "The Today screen in dark and light modes"
+          }
+        },
+        {
+          "src": "assets/img/gallery/rafiq-2.webp",
+          "cap": {
+            "ar": "درس متكامل: المعنى والتفسير بثلاثة مستويات",
+            "en": "An integrated lesson: meaning and tafsir at three levels"
+          }
+        }
+      ]
     },
     {
       "slug": "clarity",
@@ -644,10 +734,18 @@ window.CONTENT = {
       },
       "outcome": {
         "ar": [
+          "18 أسلوب كتابة مبني على الأبحاث، و7 قوالب سريعة (3–6 دقائق)",
+          "قاموس مشاعر من 20,000 كلمة وتحليل بالذكاء الاصطناعي على الجهاز نفسه",
+          "استبيان الاحتياج: 95% يعرفون أنهم منزعجون لكن لا يستطيعون تسمية الشعور",
+          "فريق من 5 مطوّرات",
           "تطبيق iOS يعمل",
           "عرض مناقشة بالعربية والإنجليزية وسكربت كامل"
         ],
         "en": [
+          "18 research-based journaling methods and 7 quick templates (3–6 minutes)",
+          "A 20,000-word emotion lexicon with on-device AI analysis",
+          "Needs survey: 95% know they're upset but can't name the feeling",
+          "A team of 5 developers",
           "Working iOS app",
           "Defence presentation in Arabic and English with full script"
         ]
@@ -676,6 +774,22 @@ window.CONTENT = {
             "en": "Project presentation (PDF)"
           },
           "url": "assets/docs/clarity.pdf"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "assets/img/gallery/clarity-1.webp",
+          "cap": {
+            "ar": "الميزتان الأساسيتان: التحليل بالذكاء الاصطناعي وقوالب الكتابة",
+            "en": "The two core features: AI analysis and journal templates"
+          }
+        },
+        {
+          "src": "assets/img/gallery/clarity-2.webp",
+          "cap": {
+            "ar": "كيف بنيناه: أبحاث، تصميم أصيل لأبل، وذكاء اصطناعي على الجهاز",
+            "en": "How we built it: research, native Apple design and on-device AI"
+          }
         }
       ]
     },
@@ -761,7 +875,8 @@ window.CONTENT = {
       "imgFit": "contain",
       "imgZoom": 130,
       "imgPos": "3% 50%",
-      "links": []
+      "links": [],
+      "gallery": []
     },
     {
       "slug": "ewc-game",
@@ -820,11 +935,15 @@ window.CONTENT = {
       },
       "outcome": {
         "ar": [
+          "لعبتان مصغرتان: لعبة ذاكرة بفن البكسل، ورواية مرئية بنهايات متعددة",
+          "8 مراحل تصميم وتطوير موثّقة من الفكرة إلى النشر",
           "إطلاق عام على منصة gd.games",
           "نموذج POC لاختبار مقاييس التفاعل",
           "دراسة حالة بصرية توثّق الرحلة من الرسومات الأولى للمنتج"
         ],
         "en": [
+          "Two mini-games: a pixel-art memory game and a visual novel with multiple endings",
+          "8 documented design & build stages, from concept to launch",
           "Public launch on gd.games",
           "POC to test engagement metrics",
           "Visual case study from first sketches to final product"
@@ -859,7 +978,23 @@ window.CONTENT = {
       "logoBg": "#c7a68e",
       "imgFit": "",
       "imgZoom": 100,
-      "imgPos": ""
+      "imgPos": "",
+      "gallery": [
+        {
+          "src": "assets/img/gallery/ewc-game-1.webp",
+          "cap": {
+            "ar": "لعبة الذاكرة تعمل في المتصفح",
+            "en": "The memory game running in the browser"
+          }
+        },
+        {
+          "src": "assets/img/gallery/ewc-game-2.webp",
+          "cap": {
+            "ar": "البطل والخلفيات المستوحاة من جبل طويق",
+            "en": "The hero and Tuwaiq-inspired backdrops"
+          }
+        }
+      ]
     },
     {
       "slug": "guardian-of-vision",
@@ -917,11 +1052,13 @@ window.CONTENT = {
       },
       "outcome": {
         "ar": [
+          "8 مراحل من الفكرة إلى التسليم، بمحرك Unity وYarn Spinner لنهايات متعددة",
           "فيديو مقدمة اللعبة وأنميشن القصة",
           "ملف يوثّق ثماني مراحل للتصميم والتطوير",
           "عرض الهاكاثون"
         ],
         "en": [
+          "8 stages from idea to delivery, built in Unity with Yarn Spinner for branching endings",
           "Game Intro and Story Animation video",
           "Document tracing eight design & development stages",
           "Hackathon pitch"
@@ -952,6 +1089,29 @@ window.CONTENT = {
             "en": "Design & build stages (PDF)"
           },
           "url": "assets/docs/vision-guardian-stages.pdf"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "assets/img/gallery/guardian-of-vision-1.webp",
+          "cap": {
+            "ar": "مونتاج أنميشن القصة",
+            "en": "Editing the story animation"
+          }
+        },
+        {
+          "src": "assets/img/gallery/guardian-of-vision-2.webp",
+          "cap": {
+            "ar": "شعار اللعبة",
+            "en": "The game title"
+          }
+        },
+        {
+          "src": "assets/img/gallery/guardian-of-vision-3.webp",
+          "cap": {
+            "ar": "مشهد من عالم اللعبة",
+            "en": "A scene from the game world"
+          }
         }
       ]
     },
@@ -1010,10 +1170,14 @@ window.CONTENT = {
       },
       "outcome": {
         "ar": [
+          "5 منازل و5 أسئلة، وطريقتان للفرز: الأسئلة أو «اتبعي القدر»",
+          "لغتان، وفيديو كشف بنحو 10 ثوانٍ، ويعمل بالكامل دون إنترنت",
           "تجربة جاهزة للفعالية",
           "بطاقات تحديات «صناعة التعويذات» بالعربية والإنجليزية"
         ],
         "en": [
+          "5 houses, 5 questions and two ways to be sorted: the quiz or “follow fate”",
+          "2 languages, a ~10-second reveal video, and fully offline",
           "Event-ready kiosk",
           "“Spellcraft Challenge” cards in Arabic and English"
         ]
@@ -1033,7 +1197,23 @@ window.CONTENT = {
       "imgFit": "",
       "imgZoom": 100,
       "imgPos": "",
-      "links": []
+      "links": [],
+      "gallery": [
+        {
+          "src": "assets/img/gallery/sorting-hat-1.webp",
+          "cap": {
+            "ar": "الشاشة الرئيسية للتجربة",
+            "en": "The experience’s start screen"
+          }
+        },
+        {
+          "src": "assets/img/gallery/sorting-hat-2.webp",
+          "cap": {
+            "ar": "منازل الأكاديمية الخمسة",
+            "en": "The academy’s five houses"
+          }
+        }
+      ]
     },
     {
       "slug": "learning-journey",
@@ -1087,9 +1267,11 @@ window.CONTENT = {
       },
       "outcome": {
         "ar": [
+          "9 ميزات، وأهداف أسبوعية وشهرية وسنوية مع نظام تجميد للأيام",
           "مستودع عام على GitHub مع لقطات شاشة"
         ],
         "en": [
+          "9 features, with weekly, monthly and yearly goals and a day-freeze system",
           "Public GitHub repository with screenshots"
         ]
       },
@@ -1114,7 +1296,16 @@ window.CONTENT = {
       "logoBg": "#120d0a",
       "imgFit": "contain",
       "imgZoom": 110,
-      "imgPos": "33% 11%"
+      "imgPos": "33% 11%",
+      "gallery": [
+        {
+          "src": "assets/img/gallery/learning-journey-1.webp",
+          "cap": {
+            "ar": "تحديد الهدف، تسجيل اليوم أو تجميده، وسجل التقويم",
+            "en": "Set a goal, log or freeze the day, and the calendar history"
+          }
+        }
+      ]
     },
     {
       "slug": "ajmal-bitarikhna",
@@ -1184,7 +1375,8 @@ window.CONTENT = {
       "imgFit": "",
       "imgZoom": 100,
       "imgPos": "",
-      "links": []
+      "links": [],
+      "gallery": []
     }
   ],
   "experience": [
@@ -2193,6 +2385,10 @@ window.CONTENT = {
         "ar": "حساب",
         "en": "Account"
       }
+    },
+    "gallery": {
+      "ar": "لقطات من المشروع",
+      "en": "Screens & visuals"
     }
   }
 };

@@ -88,13 +88,15 @@
     name: "الاسم", brand: "العلامة", title: "العنوان", focus: "مجالات التركيز", headline: "العبارة الرئيسية", intro: "المقدمة",
     location: "الموقع", email: "البريد", phone: "رقم الجوال (يظهر في السيرة)", linkedin: "LinkedIn", github: "GitHub", cv: "ملف السيرة (PDF)", roles: "الأدوار (الفوتر)", quote: "الاقتباس",
     lead: "الفقرة الأولى", now: "وش أسوي الحين", approachTitle: "عنوان المنهج", approach: "خطوات منهجي", seekingTitle: "عنوان الفرص", seeking: "وش أدوّر عليه", body: "الفقرة الثانية", facts: "معلومات سريعة", k: "العنوان", v: "القيمة", interests: "الاهتمامات",
-    slug: "المعرّف (رابط الصفحة)", featured: "مشروع مميّز (يظهر كبير)", cat: "التصنيف", year: "السنة", image: "صورة غلاف (تغطي البطاقة)", logo: "الشعار / الهوية", logoBg: "لون الخلفية (خلف الشعار أو الصورة)", imgFit: "ضبط الصورة في البطاقة", art: "موضع الصورة في اللوحة",
+    slug: "المعرّف (رابط الصفحة)", featured: "مشروع مميّز (يظهر كبير)", cat: "التصنيف", year: "السنة", image: "صورة غلاف (تغطي البطاقة)", logo: "الشعار / الهوية", logoBg: "لون الخلفية (خلف الشعار أو الصورة)", gallery: "لقطات من المشروع (تظهر في صفحة دراسة الحالة)", src: "الصورة", cap: "وصف الصورة", imgFit: "ضبط الصورة في البطاقة", art: "موضع الصورة في اللوحة",
     kicker: "الوصف القصير", summary: "الملخص", role: "دوري", tags: "الوسوم", context: "السياق", challenge: "التحدي", approach: "المنهج (خطوات)",
     solution: "الحل", outcome: "النتيجة", tools: "الأدوات", links: "الروابط", label: "النص", url: "الرابط أو الملف", type: "نوع الرابط", award: "الجائزة", status: "الحالة",
     org: "الجهة", date: "التاريخ", points: "النقاط", icon: "الأيقونة", project: "مرتبط بمشروع", education: "التعليم", t: "العنوان", o: "الجهة / الوصف", y: "السنة",
     certifications: "الشهادات", courses: "الدورات", skills: "المهارات", g: "المجموعة", items: "العناصر", languages: "اللغات", l: "اللغة", n: "المستوى (1–5)",
     id: "المعرّف", pos: "موضع المبنى في اللوحة", place: "اسم المكان", section: "القسم", q: "السؤال", href: "الرابط"
   };
+  // starting shape for lists that may be empty
+  const TEMPLATES = { gallery: { src: "", cap: { ar: "", en: "" } }, links: { type: "doc", label: { ar: "", en: "" }, url: "" } };
   const isBi = (v) => v && typeof v === "object" && !Array.isArray(v) && Object.keys(v).length && Object.keys(v).every((k) => k === "ar" || k === "en");
   const titleOf = (o) => { const v = o && (o.title || o.role || o.place || o.t || o.g || o.l || o.k || o.label || o.slug || o.id); return v ? (typeof v === "string" ? v : v.ar || v.en) : "عنصر"; };
 
@@ -130,6 +132,7 @@
     if (key === "icon") return `<div class="f">${lab}<button class="iconpick" data-icon='${P(path)}'><svg viewBox="0 0 24 24"><path d="${window.ICONS[v] || ""}"/></svg><span>${esc(v)}</span></button></div>`;
     if (key === "image") return `<div class="f">${lab}${imageField(path, v)}</div>`;
     if (key === "logo") return `<div class="f">${lab}${imageField(path, v)}</div>`;
+    if (key === "src" && path.includes("gallery")) return `<div class="f">${lab}${imageField(path, v)}</div>`;
     if (key === "type" && path.includes("links")) return `<div class="f">${lab}<select data-p='${P(path)}'>${Object.entries(data.ui.linkTypes || {}).map(([k, n]) => `<option value="${k}" ${k === v ? "selected" : ""}>${esc(n.ar)}</option>`).join("")}</select></div>`;
     if (key === "url" && path.includes("links")) return `<div class="f">${lab}<div class="urlrow">${input(path, v)}<label class="btn">رفع ملف (PDF…)<input type="file" data-doc='${P(path)}' hidden></label></div><small class="hint">رابط موقع، أو ارفعي ملف (عرض، مستند) فيُحفظ في المشروع ويُنشر معه.</small></div>`;
     if (key === "imgZoom" || key === "imgPos") return "";
@@ -148,7 +151,7 @@
       return `<div class="f">${lab}<div class="bi"><div><em>عربي</em><div dir="rtl">${input([...path, "ar"], v.ar ?? "", long)}</div></div><div><em>English</em><div dir="ltr">${input([...path, "en"], v.en ?? "", long)}</div></div></div></div>`;
     }
     if (Array.isArray(v)) {
-      if (v.every((x) => typeof x === "string")) return `<div class="f">${lab}${strList(path, v, "ltr")}</div>`;
+      if (!(key in TEMPLATES) && v.every((x) => typeof x === "string")) return `<div class="f">${lab}${strList(path, v, "ltr")}</div>`;
       return `<div class="f">${lab}${objList(path, v)}</div>`;
     }
     if (v && typeof v === "object") return `<fieldset class="f grp"><legend>${esc(LABEL[key] || key)}</legend>${Object.keys(v).map((k) => field(k, [...path, k], v[k])).join("")}</fieldset>`;
@@ -255,7 +258,7 @@
       const fid = b.closest("details")?.parentElement?.closest("details")?.id || b.closest("details")?.id; render(fid); undoable("🗑 انحذف", fid); }
     if (d.addstr) { e.preventDefault(); const p = JSON.parse(d.addstr); get(p).push(""); const l = p[p.length - 1];
       if ((l === "ar" || l === "en") && isBi(get(p.slice(0, -1)))) { const o = get([...p.slice(0, -1), l === "ar" ? "en" : "ar"]); if (Array.isArray(o)) o.push(""); } save(); render(b.closest("details")?.id); }
-    if (d.addobj) { e.preventDefault(); const arr = get(JSON.parse(d.addobj)); arr.push(blank(arr[0])); save(); render(`it-${JSON.parse(d.addobj).join("-")}-${arr.length - 1}`); }
+    if (d.addobj) { e.preventDefault(); const ap = JSON.parse(d.addobj), arr = get(ap); arr.push(blank(arr[0] || TEMPLATES[ap[ap.length - 1]])); save(); render(`it-${JSON.parse(d.addobj).join("-")}-${arr.length - 1}`); }
     if (d.dup) { e.preventDefault(); const p = JSON.parse(d.dup); const arr = get(p.slice(0, -1)); const c = clone(arr[p[p.length - 1]]); if (c.slug) c.slug += "-copy"; arr.splice(p[p.length - 1] + 1, 0, c); save(); render(); }
     if (d.move) { e.preventDefault(); const p = JSON.parse(d.move); const arr = get(p.slice(0, -1)); const i = p[p.length - 1], j = i + Number(d.d); if (j < 0 || j >= arr.length) return; [arr[i], arr[j]] = [arr[j], arr[i]]; save(); render(); }
     if (d.clear) { e.preventDefault(); undoSnap = clone(data); set(JSON.parse(d.clear), ""); const fid = b.closest("details")?.id; render(fid); undoable("انشالت الصورة", fid); }
