@@ -3,7 +3,7 @@
 (function () {
   const A = window.App, C = window.CONTENT; if (!A) return;
   const t = (o) => A.t(o), esc = A.esc, ic = A.icon, ar = () => A.lang === "ar";
-  const ROLES = { ar: ["مديرة مشاريع", "محللة أعمال", "مصممة منتجات رقمية", "مطوّرة حلول ذكاء اصطناعي"], en: ["Project Manager", "Business Analyst", "Digital Product Designer", "AI Solutions Developer"] };
+  const ROLES = { ar: ["مديرة منتجات وابتكار", "محللة أعمال", "مصممة منتجات رقمية", "مطوّرة حلول ذكاء اصطناعي"], en: ["Product & Innovation Manager", "Business Analyst", "Digital Product Designer", "AI Solutions Developer"] };
   const ROLE_IC = ["compass", "grid", "sparkle", "gear"];
   const PLACES = ["about", "projects", "experience", "achievements", "library", "contact"];
   const pic = (z, zoom) => window.RWArt.paint([z.pos[0], z.pos[1] + 70], zoom);

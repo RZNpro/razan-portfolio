@@ -16,18 +16,26 @@
 
 ## عن الموقع
 
-هذا ملفي الشخصي: مديرة مشاريع ومحللة أعمال ومصممة منتجات رقمية ومطوّرة حلول ذكاء اصطناعي. الموقع واجهتان مترابطتان لنفس المحتوى، كل واحدة لقارئ مختلف.
+هذا ملفي الشخصي: **مديرة منتجات وابتكار** — أولّد الأفكار، وأصممها، وأقودها لين تصير منتجًا أو مشروعًا له أثر. ومعها: محللة أعمال، ومصممة منتجات رقمية، ومطوّرة حلول ذكاء اصطناعي. الموقع واجهتان مترابطتان لنفس المحتوى، كل واحدة لقارئ مختلف.
 
 ## المميزات
 
 - **خريطة تفاعلية** — جزيرة طائرة مرسومة، كل مبنى فيها قسم، وتقترب الكاميرا منه بضغطة.
-- **عالم حيّ** — طبقات بعمق، ونهر يجري، وأسماك تقفز، وأوراق خضراء تطير.
+- **عالم حيّ** — طبقات بعمق، ونهر يجري، وأسماك تقفز، وأوراق خضراء تطير، وشهاب يعبر السماء ويختفي خلف الغيوم.
+- **تصغير طبيعي** — تبعدين عن الخريطة لين تبان الجزيرة كاملة، وأطرافها تذوب في امتداد من سمائها وغيومها بلا إطار. وزر الإرجاع يرجع للمنظر الأول، وضغطة ثانية تعرض الجزيرة كاملة.
 - **عرض مهني سريع** — نفس المحتوى بترتيب واضح لمن يبغى المعلومة مباشرة.
-- **دراسات حالة للمشاريع** — التحدي، والدور، والمنهج، والحل، والنتيجة، مع الروابط والمواد.
-- **سيرة ذاتية تلقائية** — تُبنى من نفس المحتوى وتتحدّث معه.
+- **دراسات حالة للمشاريع** — التحدي، والدور، والمنهج، والحل، و**نتائج بأرقام حقيقية**، مع الروابط والمواد (مواقع، تطبيقات، عروض وملفات PDF).
+- **لقطات من كل مشروع** — شاشات حقيقية من المواقع والتطبيقات، تكبر بضغطة.
+- **سيرة ذاتية تلقائية** — تُبنى من نفس المحتوى، و**تتحمّل PDF بضغطة وحدة** (عربي أو إنجليزي) بنص حقيقي تقرأه أنظمة التوظيف (ATS)، ويُعاد بناؤها مع كل نشر.
+- **كلمات ممن عرفوني** — من عمل معي يترك كلمته عبر نموذج، وما يظهر في الموقع إلا بعد اعتمادي، وتطفو التعليقات مثل جريان النهر.
 - **عربي وإنجليزي** — مع اتجاه الكتابة الصحيح لكل لغة.
 - **وضع فاتح وغامق** — والخريطة تبقى نهارًا في الوضعين.
-- **محرر محتوى محلي** — أعدّل النصوص والصور والأيقونات بدون ما ألمس الكود.
+- **محرر محتوى محلي** — أعدّل النصوص والصور والأيقونات بدون ما ألمس الكود، و:
+  - **ينشر مباشرة على الموقع** بضغطة.
+  - **يترجم تلقائيًا** بين العربي والإنجليزي ليبقى النص متطابقًا.
+  - **يقترح تصحيحات** تحت النصوص الطويلة.
+  - **يضبط الصورة في البطاقة**: تعبئة أو صورة كاملة، وحجم، والجزء الظاهر.
+- **جاهز للبحث والمشاركة** — معاينة للرابط بصورة ووصف، وخريطة موقع لقوقل، وصفحة ٤٠٤ بتصميم الموقع.
 
 ## لقطات الشاشة
 
@@ -55,6 +63,8 @@
 - **HTML وCSS وJavaScript** خالصة — بدون أي خطوة بناء.
 - **رسومات الخريطة** مقسّمة إلى طبقات ومكبّرة بدقة عالية، عشان تبقى حادّة عند التقريب.
 - **كل النصوص** في `assets/js/content.js`، ومحرر محلي (`admin.html`) يعدّلها.
+- **تشغيل المحرر:** ضغطتين على `تشغيل المحرر.command` — يفتح المحرر (`tools/studio.py`) وينشر ويترجم.
+- **ملفات السيرة PDF:** `tools/cv_pdf.py` يحوّل صفحة السيرة إلى PDF بمحرك WebKit في الماك.
 - **التشغيل محليًا:** `python3 -m http.server 5173` ← http://localhost:5173
 - **النشر** تلقائي على GitHub Pages مع كل دفع (push) إلى فرع `main`.
 
@@ -79,18 +89,24 @@ My portfolio as two connected interfaces over the same content.
 ## Features
 
 - **Explorer World** — a painted floating island where each building is a section (Town → About, Observatory → Experience, Lab → Projects, Castle → Achievements, Library → Knowledge, Gateway → Contact). Click a building to fly to it.
-- **A living map** — layered parallax art, a flowing river, leaping fish, drifting leaves.
+- **A living map** — layered parallax art, a flowing river, leaping fish, drifting leaves, and a shooting star that slips behind the clouds.
+- **Natural zoom-out** — pull back until the whole island shows; its edges melt into its own sky and clouds, no frame. Reset returns to the opening view; press again for the whole island.
 - **Professional View** — the same content, fast and clear.
-- **Case studies** — challenge, role, approach, solution, outcome, links and materials.
-- **Auto-generated CV** built from the same content.
+- **Case studies** — challenge, role, approach, solution, **outcomes with real figures**, links and materials.
+- **Screens from every project** — real screenshots of the sites and apps, enlarged with a click.
+- **Auto-generated CV** built from the same content — **one-click PDF download** (Arabic or English) with real, ATS-readable text, rebuilt on every publish.
+- **Words from people I’ve worked with** — left through a form, shown only after I approve them, floating like the river.
 - **Arabic / English** and **light / dark**.
-- **Local content editor** for text, images and icons.
+- **Local content editor** for text, images and icons — publishes straight to the live site, auto-translates Arabic ↔ English, suggests fixes under long texts, and frames each picture (fill / whole, zoom, focus point).
+- **Search & share ready** — link previews, a sitemap and a custom 404 page.
 
 ## Technologies
 
 - Plain HTML, CSS and JavaScript — no build step.
 - Painted map art layered and upscaled for sharp zoom.
 - All text lives in `assets/js/content.js`; a local editor (`admin.html`) edits it.
+- Edit: double-click `تشغيل المحرر.command` — opens the editor studio (`tools/studio.py`) that publishes and translates.
+- CV PDFs: `tools/cv_pdf.py` renders the CV page with macOS WebKit.
 - Run locally: `python3 -m http.server 5173` → http://localhost:5173
 - Deploys to GitHub Pages on every push to `main`.
 
