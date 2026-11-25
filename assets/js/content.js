@@ -11,8 +11,8 @@ window.CONTENT = {
       "en": "RAZAN — Beyond Ideas"
     },
     "title": {
-      "ar": "مديرة مشاريع – الذكاء الاصطناعي التوليدي",
-      "en": "Project Manager – GenAI"
+      "ar": "مديرة منتجات وابتكار",
+      "en": "Product & Innovation Manager"
     },
     "focus": {
       "ar": [
@@ -46,8 +46,8 @@ window.CONTENT = {
     "github": "https://github.com/RZNpro",
     "cv": "cv.html",
     "roles": {
-      "ar": "مديرة مشاريع | مبتكرة | متعلّمة مدى الحياة",
-      "en": "Project Manager | Innovator | Lifelong Learner"
+      "ar": "مديرة منتجات وابتكار | مبتكرة | متعلّمة مدى الحياة",
+      "en": "Product & Innovation Manager | Innovator | Lifelong Learner"
     },
     "quote": {
       "ar": "«احلم أكبر. ابنِ أفضل.»",
