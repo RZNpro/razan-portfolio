@@ -181,6 +181,13 @@ class Handler(SimpleHTTPRequestHandler):
             with open(full, "wb") as f:
                 f.write(base64.b64decode(b64))
             written.append(path)
+        # keep the one-click CV PDFs in step with the content (needs PyObjC; skipped quietly if missing)
+        if "assets/js/content.js" in written:
+            r = subprocess.run([sys.executable, os.path.join(ROOT, "tools", "cv_pdf.py")], cwd=ROOT, capture_output=True, text=True, timeout=180)
+            if r.returncode == 0:
+                written += ["assets/docs/razan-alawadh-cv-ar.pdf", "assets/docs/razan-alawadh-cv-en.pdf"]
+            else:
+                print("CV PDF not rebuilt:", (r.stderr or r.stdout)[-400:], file=sys.stderr)
         code, out = git("add", "--", *written)
         if code:
             return self.reply(500, {"ok": False, "error": out})

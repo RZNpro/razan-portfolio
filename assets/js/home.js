@@ -142,7 +142,7 @@
           <a class="btn btn-ivory lg" href="mailto:${p.email}">${ic("mail")}<span dir="ltr">${p.email}</span></a>
           <a class="btn btn-line lg" href="${p.linkedin}" target="_blank" rel="noopener">${ic("linkedin")}<span>LinkedIn</span></a>
           <a class="btn btn-line lg" href="${p.github}" target="_blank" rel="noopener">${ic("github")}<span>GitHub</span></a>
-          <a class="btn btn-line lg" href="cv.html">${ic("download")}<span>${t(u.cv)}</span></a>
+          <a class="btn btn-line lg" href="${A.cvPdf()}" download="${A.cvName()}">${ic("download")}<span>${t(u.cv)}</span></a>
         </div>
       </div>
     </div></div>`;

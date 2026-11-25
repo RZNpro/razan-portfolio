@@ -31,7 +31,8 @@ window.ICONS = {
 (function () {
   const C = window.CONTENT;
   const App = (window.App = {});
-  App.lang = localStorage.getItem("rz-lang") || "ar";
+  const qLang = new URLSearchParams(location.search).get("lang"); // ?lang=ar|en (used to render each language's CV PDF)
+  App.lang = (/^(ar|en)$/.test(qLang || "") && qLang) || localStorage.getItem("rz-lang") || "ar";
   App.t = (o) => (o == null ? "" : typeof o === "string" ? o : o[App.lang] ?? o.en ?? "");
   App.icon = (n, cls = "") => `<svg class="ic ${cls}" viewBox="0 0 24 24" aria-hidden="true"><path d="${window.ICONS[n] || ""}"/></svg>`;
   App.esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -75,7 +76,7 @@ window.ICONS = {
           ${toggle}
           <button class="btn btn-ghost sm theme" id="theme-btn" aria-label="${App.lang === "ar" ? "تبديل الوضع الغامق والفاتح" : "Toggle dark mode"}">${App.icon(App.theme() === "dark" ? "sun" : "moon")}</button>
           <button class="btn btn-ghost sm lang" id="lang-btn" aria-label="Switch language">${App.icon("globe")}<span>${App.lang === "ar" ? "EN" : "عربي"}</span></button>
-          <a class="btn btn-solid sm cv" href="cv.html">${App.icon("download")}<span>${App.t(u.cv)}</span></a>
+          <a class="btn btn-solid sm cv" href="${App.cvPdf()}" download="${App.cvName()}">${App.icon("download")}<span>${App.t(u.cv)}</span></a>
           <button class="btn btn-ghost sm burger" id="burger" aria-label="Menu" aria-expanded="false">${App.icon("menu")}</button>
         </div>
       </div>`;
@@ -107,6 +108,9 @@ window.ICONS = {
     const zf = Math.max(30, Math.min(300, Number(p.imgZoom) || 100)) / 100;
     return `--z:${zf};--fit:${p.imgFit === "contain" ? "contain" : "cover"};--pos:${App.esc(p.imgPos || "50% 50%")};--lbg:${App.esc(p.logoBg || "#F3EFE3")}`;
   };
+  // the ready-made CV PDF for the current language (made by tools/cv_pdf.py on every publish) — one click downloads it
+  App.cvPdf = () => `assets/docs/razan-alawadh-cv-${App.lang === "en" ? "en" : "ar"}.pdf`;
+  App.cvName = () => App.lang === "en" ? "Razan-Al-Awadh-CV.pdf" : "رزان-العوض-السيرة-الذاتية.pdf";
   App.visual = (p, z = 1, cls = "") => {
     if (p.image) return `<div class="pimgw ${cls}" style="${App.frame(p)}"><img class="pimg" src="${App.esc(p.image)}" alt="" loading="lazy"></div>`;
     if (p.logo) return `<div class="plogo ${cls}" style="${App.frame(p)}"><img src="${App.esc(p.logo)}" alt="${App.esc(App.t(p.title))}" loading="lazy"></div>`;

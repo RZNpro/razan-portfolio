@@ -9,7 +9,7 @@
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css?v=75">
 <link rel="stylesheet" href="assets/css/world.css?v=73">
-<script>(function(){var d=document.documentElement,l=localStorage.getItem('rz-lang')||'ar',t=localStorage.getItem('rz-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');d.lang=l;d.dir=l==='ar'?'rtl':'ltr';d.dataset.theme=t;})();</script>
+<script>(function(){var d=document.documentElement,q=new URLSearchParams(location.search),l=(/^(ar|en)$/.test(q.get('lang'))&&q.get('lang'))||localStorage.getItem('rz-lang')||'ar',t=q.has('pdf')?'light':(localStorage.getItem('rz-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));d.lang=l;d.dir=l==='ar'?'rtl':'ltr';d.dataset.theme=t;})();</script>
 <title>CV — Razan Al-Awadh</title>
 <meta name="description" content="السيرة الذاتية لرزان العوض: الخبرات، المشاريع، الإنجازات والمهارات. Razan Al-Awadh — CV.">
 <link rel="canonical" href="https://rznpro.github.io/razan-portfolio/cv.html">
@@ -30,7 +30,7 @@
 <main class="cv-sheet" id="cv"></main>
 <script src="assets/js/content.js?v=75"></script>
 <script src="assets/js/draft.js?v=37"></script>
-<script src="assets/js/common.js?v=44"></script>
-<script src="assets/js/cv.js?v=37"></script>
+<script src="assets/js/common.js?v=76"></script>
+<script src="assets/js/cv.js?v=76"></script>
 </body>
 </html>

@@ -28,7 +28,7 @@
         <li><a href="mailto:${p.email}"><span><b>${t(u.email)}</b><small dir="ltr">${p.email}</small></span>${ic("mail")}</a></li>
         <li><a href="${p.linkedin}" target="_blank" rel="noopener"><span><b>LinkedIn</b><small>Razan Alawadh</small></span>${ic("linkedin")}</a></li>
         <li><a href="${p.github}" target="_blank" rel="noopener"><span><b>GitHub</b><small dir="ltr">RZNpro</small></span>${ic("github")}</a></li>
-        <li><a href="cv.html"><span><b>${t(u.cv)}</b><small>PDF</small></span>${ic("download")}</a></li></ul>`;
+        <li><a href="${A.cvPdf()}" download="${A.cvName()}"><span><b>${t(u.cv)}</b><small>PDF</small></span>${ic("download")}</a></li></ul>`;
     }
     drawer.innerHTML = `<div class="d-art d-paint" style="${crop(id)}"><button class="d-close" id="d-close" aria-label="${t(u.close)}">${ic("close")}</button></div>
       <div class="d-body"><p class="q">${esc(t(z.section))} · ${esc(t(z.q))}</p><h2>${esc(t(z.place))}</h2>${body}

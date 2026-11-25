@@ -8,7 +8,8 @@
   function render() {
     const p = C.person, lib = C.library;
     document.title = `${t(p.name)} — ${L("السيرة الذاتية", "CV")}`;
-    const site = location.origin + location.pathname.replace(/cv\.html$/, "");
+    // always the public address (the PDF is made from a local copy)
+    const site = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? "https://rznpro.github.io/razan-portfolio/" : location.origin + location.pathname.replace(/cv\.html$/, "");
     const contact = [
       p.location && [ic("map"), esc(t(p.location))],
       p.email && [ic("mail"), `<a href="mailto:${esc(p.email)}" dir="ltr">${esc(p.email)}</a>`],
@@ -45,10 +46,8 @@
     document.getElementById("cv-bar").innerHTML = `
       <a href="index.html">${ic("arrow", "back")} ${L("الموقع", "Website")}</a>
       <button id="cv-lang">${ic("globe")} ${A.lang === "ar" ? "English" : "العربية"}</button>
-      <button id="cv-print" class="pri">${ic("download")} ${L("تحميل PDF", "Download PDF")}</button>
-      <small>${L("في نافذة الطباعة اختاري «حفظ كـ PDF»", "In the print dialog choose “Save as PDF”")}</small>`;
+      <a id="cv-pdf" class="pri" href="${A.cvPdf()}" download="${A.cvName()}">${ic("download")} ${L("تحميل PDF", "Download PDF")}</a>`;
     document.getElementById("cv-lang").onclick = () => A.setLang(A.lang === "ar" ? "en" : "ar");
-    document.getElementById("cv-print").onclick = () => print();
   }
   A.header = () => {}; A.footer = () => {};
   A.boot(render);
