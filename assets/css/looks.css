@@ -116,7 +116,9 @@ html[data-look="3"] .btn-solid { isolation: isolate; }
 html[data-theme="dark"][data-look="3"] .btn-solid::after { background: #fff8e6; }
 
 @media (prefers-reduced-motion: reduce) {
-  .lk-blobs i, html[data-look] .hero-txt h1 .lw, html[data-look="3"] #hero::before { animation: none !important; opacity: 1; filter: none; transform: none; }
+  /* stop the motion, keep the look: the soft shapes stay blurred and faint (only the headline words need resetting) */
+  .lk-blobs i, html[data-look="3"] #hero::before { animation: none !important; }
+  html[data-look] .hero-txt h1 .lw { animation: none !important; opacity: 1; filter: none; transform: none; }
   .lk-cursor { display: none !important; }
 }
 @media (hover: none) { .lk-cursor { display: none !important; } }
