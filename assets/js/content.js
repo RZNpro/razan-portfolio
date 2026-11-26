@@ -1217,7 +1217,24 @@ window.CONTENT = {
       "imgFit": "",
       "imgZoom": 100,
       "imgPos": "",
-      "links": [],
+      "links": [
+        {
+          "type": "app",
+          "label": {
+            "ar": "جرّب التجربة",
+            "en": "Try the experience"
+          },
+          "url": "https://appllee-witches-academy3.netlify.app"
+        },
+        {
+          "type": "code",
+          "label": {
+            "ar": "الكود والتوثيق على GitHub",
+            "en": "Code & docs on GitHub"
+          },
+          "url": "https://github.com/RZNpro/sorting-hat"
+        }
+      ],
       "gallery": [
         {
           "src": "assets/img/gallery/sorting-hat-1.webp",
