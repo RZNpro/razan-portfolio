@@ -350,3 +350,9 @@ html[data-theme="dark"] .world-stage { background: #1C2A21; }
 .car-btn.prev { inset-inline-start: -22px; } .car-btn.next { inset-inline-end: -22px; }
 .w-cards.at-start .car-btn.prev, .w-cards.at-end .car-btn.next { opacity: 0; pointer-events: none; }
 html[data-theme="dark"] .car-btn { color: #FFFDF6; }
+
+/* Reduce Motion: the water keeps moving, but slower and softer */
+@media (prefers-reduced-motion: reduce) {
+  .river .flow-a { animation-duration: 6.5s; opacity: .32; } .river .flow-b { animation-duration: 11s; opacity: .22; }
+  .fall { animation-duration: 1.8s; }
+}

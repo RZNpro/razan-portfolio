@@ -266,7 +266,8 @@ html[lang="ar"] .cs-meta dt { letter-spacing: 0; font-size: .82rem; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .rv { opacity: 1; transform: none; transition: none; }
-  * { animation: none !important; }
+  /* stop everything that travels; keep only gentle, in-place life on the map (water flowing, the waterfall, twinkles, the portal glow) */
+  *:not(.flow-a):not(.flow-b):not(.fall):not(.spk):not(.portal-glow):not(.beam) { animation: none !important; }
 }
 
 /* painting crops (replace the old drawn emblems) */
