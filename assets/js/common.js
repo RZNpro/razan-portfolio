@@ -76,7 +76,7 @@ window.ICONS = {
           ${toggle}
           <button class="btn btn-ghost sm theme" id="theme-btn" aria-label="${App.lang === "ar" ? "تبديل الوضع الغامق والفاتح" : "Toggle dark mode"}">${App.icon(App.theme() === "dark" ? "sun" : "moon")}</button>
           <button class="btn btn-ghost sm lang" id="lang-btn" aria-label="Switch language">${App.icon("globe")}<span>${App.lang === "ar" ? "EN" : "عربي"}</span></button>
-          <a class="btn btn-solid sm cv" href="${App.cvPdf()}" download="${App.cvName()}">${App.icon("download")}<span>${App.t(u.cv)}</span></a>
+          <a class="btn btn-solid sm cv" href="cv.html">${App.icon("download")}<span>${App.t(u.cv)}</span></a>
           <button class="btn btn-ghost sm burger" id="burger" aria-label="Menu" aria-expanded="false">${App.icon("menu")}</button>
         </div>
       </div>`;
