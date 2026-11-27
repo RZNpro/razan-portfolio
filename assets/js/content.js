@@ -878,12 +878,12 @@ window.CONTENT = {
         "ar": [
           "المركز الأول على مستوى قسم علوم الحاسب",
           "المركز الرابع في معرض مشاريع تخرج الكليات العلمية — جامعة القصيم",
-          "توثيق تقني ودليل مستخدم"
+          "مشروع تقني مكتمل و ورقة بحثية"
         ],
         "en": [
           "1st place, Computer Science department",
           "4th place, Science Colleges Graduation Projects Exhibition — Qassim University",
-          "Technical documentation and a user guide"
+          "Completed technical project and research paper"
         ]
       },
       "tools": [
@@ -1157,8 +1157,8 @@ window.CONTENT = {
         "en": "A camera-based interactive experience inspired by the Sorting Hat from the Harry Potter series — sorting visitors into learning tracks at the Apple Developer Academy."
       },
       "summary": {
-        "ar": "تطبيق ويب للآيباد والحاسوب: الكاميرا تتبّع الرأس وتلبس الزائرة قبعة، ثم تكشف لقبها بفيديو وصحيفة قابلة للمشاركة — بالعربية والإنجليزية ودون أي اتصال بالإنترنت.",
-        "en": "A web app for iPad and computer: the camera tracks the head, places a hat, then reveals the visitor’s title with a shareable video and scroll — Arabic & English, fully offline."
+        "ar": "لعبة ويب تفاعلية: الكاميرا تتبّع الرأس وتلبس الزائرة قبعة، ثم تكشف لقبها بفيديو وصحيفة قابلة للمشاركة — بالعربية والإنجليزية ودون أي اتصال بالإنترنت.",
+        "en": "Interactive web game: The camera tracks the head and puts a hat on the visitor, then reveals her nickname with a video and a shareable infographic — in Arabic and English and without any internet connection."
       },
       "role": {
         "ar": "تصميم وتطوير كامل",
@@ -1189,21 +1189,19 @@ window.CONTENT = {
         ]
       },
       "solution": {
-        "ar": "تطبيق ويب مستقل بلا أي طلب شبكي خارجي، يُنشر بسحب المجلد فقط.",
-        "en": "A standalone web app with zero external requests, deployable by dropping a folder."
+        "ar": "لعبة ويب تفاعلية Offline، منشورة على Netlify.",
+        "en": "An offline interactive web game, published on Netlify."
       },
       "outcome": {
         "ar": [
           "5 منازل و5 أسئلة، وطريقتان للفرز: الأسئلة أو «اتبعي القدر»",
           "لغتان، وفيديو كشف بنحو 10 ثوانٍ، ويعمل بالكامل دون إنترنت",
-          "تجربة جاهزة للفعالية",
-          "بطاقات تحديات «صناعة التعويذات» بالعربية والإنجليزية"
+          "تجربة جاهزة للفعالية"
         ],
         "en": [
           "5 houses, 5 questions and two ways to be sorted: the quiz or “follow fate”",
           "2 languages, a ~10-second reveal video, and fully offline",
-          "Event-ready kiosk",
-          "“Spellcraft Challenge” cards in Arabic and English"
+          "Event-ready kiosk"
         ]
       },
       "tools": [
@@ -1349,8 +1347,8 @@ window.CONTENT = {
         "en": "Cultural short film — Ministry of Culture competition"
       },
       "summary": {
-        "ar": "تصوير ومونتاج فيلم يحيي المواقع الثقافية والتاريخية في محافظة الرس.",
-        "en": "Filming and editing a short that brings the cultural and historic sites of Al-Rass back to life."
+        "ar": "اخراج ومونتاج فيلم يحيي المواقع الثقافية والتاريخية في محافظة الرس.",
+        "en": "Directing and editing a film that celebrates the cultural and historical sites in Al-Rass Governorate."
       },
       "role": {
         "ar": "إخراج ومونتاج",
@@ -1378,8 +1376,8 @@ window.CONTENT = {
         ]
       },
       "solution": {
-        "ar": "فيلم قصير يعرّف بتاريخ الرس وثقافتها.",
-        "en": "A short film introducing the history and culture of Al-Rass."
+        "ar": "فيلم قصير يعرّف بتاريخ الرس العريق وثقافتها.",
+        "en": "A short film that introduces the ancient history and culture of Al-Rass."
       },
       "outcome": {
         "ar": [
