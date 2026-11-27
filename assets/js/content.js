@@ -16,16 +16,18 @@ window.CONTENT = {
     },
     "focus": {
       "ar": [
-        "إدارة المشاريع",
         "الابتكار",
         "التقنية",
-        "تطوير المنتجات"
+        "تصميم المنتجات والمشاريع",
+        "تطوير الاعمال",
+        "إدارة المشاريع"
       ],
       "en": [
-        "Project Management",
         "Innovation",
         "Technology",
-        "Product Development"
+        "Product and project design",
+        "Business development",
+        "project management"
       ]
     },
     "headline": {
@@ -50,8 +52,8 @@ window.CONTENT = {
       "en": "Product & Innovation Manager | Innovator | Lifelong Learner"
     },
     "quote": {
-      "ar": "«احلم أكبر. ابنِ أفضل.»",
-      "en": "“Dream bigger. Build better.”"
+      "ar": "«احلم أكبر. اصنع أثر.»",
+      "en": "“Dream bigger. Make an impact.”"
     }
   },
   "about": {
@@ -70,7 +72,8 @@ window.CONTENT = {
         "أولّد الحلول",
         "أدرسها وأقيّمها",
         "أجرّب بنموذج أولي",
-        "أنتج وأطلق"
+        "أنتج وأطلق",
+        "اختبر واتحقق"
       ],
       "en": [
         "Notice the problem",
@@ -78,7 +81,8 @@ window.CONTENT = {
         "Generate ideas",
         "Study and evaluate",
         "Prototype and test",
-        "Build and launch"
+        "Build and launch",
+        "Test and verify"
       ]
     },
     "seekingTitle": {
@@ -86,8 +90,8 @@ window.CONTENT = {
       "en": "What I'm looking for"
     },
     "seeking": {
-      "ar": "فرص أتعامل فيها مع الأفكار: أحتضنها، أطوّرها، وأحوّلها إلى منتجات — رقمية أو حقيقية — كمستشارة مشاريع، أو مطوّرة أعمال، أو مديرة منتج.",
-      "en": "Roles where I work with ideas — shaping, growing and turning them into products, digital or physical — as a project consultant, business developer or product manager."
+      "ar": "فرص أتعامل فيها مع الأفكار: أحتضنها، أطوّرها، وأحوّلها إلى منتجات — رقمية أو حقيقية ذات اثر — كمستشارة مشاريع، أو مطوّرة أعمال، أو مديرة منتج. \n",
+      "en": "Opportunities where I engage with ideas: incubate them, develop them, and turn them into products — digital or real with impact — as a project consultant, business developer, or product manager."
     },
     "lead": {
       "ar": "متخصصة في تحليل الأعمال وتسليم المشاريع والمنتجات، أحوّل مدخلات أصحاب المصلحة غير المنظمة إلى نطاق عمل واضح، والتحليل إلى قرارات.",
@@ -217,8 +221,8 @@ window.CONTENT = {
         "en": "Cultural center & exhibition concept — Memory of Resilience"
       },
       "summary": {
-        "ar": "تجربة تفاعلية لتاريخ الرس في موقع الجريف بمحافظة الرس، من دراسة الاحتياج حتى الهوية والموقع الإلكتروني والخطة المالية.",
-        "en": "An interactive experience of Al-Rass history at Al-Jurayf, Qassim — from needs study to brand, website and financial plan."
+        "ar": "معرض يضم تجارب تفاعلية لتاريخ الرس في موقع الجريف بمحافظة الرس، من دراسة الاحتياج حتى الهوية والموقع الإلكتروني والخطة المالية.",
+        "en": "An exhibition that includes interactive experiences about the history of Al-Rass at the Al-Juraif site in Al-Rass Governorate, from the study of needs to identity, the website, and the financial plan."
       },
       "role": {
         "ar": "قائدة نموذج العمل والمنتج",
@@ -357,8 +361,8 @@ window.CONTENT = {
         "en": "An app that rewards you for building your financial future, not for spending: Japanese Kakeibo budgeting plus gamification, and instant QR pay for micro-merchants."
       },
       "role": {
-        "ar": "مصممة منتج ومطورة حلول — قادت أبحاث السوق وتقييم الاحتياج والنموذج الأولي",
-        "en": "Product Designer & Solution Developer — led market research, needs assessment and the prototype"
+        "ar": "مصممة منتج ومطورة حلول — قدت أبحاث السوق وتقييم الاحتياج والنموذج الأولي",
+        "en": "Product Designer and Solution Developer — Led market research, need assessment, and prototype"
       },
       "tags": [
         "PRD",
@@ -488,8 +492,8 @@ window.CONTENT = {
         "en": "A national platform for non-profit services and products"
       },
       "summary": {
-        "ar": "منصة تجمع أنشطة الجمعيات وخدماتها في مكان واحد وتقيس أثرها — حازت ميدالية الابتكار في إمباكتثون الذكاء الاصطناعي.",
-        "en": "A platform that gathers non-profit activities and services in one place and measures their impact — winner of the Innovation Medal at the AI Impactathon."
+        "ar": "منصة تجمع منتجات الجمعيات وخدماتها في مكان واحد وتقيس أثرها — حازت ميدالية الابتكار في إمباكتثون الذكاء الاصطناعي.",
+        "en": "A platform that brings together association products and services in one place and measures their impact — won the Innovation Medal at AI Impacton."
       },
       "award": {
         "ar": "ميدالية الابتكار — إمباكتثون 2025",
@@ -736,13 +740,13 @@ window.CONTENT = {
       },
       "approach": {
         "ar": [
-          "ورقة بحثية عن المشاعر واستبيان دراسة احتياج",
+          "اوراق بحثية عن المشاعر واستبيان دراسة احتياج",
           "تحديد الفئة المستهدفة وربط فهم المشاعر بالصحة النفسية",
           "مقارنة الرسوم البيانية مع محادثة الذكاء الاصطناعي",
           "مكتبة قوالب للكتابة العلاجية مستندة إلى الأبحاث"
         ],
         "en": [
-          "Research paper on emotions and a needs survey",
+          "Research papers on feelings and a need study questionnaire",
           "Defined the target audience and linked emotional literacy to mental health",
           "Compared data charts with AI chat for insight",
           "A research-based library of therapeutic writing templates"
@@ -1217,24 +1221,7 @@ window.CONTENT = {
       "imgFit": "",
       "imgZoom": 100,
       "imgPos": "",
-      "links": [
-        {
-          "type": "app",
-          "label": {
-            "ar": "جرّب التجربة",
-            "en": "Try the experience"
-          },
-          "url": "https://appllee-witches-academy3.netlify.app"
-        },
-        {
-          "type": "code",
-          "label": {
-            "ar": "الكود والتوثيق على GitHub",
-            "en": "Code & docs on GitHub"
-          },
-          "url": "https://github.com/RZNpro/sorting-hat"
-        }
-      ],
+      "links": [],
       "gallery": [
         {
           "src": "assets/img/gallery/sorting-hat-1.webp",
@@ -1429,12 +1416,12 @@ window.CONTENT = {
       "date": "2026 – Present",
       "points": {
         "ar": [
-          "برنامج مدته تسعة أشهر بالتعلم عبر التحديات: البحث والتصميم وتجربة المستخدم والنماذج الأولية والتسويق وتطوير Swift.",
+          "برنامج مدته تسعة أشهر بالتعلم عبر التحديات: البحث والتصميم وتجربة المستخدم والنماذج الأولية والتسويق وتطوير Swift و الأعمال و الذكاء الاصطناعي.",
           "Clarity: تطبيق iOS (Swift وSketch) يساعد المستخدم على فهم مشاعره لدعم صحته النفسية؛ مشروع فريق.",
           "قبعة الاختيار: لعبة تفاعلية لفعالية الأكاديمية تفرز المشاركين على منازل تمثل تخصصات الأكاديمية."
         ],
         "en": [
-          "Nine-month, challenge-based program covering user research, design, UX, prototyping, marketing and Swift development.",
+          "A nine-month program with learning across challenges: research, design, UX, prototyping, marketing, Swift development, business, and AI.",
           "Clarity — iOS app (Swift, Sketch) that helps users understand their emotions to support mental wellbeing; team project.",
           "Sorting Hat — interactive event game that sorts participants into houses representing the Academy's specializations."
         ]
@@ -1538,12 +1525,14 @@ window.CONTENT = {
       "date": "2024",
       "points": {
         "ar": [
-          "قدت حلاً لتعزيز التفاعل في كأس العالم للرياضات الإلكترونية (EWC) من دراسة الجدوى حتى النشر، بالتنسيق على المتطلبات مع أصحاب المصلحة في التسويق.",
-          "بنيت واختبرت نماذج إثبات المفهوم، وأعددت تقارير الأداء المستخدمة في تقييم النتائج."
+          "قدت حلاً لتعزيز التفاعل في كأس العالم للرياضات الإلكترونية (EWC) من تصميم الفكرة، و دراسة الجدوى حتى النشر.",
+          "بنيت واختبرت نماذج إثبات المفهوم، وأعددت تقارير الأداء المستخدمة في تقييم النتائج.",
+          "صممت و طورت المرئيات، الاحداث، الالعاب في اللعبة، وطورتها ثم نشرتها."
         ],
         "en": [
-          "Led an engagement solution for the Esports World Cup (EWC) from feasibility study through deployment, coordinating requirements with marketing stakeholders.",
-          "Built and tested Proof of Concept models and produced performance reports used to assess engagement outcomes."
+          "Led a solution to drive engagement at the Esports World Cup (EWC) from concept design, feasibility study to deployment.",
+          "Built and tested Proof of Concept models and produced performance reports used to assess engagement outcomes.",
+          "I designed and developed the visuals, events, and gameplay in the game, developed them, and then published them."
         ]
       }
     },
@@ -1562,13 +1551,15 @@ window.CONTENT = {
           "إدارة العمليات: الجدولة، تنسيق المحاضرين، ولوجستيات الفعاليات",
           "محتوى ترويجي رفع معدلات التسجيل والمشاركة",
           "تصميم مواد تعليمية وعروض احترافية، وإنتاج ومونتاج الفيديو",
-          "تقارير أداء ومؤشرات KPIs لدعم القرار"
+          "تقارير أداء ومؤشرات KPIs لدعم القرار",
+          "كتابة المحتوي، الاعلانات، و زادت نسبة الحضور للفعليات و الورش التي كتبت اعلاناتها بنسبة اكثر من ٨٠٪ من الطلاب. "
         ],
         "en": [
           "Ran operations: scheduling, speaker coordination and event logistics",
           "Promotional content that lifted registration and engagement",
           "Designed learning materials and presentations; produced and edited video",
-          "Performance reports and KPI tracking for decision-making"
+          "Performance reports and KPI tracking for decision-making",
+          "Writing content, advertisements, and attendance at events and workshops for which advertisements were written increased by more than 80% of students."
         ]
       }
     },
@@ -1585,13 +1576,11 @@ window.CONTENT = {
       "points": {
         "ar": [
           "إدارة رحلة العميل من الاستفسار حتى تقديم الخدمة",
-          "تطبيق Gantt وتحليل المخاطر ورسم رحلة العميل",
-          "تصميم نماذج عمل أولية وإعداد SOW وتحليل المعنيين"
+          "تسجيل الاشتراكات والرسوم والمحاسبة المالية"
         ],
         "en": [
           "Managed the client journey from first enquiry to delivery",
-          "Applied Gantt planning, risk analysis and journey mapping",
-          "Designed POCs, drafted SOWs and ran stakeholder analysis"
+          "Registration of subscriptions, fees and financial accounting"
         ]
       }
     },
