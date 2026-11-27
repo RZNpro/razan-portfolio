@@ -797,7 +797,7 @@ window.CONTENT = {
             "ar": "عرض المشروع (PDF)",
             "en": "Project presentation (PDF)"
           },
-          "url": "assets/docs/clarity.pdf"
+          "url": "assets/docs/clarity-ClarityStory.pptx.pdf"
         }
       ],
       "gallery": [
